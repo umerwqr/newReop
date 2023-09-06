@@ -1,0 +1,102 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+*{
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.fontPop{
+  font-family: 'Poppins', sans-serif !important;
+}
+
+.picShadow{
+  box-shadow: 0px 4px 15px 0px #00000012 !important;
+}
+
+html,body{
+  height: 100vh !important;
+  width: 100% !important;
+}
+
+.ant-form-item-label label{
+  color: #777777 !important;
+}
+
+.ant-btn{
+  color:white !important;
+}
+
+.ant-btn:hover{
+  color:white !important;
+}
+
+.login-btn:hover{
+  background: #EB4637 !important;
+  border: 1px solid #EB4637 !important;
+}
+
+.update-btn:hover{
+  background: #357EDB !important;
+  border: 1px solid #357EDB !important;
+}
+
+.ant-dropdown-menu-item{
+background: "#1F5689" !important;
+}
+
+
+
+
+.google-btn:hover{
+  background: #2C78BF !important;
+}
+.red-radio input[type="radio"]:checked + span {
+  border-color: #D7392B;
+  background-color: #D7392B;
+}
+
+.red-radio:hover input[type="radio"] + span {
+  border-color: #D7392B !important;
+}
+
+.custom-radio input[type="radio"] + span:hover{
+  border-color: #D7392B !important;
+}
+.ant-radio-input:hover{
+  border-color: #D7392B !important;
+}
+.register-btn:hover{
+  background: #357EDB !important;
+}
+
+.ant-slider-rail{
+  background: #D7392B !important;
+  padding: 10px 0 10px 0;
+  border-radius: 90px !important;
+}
+
+.ant-slider-handle::before{
+  border-radius: 100%;
+
+}
+
+.ant-slider-handle::after{
+  background: #D7392B !important;
+  border-radius: 100%;
+  width: 30px !important;
+  height: 30px !important;
+  border: 4px solid white !important;
+  box-shadow: none !important
+}
+
+.ant-slider-track{
+  background: transparent !important;
+  height: 100%;
+}
+.ant-slider-handle {
+  transform: translateY(0%) !important;
+}
+
