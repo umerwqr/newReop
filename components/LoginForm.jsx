@@ -36,11 +36,10 @@ function LoginForm() {
   const onFinish = async () => {
     try {
       const response = await axios.post('/api/login', formData);
-
+      console.log(response.data)
+      console.log("typeeeeeeeeeee"+ typeof(response.data))
       updateUser(response.data);
-      const userData = response.data.user_id;
-      console.log(userData)
-    updateUser(userData)
+
 
       if (response.status === 200 ) {
         auth.login(response);

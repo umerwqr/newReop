@@ -9,6 +9,7 @@ import Data from '@/data/Data';
 import SubjectCard from '@/components/SubjectCard';
 import React from 'react';
 import Link from 'next/link'
+import PpMedicine from '@/components/PpMedicine';
 
 const Subject = () => {
 
@@ -148,7 +149,7 @@ const handleRadioChange = (e) => {
           <div className="my-[3rem]   flex justify-center w-full   flex-wrap px-6">
             
             {subjects.map((subject, index) => (
-  <SubjectCard 
+  <PpMedicine
     key={index}
     subject={subject}
     link ={`/items/name/papers/paper?index=${index}`}

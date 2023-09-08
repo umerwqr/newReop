@@ -8,6 +8,7 @@ import {useRouter} from 'next/router'
 import Data from '@/data/Data';
 import GuideCard from '@/components/GuideCard';
 import React from 'react';
+import axios from 'axios';
 
 const Guide = () => {
 
@@ -16,92 +17,26 @@ const Guide = () => {
     // const [selectedDataObj, setSelectedDataObj] = useState({});
     // const [isLoading, setIsLoading] = useState(false);
 
-    const [guideData, setGuideData] = useState([
-        {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide1.svg',
+    
+    const [data, setData] = useState(null)
 
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide2.svg',
+    useEffect((e) => {
+        const getData = async () => {
+            try {
+                const response = await axios.post('/api/getGuide', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us' })
+                if(response.data.error===false){
+                    setData(response.data.specialities)
+                }
+               
+            } catch (error) {
+                console.log(error)
+            }
 
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide3.svg',
+        }
+        getData();
+    }, [])
 
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide4.svg',
-
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide5.svg',
-
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide6.svg',
-
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide7.svg',
-
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide8.svg',
-
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide9.svg',
-
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide10.svg',
-
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide11.svg',
-
-       },
-       {
-           name: "Dr. James Williams",
-           post: "12 Aug 2023",
-           info: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. ",
-           img: '/images/guide/guide12.svg',
-
-       },
-   ])
+ 
 
 
     // useEffect(() => {
@@ -131,7 +66,7 @@ const Guide = () => {
                         <p className="text-[#777777]">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt.</p>
                     </div>
                     <div className="my-[3rem] h-full  w-full grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-4">
-  {guideData.map((guide, index) => (
+  {data&&data.map((guide, index) => (
     <GuideCard key={index} guide={guide}  />
   ))}
 </div>

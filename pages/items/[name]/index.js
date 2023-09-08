@@ -20,7 +20,7 @@ const router = useRouter();
   const [optionName, setOptionName] = useState('');
 
   const findOptionsByName = (name) => {
-    const foundOptions = Data.find((item) => item.name === name);
+    const foundOptions = Data.find((item) => true);
     if (foundOptions) {
       setSelectedData(foundOptions)
       setSelectedOptions(foundOptions.options);

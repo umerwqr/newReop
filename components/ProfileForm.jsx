@@ -10,19 +10,19 @@ import { useUser } from '../context/userContext';
 function ProfileForm() {
   const {user} = useUser();
 
-
   const auth = useAuth();
   const router = useRouter();
   const [formData, setFormData] = useState({
-    fullName: (auth.user?.firstName || '') + ' ' + (auth.user?.lastName || ''),
-    email: auth.user?.email || '',
-    phone: auth.user?.phone || '',
-    pmdc: auth.user?.pmdc || '',
-    city: auth.user?.city || '',
+    user_id:user.user_id,
+    key:"Vx0cbjkzfQpyTObY8vfqgN1us",
+    full_name:'',
+    email:'',
+    phone:'',
+    pmdc_number:'',
+    city_id:'',
   });
   
 
-  const { fullName, email, phoneNumber, pmdc, city } = formData;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,31 +33,31 @@ function ProfileForm() {
   };
 
   const onFinish =async () => {
-console.log("helooooooo  "+   user)
+    console.log(user.user_id)
 
-    
-    // try {
-    //   const response = await axios.post('/api/update', formData);
-    //   console.log(response)
-    //   if (response.status === 200 ) {
-    //     auth.login(response);
-    //     message.success('update profile successfully');
-    //     setTimeout(() => {
-    //       router.push('/');
-    //     }, 2000);
-    //   } else {
-    //     message.error('profile Not updated');
-    //   }
-    // } catch (error) {
-    //   console.log(error);
-    // }
+    console.log(formData);
+
+    try {
+      const response = await axios.post('/api/update', formData);
+      console.log(response)
+      if (response.status === 200 ) {
+        auth.login(response);
+        message.success('update profile successfully');
+        setTimeout(() => {
+          router.push('/');
+        }, 2000);
+      } else {
+        message.error('profile Not updated');
+      }
+    } catch (error) {
+      console.log(error);
+    }
     
   };
 
   return (
     <div className="flex flex-col px-6 py-5 rounded-md shadow-sm w-[440px] border border-[#00000030]">
       <h2 className="font-[600] text-[24px]">Update Profile</h2>
-       {user}
       <Form
         name="profileForm"
         onFinish={onFinish}
@@ -69,8 +69,8 @@ console.log("helooooooo  "+   user)
           <Input
             placeholder="Full Name"
             className="border border-[#0000000F] py-2 px-3"
-            value={fullName}
-            onChange={handleChange}
+            value={formData.full_name}
+            onChange={(e)=>setFormData({...formData,full_name:e.target.value})}
           />
         </Form.Item>
 
@@ -78,8 +78,8 @@ console.log("helooooooo  "+   user)
           <Input
             placeholder="Email Address"
             className="border border-[#0000000F] py-2 px-3"
-            value={email}
-            onChange={handleChange}
+            value={formData.email}
+            onChange={(e)=>setFormData({...formData,email:e.target.value})}
           />
         </Form.Item>
 
@@ -87,8 +87,8 @@ console.log("helooooooo  "+   user)
           <Input
             placeholder="Phone Number"
             className="border border-[#0000000F] py-2 px-3"
-            value={phoneNumber}
-            onChange={handleChange}
+            value={formData.phone}
+            onChange={(e)=>setFormData({...formData,phone:e.target.value})}
           />
         </Form.Item>
 
@@ -97,17 +97,17 @@ console.log("helooooooo  "+   user)
             <Input
               placeholder="PMDC"
               className="border border-[#0000000F] py-2 px-3"
-              value={pmdc}
-              onChange={handleChange}
-            />
+              value={formData.pmdc_number}
+              onChange={(e)=>setFormData({...formData,pmdc_number:e.target.value})}
+              />
           </Form.Item>
 
         <Form.Item label="City" className="text-[#777777] mb-2" name="city">
           <Input
             placeholder="City"
             className="border border-[#0000000F] py-2 px-3"
-            value={city}
-            onChange={handleChange}
+            value={formData.city_id}
+            onChange={(e)=>setFormData({...formData,city_id:e.target.value})}
           />
         </Form.Item>
 

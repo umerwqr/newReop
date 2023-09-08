@@ -20,6 +20,26 @@ module.exports = {
         source: '/api/update',
         destination: 'https://www.medicall.pk/medi-app-api/auth/doctor/profile/update', // Replace with the actual API URL
       },
+      {
+        source:'/api/getMcqs',
+        destination:'https://www.medicall.pk/medi-app-api/get-subjects-for-mcqs'
+      },
+      {
+        source:'/api/guideData',
+        destination:'https://www.medicall.pk/medi-app-api/medistudy/med/guidelines/get'
+      },
+      {
+        source:'/api/getGuide',
+        destination:'https://www.medicall.pk/medi-app-api/medistudy/specialities/guidelines/get'
+      },
+      {
+        source:'/api/get_past_paper/Medicine',
+        destination:'https://www.medicall.pk/medi-app-api/past-papers/program/get'
+      },
+      {
+        source:'/api/get_Core_Data',
+        destination:'https://www.medicall.pk/medi-app-api/get-medistudy-core-list'
+      }
     ];
   },
 };

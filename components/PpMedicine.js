@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link'; 
 
-function SubjectCard({ subject, link }) {
+function PpMedicine({ subject, link }) {
  
   return (
     <div className={` rounded-lg px-4 py-5 m-4 sm:w-[300px]  flex flex-col items-center`} style={{background: `#96D4D4`}}>
@@ -18,4 +18,4 @@ function SubjectCard({ subject, link }) {
   );
 }
 
-export default SubjectCard;
+export default PpMedicine;

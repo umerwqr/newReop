@@ -1,16 +1,32 @@
 import WebFooter from '@/components/WebFooter';
 import WebHeader from '@/components/WebHeader';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Input, Radio } from 'antd';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import Image from 'next/image';
-import Data from '@/data/Data'
+import Data from '@/data/Data';
 import Link from 'next/link'
+import axios from 'axios';
 const Home = () => {
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState('brands');
+const [programs,setPrograms]=useState(null);
 
+console.log(programs)
+  useEffect((e)=>{
+    const Data=async()=>{
+      try{
+          const response= await axios.post("/api/get_Core_Data",{key:"Vx0cbjkzfQpyTObY8vfqgN1us"})
+          console.log(response.data.programs.name);
+          setPrograms(response.data.programs);
 
+      }catch(error){
+           console.log(error)
+      }
+
+    }
+    Data();
+  },[])
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
   };
@@ -26,10 +42,10 @@ const Home = () => {
   return (
     <div>
       <WebHeader />
-      <main className="w-full h-[100vh] flex items-center justify-center">
-        <div className=" p-6  w-[600px]">
-            <div>
-          <div className="relative flex items-center justify-between mb-4">
+      <main className="w-full flex items-center justify-center">
+        <div className=" p-6  w-[1200px]">
+            <div  style={{display:"flex",justifyContent:"center", flexDirection:"column",alignItems:"center",marginTop:"100px"}}>
+          <div className="relative flex items-center  mb-4 w-[600px] ">
             <Image
               src="/images/search.svg"
               alt="Search Icon"
@@ -77,8 +93,8 @@ const Home = () => {
             </Radio.Group>
           </div>
           </div>
-          <div className="my-[6rem] flex justify-center space-x-4 w-full">
-            {Data.map((item, index) => (
+          <div className="my-[6rem] flex justify-center space-x-4 flex-wrap">
+            {programs && programs.map((item, index) => (
                <Link
                key={index}
                href={`/items/${encodeURIComponent(item.name)}?options=${encodeURIComponent(JSON.stringify(item.name))}`}
@@ -86,8 +102,8 @@ const Home = () => {
              >
               <div
                 key={item.name}
-                style={{ backgroundColor: item.bg }}
-                className={`uppercase cursor-pointer text-[48px] font-[700] w-full  flex items-center justify-center py-8 px-8 text-white rounded-md bg-[${item.bg}]`}
+                style={{ backgroundColor: item.tag_bg_color ,display:"flex",width:"250px",color:item.tag_text_color, margin:"10px"}}
+                className={`uppercase cursor-pointer text-[48px] font-[700]  flex flex-wrap items-center justify-center py-8 px-8 text-white rounded-md bg-[${item.tag_bg_color}]`}
               >
                 {item.name}
               </div>

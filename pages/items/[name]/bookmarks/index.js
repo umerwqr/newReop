@@ -6,7 +6,7 @@ import { Input, Radio } from 'antd';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import {useRouter} from 'next/router'
 import Data from '@/data/Data'; 
-import ItemCard from '@/components/ItemCard';
+import ItemCard from '@/components/ItemCard.jsx';
 import React from 'react';
 import Link from 'next/link'
 const Name = () => {
@@ -131,7 +131,8 @@ const router = useRouter();
             <div className="flex  sm:w-[90%] w-full flex-wrap">
             {selectedOptions.map((option, index) => {
   const optionName = getOptionText(option.name);
-  return (
+  return ( <>
+  <h1>NO Bookmarks</h1>
     <Link
       href={`/items/name/${optionName}?index=${index}&optionName=${option.name}&selectedData=${encodeURIComponent(JSON.stringify(selectedData))}`}
       key={option.name}
@@ -141,7 +142,7 @@ const router = useRouter();
         img={`/images/${option.name}.jpg`}
       />
     </Link>
-  );
+ </>);
 })}
 
 

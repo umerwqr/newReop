@@ -3,15 +3,14 @@ import { createContext, useContext, useEffect, useState } from 'react';
 
 const UserContext = createContext();
 
-export function useUser() {
-  return useContext(UserContext);
-}
+
 
 export function UserProvider({ children }) {
-  const [user, setUser] = useState([]);
+  const [user, setUser] = useState({});
   // Function to update user data
   const updateUser = (newData) => {
-    setUser([...user, newData]);
+    console.log("heeeeeeeeeeeeee  "+newData.user_id)
+    setUser(newData);
   };
   
 
@@ -20,4 +19,7 @@ export function UserProvider({ children }) {
       {children}
     </UserContext.Provider>
   );
+}
+export function useUser() {
+  return useContext(UserContext);
 }
