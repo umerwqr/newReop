@@ -87,11 +87,11 @@ const handleRadioChange = (e) => {
       <div className="text-center w-full">
             <h1 className="font-[700] text-[32px]">Select Past Paper</h1>
         </div>
-        <div className="my-[3rem] flex justify-center w-full   flex-wrap px-6">
+        <div className="flex  w-[90%] w-full flex-wrap justify-center">
         
             {papers&&papers.map((paper, index) => (
-                <div key={index} className="my-[.5rem] mx-[3rem] bg-[#96D4D4] py-2 px-7 rounded-md" >
-                    <p className='font-[500] text-[18px]'>{paper.custom_name}</p>
+                <div key={index} className=" my-[.5rem] mx-[3rem] bg-[#96D4D4] py-2 px-7 rounded-md " style={{width:"300px"}} >
+                    <p className='font-[500] text-[18px] '>{paper.custom_name}</p>
                 </div>
             ))}
          

@@ -5,6 +5,8 @@ const nextConfig = {
 
 module.exports = nextConfig
 // next.config.js
+
+
 module.exports = {
   async rewrites() {
     return [
@@ -39,6 +41,10 @@ module.exports = {
       {
         source:'/api/get_Core_Data',
         destination:'https://www.medicall.pk/medi-app-api/get-medistudy-core-list'
+      },
+      {
+        source:'/api/subjects_units',
+        destination:'https://www.medicall.pk/medi-app-api/mcqs/subjects/get'
       }
     ];
   },

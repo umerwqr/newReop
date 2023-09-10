@@ -9,10 +9,54 @@ import Data from '@/data/Data';
 import SubjectCard from '@/components/SubjectCard';
 import React from 'react';
 import Link from 'next/link'
+import axios from 'axios';
 import { Slider } from 'antd';
 const Unit = () => {
 
 const router = useRouter();
+
+const { subject, index } = router.query;
+
+const subjectObject = subject ? JSON.parse(subject) : null;
+
+console.log("hell")
+console.log(subjectObject.units)
+const name=subject
+console.log("hell")
+
+const [data,setData]=useState(null);
+console.log(data)
+
+const [foundObject, setFoundObject] = useState(null);
+console.log(foundObject)
+// useEffect(() => {
+//   if (data) {
+//     const found = data.find(item => item.name === name).units;
+//     if (found) {
+//       setFoundObject(found);
+//     }
+//   }
+// }, [data, name]);
+
+
+console.log(foundObject)
+useEffect((e) => {
+  const getData = async () => {
+      try {
+          const response = await axios.post('/api/subjects_units', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us' })
+          console.log(response.status == 200)
+          if(response){
+              setData(response.data.subjects)
+          }
+         
+      } catch (error) {
+          console.log(error)
+      }
+
+  }
+  getData();
+}, [])
+
 const [isSelected, setIsSelected] = useState(-1);
 const [sliderValue, setSliderValue] = React.useState(0);
 
@@ -68,7 +112,12 @@ const handleRadioChange = (e) => {
             <h1 className="font-[700] text-[32px]">Select Unit</h1>
         </div>
         <div className="my-[3rem] px-[2rem] md:px-[6rem] lg:px-[15rem] w-full flex-wrap px-6 grid grid-cols-1 md:grid-cols-2 gap-3">
-  {unit.map((each, index) => (
+          {
+            foundObject&&foundObject.forEach(element => {
+              <h1>{element.name}</h1>
+            })
+          }
+  {subjectObject&&subjectObject.units.map((each, index) => (
     <div
      
       key={index}
@@ -77,7 +126,7 @@ const handleRadioChange = (e) => {
       } py-2 px-7 rounded-lg`}
       onClick={() => setIsSelected(index)}
     >
-      <p className={`font-[600] text-[24px] text-white`}>{each}</p>
+      <p className={`font-[600] text-[24px] text-white`}>{each.name}</p>
     </div>
   ))}
 </div>

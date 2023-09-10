@@ -13,6 +13,7 @@ const Name = () => {
 
 const router = useRouter();
   const { options } = router.query; 
+ 
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState('PREP Mode');
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -30,14 +31,12 @@ const router = useRouter();
     }
   };
 
-  console.log(optionName)
 
   useEffect(() => {
 
     if (options) {
       const parsedOptions = JSON.parse(options);
       findOptionsByName(parsedOptions);
-    
     }
   });
 
@@ -127,13 +126,14 @@ const router = useRouter();
           </div>
           </div>
           </div>
-          <div className="my-[3rem]   flex justify-center w-full   flex-wrap px-6">
-            <div className="flex  sm:w-[90%] w-full flex-wrap">
+          <div className="my-[3rem]   flex justify-center w-full   flex-wrap px-6" >
+            <div className="flex  sm:w-[90%] w-full flex-wrap justify-center" >
             {selectedOptions.map((option, index) => {
   const optionName = getOptionText(option.name);
+  
   return (
     <Link
-      href={`/items/name/${optionName}?index=${index}&optionName=${option.name}&selectedData=${encodeURIComponent(JSON.stringify(selectedData))}`}
+      href={`/items/name/${optionName}?index=${index}&optionName=${option.name}&programId=${options}&selectedData=${encodeURIComponent(JSON.stringify(selectedData))}`}
       key={option.name}
     >
       <ItemCard

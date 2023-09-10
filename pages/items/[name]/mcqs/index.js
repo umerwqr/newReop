@@ -15,12 +15,17 @@ const Subject = () => {
 
 
     const [data, setData] = useState(null)
+    console.log("Heeee")
+console.log(data)
+console.log("Heeee")
+const[ array,setArray]=useState(null);
 
     useEffect((e) => {
         const getData = async () => {
             try {
-                const response = await axios.post('/api/getMcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us' })
-                if(response.data.error===false){
+                const response = await axios.post('/api/subjects_units', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us' })
+                console.log(response.status == 200)
+                if(response){
                     setData(response.data.subjects)
                 }
                
@@ -61,7 +66,6 @@ const Subject = () => {
     //     }
     //   });
 
-
     return (
         <div className="">
             <WebHeader />
@@ -76,7 +80,7 @@ const Subject = () => {
                         <SubjectCard
                             key={index}
                             subject={subject}
-                            link={`/items/name/mcqs/unit?index=${index}`}
+                            link={{pathname:`/items/name/mcqs/unit?index=${index}`,query:{subject:JSON.stringify(subject),index}}}
                         />
                     ))}
                 </div>

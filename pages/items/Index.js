@@ -93,11 +93,11 @@ console.log(programs)
             </Radio.Group>
           </div>
           </div>
-          <div className="my-[6rem] flex justify-center space-x-4 flex-wrap">
+          <div className="my-[6rem] flex justify-center space-x-4 flex-wrap ">
             {programs && programs.map((item, index) => (
                <Link
                key={index}
-               href={`/items/${encodeURIComponent(item.name)}?options=${encodeURIComponent(JSON.stringify(item.name))}`}
+               href={`/items/${encodeURIComponent(item.name)}?options=${encodeURIComponent(item.id)}`}
               //  as={`/items/${item.name}?options=${encodeURIComponent(JSON.stringify(item.name))}`}
              >
               <div
