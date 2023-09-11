@@ -15,31 +15,13 @@ const Unit = () => {
 
 const router = useRouter();
 
-const { subject, index } = router.query;
+const { subject, index , program_id} = router.query;
 
 const subjectObject = subject ? JSON.parse(subject) : null;
-
-console.log("hell")
-console.log(subjectObject.units)
-const name=subject
-console.log("hell")
-
+console.log("here",subjectObject , "   and   ",program_id)
+const name=subjectObject.name
 const [data,setData]=useState(null);
-console.log(data)
 
-const [foundObject, setFoundObject] = useState(null);
-console.log(foundObject)
-// useEffect(() => {
-//   if (data) {
-//     const found = data.find(item => item.name === name).units;
-//     if (found) {
-//       setFoundObject(found);
-//     }
-//   }
-// }, [data, name]);
-
-
-console.log(foundObject)
 useEffect((e) => {
   const getData = async () => {
       try {
@@ -57,6 +39,20 @@ useEffect((e) => {
   getData();
 }, [])
 
+
+const [foundObject, setFoundObject] = useState(null);
+useEffect(() => {
+  if (data) {
+    const found = data.find(item => item.name === name);
+    if (found) {
+      setFoundObject(found.units);
+    }
+  }
+}, [data, name]);
+
+
+
+
 const [isSelected, setIsSelected] = useState(-1);
 const [sliderValue, setSliderValue] = React.useState(0);
 
@@ -64,40 +60,6 @@ const [sliderValue, setSliderValue] = React.useState(0);
     setSliderValue(value);
   };
 
-  const [unit, setUnit] = useState([
-   "Oral Surgery",
-   "Periodontics",
-   "Orthodontics",
-   "Prosthodontics",
-   "Pedodontics",
-   "Dental Materials",
-   "Community Dentistry",
-   "Oral Pathalogy",
-   "Endodontics",
-   "Oral Anarony",
-  ])
-
-//   const findOptionsByName = (name) => {
-//     const foundOptions = Data.find((item) => item.name === name);
-//     if (foundOptions) {
-//       setSelectedData(foundOptions)
-//       setSelectedOptions(foundOptions.options);
-//     } else {
-//       setSelectedOptions([]);
-//       setSelectedData({}); 
-//     }
-//   };
-
-//   console.log(optionName)
-
-//   useEffect(() => {
-
-//     if (options) {
-//       const parsedOptions = JSON.parse(options);
-//       findOptionsByName(parsedOptions);
-    
-//     }
-//   });
 
 const handleRadioChange = (e) => {
     setSelectedRadio(e.target.value);
@@ -117,7 +79,7 @@ const handleRadioChange = (e) => {
               <h1>{element.name}</h1>
             })
           }
-  {subjectObject&&subjectObject.units.map((each, index) => (
+  {foundObject&&foundObject.map((each, index) => (
     <div
      
       key={index}
@@ -126,7 +88,14 @@ const handleRadioChange = (e) => {
       } py-2 px-7 rounded-lg`}
       onClick={() => setIsSelected(index)}
     >
-      <p className={`font-[600] text-[24px] text-white`}>{each.name}</p>
+         <Link href={"/items/name/mcqs/unit/quiz.js?subject={subject}"}>
+
+      <p className={`font-[600] text-[24px] text-white`} 
+      
+      >{each.name}
+
+      </p>
+      </Link>
     </div>
   ))}
 </div>

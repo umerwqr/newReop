@@ -13,10 +13,11 @@ import axios from 'axios';
 
 const Subject = () => {
 
-
+    const router = useRouter();
+    const { program_id } = router.query; 
+   
     const [data, setData] = useState(null)
-    console.log("Heeee")
-console.log(data)
+    console.log("Heeee  program_id",program_id)
 console.log("Heeee")
 const[ array,setArray]=useState(null);
 
@@ -37,7 +38,6 @@ const[ array,setArray]=useState(null);
         getData();
     }, [])
 
-    const router = useRouter();
     //   const { options } = router.query; 
     //   const [selectedOptions, setSelectedOptions] = useState([]);
     //   const [selectedData, setSelectedData] = useState({});
@@ -80,7 +80,7 @@ const[ array,setArray]=useState(null);
                         <SubjectCard
                             key={index}
                             subject={subject}
-                            link={{pathname:`/items/name/mcqs/unit?index=${index}`,query:{subject:JSON.stringify(subject),index}}}
+                            link={{pathname:`/items/name/mcqs/unit?index=${index}?program_id=${program_id}`,query:{subject:JSON.stringify(subject),index}}}
                         />
                     ))}
                 </div>

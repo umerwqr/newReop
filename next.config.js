@@ -8,6 +8,16 @@ module.exports = nextConfig
 
 
 module.exports = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'www.medicall.pk',
+        port: '',
+        pathname: '/**',
+      },
+    ],
+  },
   async rewrites() {
     return [
       {
@@ -45,7 +55,9 @@ module.exports = {
       {
         source:'/api/subjects_units',
         destination:'https://www.medicall.pk/medi-app-api/mcqs/subjects/get'
-      }
+      },
+      
     ];
+    
   },
 };

@@ -12,8 +12,8 @@ import Link from 'next/link'
 const Name = () => {
 
 const router = useRouter();
-  const { options } = router.query; 
- 
+  const { options,program_id } = router.query; 
+ console.log("proooogram_id",program_id)
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState('PREP Mode');
   const [selectedOptions, setSelectedOptions] = useState([]);
@@ -133,7 +133,7 @@ const router = useRouter();
   
   return (
     <Link
-      href={`/items/name/${optionName}?index=${index}&optionName=${option.name}&programId=${options}&selectedData=${encodeURIComponent(JSON.stringify(selectedData))}`}
+      href={`/items/name/${optionName}?index=${index}&optionName=${option.name}&programId=${options}&selectedData=${encodeURIComponent(JSON.stringify(selectedData))}&program_id=${program_id}`}
       key={option.name}
     >
       <ItemCard

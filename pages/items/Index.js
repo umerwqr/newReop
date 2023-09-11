@@ -17,8 +17,11 @@ console.log(programs)
     const Data=async()=>{
       try{
           const response= await axios.post("/api/get_Core_Data",{key:"Vx0cbjkzfQpyTObY8vfqgN1us"})
-          console.log(response.data.programs.name);
+          console.log(response.data.programs[0].id);
+          console.log("proooogrammmss",response.data.programs);
+
           setPrograms(response.data.programs);
+          
 
       }catch(error){
            console.log(error)
@@ -97,7 +100,7 @@ console.log(programs)
             {programs && programs.map((item, index) => (
                <Link
                key={index}
-               href={`/items/${encodeURIComponent(item.name)}?options=${encodeURIComponent(item.id)}`}
+               href={`/items/${encodeURIComponent(item.name)}?options=${encodeURIComponent(item.id)}&program_id=${item.id}`}
               //  as={`/items/${item.name}?options=${encodeURIComponent(JSON.stringify(item.name))}`}
              >
               <div
