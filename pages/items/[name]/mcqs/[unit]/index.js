@@ -43,9 +43,9 @@ const handleRadioChange = (e) => {
       <div className="text-center w-full">
             <h1 className="font-[700] text-[32px]">Select Unit</h1>
         </div>
-        <div className="my-[3rem] px-[2rem] md:px-[6rem] lg:px-[15rem] w-full flex-wrap px-6 grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div className="my-[3rem] md:px-[6rem] lg:px-[15rem] w-full flex-wrap px-6 grid grid-cols-1 md:grid-cols-2 gap-3">
          
-  {subjectObject.units.map((each, index) => (
+  {subjectObject?.units?.map((each, index) => (
     <div
      
       key={index}
