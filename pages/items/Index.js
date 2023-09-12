@@ -15,8 +15,6 @@ const Home = () => {
   const [programs, setPrograms] = useState(null);
   const [filteredPrograms, setFilteredPrograms] = useState(null);
 
- 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -51,10 +49,10 @@ const Home = () => {
     <div>
       <WebHeader />
       <main className="w-full flex items-center justify-center">
-        <div className=" p-6  w-[1200px]">
+        <div className="p-6 w-full max-w-screen-lg py-10">
           
-          <div style={{ display: "flex", justifyContent: "center", flexDirection: "column", alignItems: "center", marginTop: "100px" }}>
-            <div className="relative flex items-center  mb-4 w-[600px] ">
+          <div className="flex flex-col items-center mb-4">
+            <div className="relative flex items-center mb-4 w-full max-w-[600px] ">
               <Image
                 src="/images/search.svg"
                 alt="Search Icon"
@@ -102,7 +100,8 @@ const Home = () => {
               </Radio.Group>
             </div>
           </div>
-          <div className="my-[6rem] flex justify-center space-x-4 flex-wrap ">
+          
+          <div className="my-6 flex justify-center flex-wrap ">
             {filteredPrograms && filteredPrograms.map((item, index) => (
               <Link
                 key={index}
@@ -110,8 +109,8 @@ const Home = () => {
               >
                 <div
                   key={item.name}
-                  style={{ backgroundColor: item.tag_bg_color, display: "flex", width: "100%", color: item.tag_text_color, margin: "10px", }}
-                  className={`uppercase cursor-pointer text-[40px] font-[700]  flex flex-wrap items-center justify-center py-8 px-8  text-white rounded-md bg-[${item.tag_bg_color}]`}
+                  style={{ backgroundColor: item.tag_bg_color, color: item.tag_text_color, margin: "10px", }}
+                  className="uppercase cursor-pointer text-[40px] font-[700]  flex items-center justify-center py-8 px-8 text-white rounded-md"
                 >
                   {item.name}
                 </div>
