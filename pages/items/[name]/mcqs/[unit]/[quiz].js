@@ -17,7 +17,14 @@ export default function Quiz() {
   const [check, setCheck] = useState(true);
   const handleEachMcq = () => {
     if (mcqs && mcqs.length > i) {
-
+      setAanswer(null)
+      setBanswer(null)
+      setCanswer(null)
+      setDanswer(null)
+      setASelected(null)
+      setBSelected(null)
+      setCSelected(null)
+      setDSelected(null)
       setEachMcq(mcqs && mcqs[i])
       setI(i + 1)
     }
@@ -33,10 +40,11 @@ export default function Quiz() {
       try {
 
         const response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: unit_id, program_id: program_id, subject_id: subject_id })
-        
+        console.log(response)
         setMcqs(response.data.mcqs)
 
       } catch (error) {
+        console.log("errrror")
         console.log(error)
       }
 
@@ -173,6 +181,72 @@ export default function Quiz() {
   ).length;
   const wrongAnswers = totalQuestions - skippedQuestions - correctAnswers;
 
+  const [isASelected,setASelected]=useState(false)
+  const [isBSelected,setBSelected]=useState(false)
+  const [isCSelected,setCSelected]=useState(false)
+  const [isDSelected,setDSelected]=useState(false)
+
+  const handleSelectA=()=>{
+    setASelected(true)
+    setBSelected(false)
+    setCSelected(false)
+    setDSelected(false)
+  }
+  const handleSelectB=()=>{
+    setASelected(false)
+    setBSelected(true)
+    setCSelected(false)
+    setDSelected(false)
+
+  }
+  const handleSelectC=()=>{
+    setASelected(false)
+    setBSelected(false)
+    setCSelected(true)
+    setDSelected(false)
+  }
+  const handleSelectD=()=>{
+    setASelected(false)
+    setBSelected(false)
+    setCSelected(false)
+    setDSelected(true)
+  }
+  const [isAanswer,setAanswer]=useState(null);
+  const [isBanswer,setBanswer]=useState(null);
+  const [isCanswer,setCanswer]=useState(null);
+  const [isDanswer,setDanswer]=useState(null);
+  const handleAnswer=()=>{
+if(eachMcq && eachMcq.mcq1 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq1 === mcqs[0].answer ){
+
+  setAanswer(eachMcq && eachMcq.mcq1 || eachMcq === null && mcqs && mcqs[0].mcq1)
+  setBanswer(null)
+  setCanswer(null)
+  setDanswer(null)
+
+}
+else if(eachMcq && eachMcq.mcq2 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq2 === mcqs[0].answer ){
+
+  setBanswer(eachMcq && eachMcq.mcq2 || eachMcq === null && mcqs && mcqs[0].mcq2)
+  setAanswer(null)
+  setCanswer(null)
+  setDanswer(null)
+}
+else if(eachMcq && eachMcq.mcq3 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq3 === mcqs[0].answer ){
+
+  setCanswer(eachMcq && eachMcq.mcq3 || eachMcq === null && mcqs && mcqs[0].mcq3)
+  setBanswer(null)
+  setAanswer(null)
+  setDanswer(null)
+}
+else if(eachMcq && eachMcq.mcq4 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq4 === mcqs[0].answer ){
+
+  setDanswer(eachMcq && eachMcq.mcq4 || eachMcq === null && mcqs && mcqs[0].mcq4)
+  setBanswer(null)
+  setCanswer(null)
+  setAanswer(null)
+}}
+
+  
   return (
     <>
       <div className=' relative'>
@@ -184,7 +258,7 @@ export default function Quiz() {
           <div className="flex flex-wrap justify-center items-center space-y-2 lg:space-y-0 lg:space-x-5 w-full">
 
             <div className="rounded-md bg-white w-full lg:w-[38%] flex justify-center py-4 px-5">
-              <Image src="/images/logo.svg" width={80} height={80} alt="logo" />
+              <Image src="/images/logo.svg" alt="No Image Available" width={80} height={80}  />
             </div>
             <div className="hidden rounded-md border border-[#FFFFFF] py-4 px-5 w-full lg:w-auto  sm:flex sm:flex-col items-center">
               <h1>Skipped</h1>
@@ -216,7 +290,7 @@ export default function Quiz() {
           </div>
           <div className="text-black w-full flex justify-center items-center md:space-x-6 md:px-[2rem]">
             <div className="border border-[#0000001A] w-[200px] rounded-md px-2 hidden lg:flex items-center lg:flex-col">
-              <Image src="/images/portrait.svg" width={140} height={140} />
+              <Image src="/images/portrait.svg" alt="No Image Available" width={140} height={140} />
               <div className="flex flex-col items-center text-center">
                 <h1 className="font-[600] my-4">Are you an Enterpreneur?</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
@@ -227,34 +301,35 @@ export default function Quiz() {
               <div className="w-full flex flex-col ">
                 <div className="flex flex-col font-[500] text-[18px] space-y-5 mt-14">
                   {
+                    
                     check ?
                       <>
                         {mcqs &&
                           <>
-
+                          
+                     {/* ${eachMcq && eachMcq.mcq4 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq4 === mcqs[0].answer ? "bg-slate-300" : "bg-white"} */}
 
                             <div
-                              className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-md cursor-pointer ${eachMcq && eachMcq.mcq1 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq1 === mcqs[0].answer ? "bg-slate-300" : "bg-white"}`}
-
+                              className={`rounded-lg ${isASelected &&"bg-pink-400"}  ${isAanswer && "bg-slate-300"} ${isASelected && isAanswer && "bg-blue-500"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                              onClick={handleSelectA}
                             >
-
                               A) {eachMcq ? eachMcq.mcq1 : mcqs && mcqs[0].mcq1}
                             </div>
                             <div
-                              className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-md cursor-pointer  ${eachMcq && eachMcq.mcq2 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq2 === mcqs[0].answer ? "bg-slate-300" : "bg-white"}`}
-
+                              className={`rounded-lg ${isBSelected && "bg-pink-400"} ${isBanswer && "bg-slate-300"} ${isBSelected && isBanswer && "bg-blue-500"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer  `}
+                              onClick={handleSelectB}
                             >
                               B) {eachMcq ? eachMcq.mcq2 : mcqs && mcqs[0].mcq2}
                             </div>
                             <div
-                              className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-md cursor-pointer ${eachMcq && eachMcq.mcq3 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq3 === mcqs[0].answer ? "bg-slate-300" : "bg-white"}`}
-
+                              className={`rounded-lg ${isCSelected && "bg-pink-400"} ${isCanswer && "bg-slate-300"} ${isCSelected && isCanswer && "bg-blue-500"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                              onClick={handleSelectC}
                             >
                               C) {eachMcq ? eachMcq.mcq3 : mcqs && mcqs[0].mcq3}
                             </div>
                             <div
-                              className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-105 hover:shadow-md cursor-pointer ${eachMcq && eachMcq.mcq4 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq4 === mcqs[0].answer ? "bg-slate-300" : "bg-white"}`}
-
+                              className={`rounded-lg ${isDSelected &&"bg-pink-400"} ${isDanswer && "bg-slate-300"} ${isDSelected && isDanswer && "bg-blue-500"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                              onClick={handleSelectD}
                             >
                               D) {eachMcq ? eachMcq.mcq4 : mcqs && mcqs[0].mcq4}
                             </div>
@@ -270,6 +345,8 @@ export default function Quiz() {
 
                 <div className="flex w-full justify-between my-4">
                   <button onClick={handleSkipQuestion} className="bg-[#1F5689] py-2 px-7 rounded-md text-white font-[500] text-[18px] hover:bg-[#268FDA] hover:shadow-md transition duration-300 ease-in-out">Skip</button>
+                  <button onClick={handleAnswer} className="bg-[#1F5689] py-2 px-7 rounded-md text-white font-[500] text-[18px] hover:bg-[#268FDA] hover:shadow-md transition duration-300 ease-in-out">Answer</button>
+
                   <button onClick={handleEachMcq} disabled={currentQuestionIndex === quizData.length - 1} className="bg-[#D7392B] py-2 px-5 rounded-md text-white font-[500] text-[18px] hover:bg-[#FF4D38] hover:shadow-md transition duration-300 ease-in-out" >Next Que</button>
                 </div>
 
@@ -290,7 +367,7 @@ export default function Quiz() {
               <button className="bg-[#268FDA0A] py-3 px-3 rounded-md my-3 w-full text-left"><p>Disscus with community</p></button>
             </div>
             <div className="border lg:flex-col lg:flex hidden border-[#0000001A] w-[200px] rounded-md px-2  items-center ">
-              <Image src="/images/portrait.svg" width={140} height={140} />
+              <Image src="/images/portrait.svg" width={140} height={140} alt='No image available'/>
               <div className="flex flex-col items-center text-center">
                 <h1 className="font-[600] my-4">Are you an Enterpreneur?</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
