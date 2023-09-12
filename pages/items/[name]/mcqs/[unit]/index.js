@@ -11,44 +11,14 @@ import React from 'react';
 import Link from 'next/link'
 import axios from 'axios';
 import { Slider } from 'antd';
-const Unit = () => {
+export default function Unit() {
 
 const router = useRouter();
 
-const { subject, index , program_id} = router.query;
+const { subject, program_id} = router.query;
 
 const subjectObject = subject ? JSON.parse(subject) : null;
-console.log("here",subjectObject , "   and   ",program_id)
-const name=subjectObject.name
-const [data,setData]=useState(null);
 
-useEffect((e) => {
-  const getData = async () => {
-      try {
-          const response = await axios.post('/api/subjects_units', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us' })
-          console.log(response.status == 200)
-          if(response){
-              setData(response.data.subjects)
-          }
-         
-      } catch (error) {
-          console.log(error)
-      }
-
-  }
-  getData();
-}, [])
-
-
-const [foundObject, setFoundObject] = useState(null);
-useEffect(() => {
-  if (data) {
-    const found = data.find(item => item.name === name);
-    if (found) {
-      setFoundObject(found.units);
-    }
-  }
-}, [data, name]);
 
 
 
@@ -74,12 +44,8 @@ const handleRadioChange = (e) => {
             <h1 className="font-[700] text-[32px]">Select Unit</h1>
         </div>
         <div className="my-[3rem] px-[2rem] md:px-[6rem] lg:px-[15rem] w-full flex-wrap px-6 grid grid-cols-1 md:grid-cols-2 gap-3">
-          {
-            foundObject&&foundObject.forEach(element => {
-              <h1>{element.name}</h1>
-            })
-          }
-  {foundObject&&foundObject.map((each, index) => (
+         
+  {subjectObject.units.map((each, index) => (
     <div
      
       key={index}
@@ -88,7 +54,7 @@ const handleRadioChange = (e) => {
       } py-2 px-7 rounded-lg`}
       onClick={() => setIsSelected(index)}
     >
-         <Link href={"/items/name/mcqs/unit/quiz.js?subject={subject}"}>
+         <Link href={`/items/name/mcqs/unit/quiz.js?subject_id=${each.subject_id}&unit_id=${each.id}&program_id=${program_id}`}>
 
       <p className={`font-[600] text-[24px] text-white`} 
       
@@ -121,4 +87,3 @@ const handleRadioChange = (e) => {
   );
 };
 
-export default Unit

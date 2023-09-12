@@ -3,11 +3,12 @@ import Image from 'next/image';
 import Link from 'next/link'; 
 
 function PpMedicine({ subject, link }) {
- 
+  console.log("here subject")
+ console.log("here ", subject)
   return (
     <div className={` rounded-lg px-4 py-5 m-4 sm:w-[300px]  flex flex-col items-center`} style={{background: `#96D4D4`}}>
       <div className="rounded-full picShadow bg-white w-16 h-16 flex items-center justify-center mb-2 mt-[-2.6rem]">
-        <Image src={subject.imagage_url} alt="Option Image" width={30} height={30} />
+        <Image src={subject?.image_url} alt="Option Image" width={30} height={30} />
       </div>
       <div className="fontPop flex flex-col items-center">
         <p className="font-[600] text-[24px] ">{subject.name}</p> 

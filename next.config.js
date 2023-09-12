@@ -56,6 +56,10 @@ module.exports = {
         source:'/api/subjects_units',
         destination:'https://www.medicall.pk/medi-app-api/mcqs/subjects/get'
       },
+      {
+        source:'/api/get_mcqs',
+        destination:'https://www.medicall.pk/medi-app-api/get-subject-wise-mcqs'
+      }
       
     ];
     

@@ -15,11 +15,8 @@ const Subject = () => {
 
     const router = useRouter();
     const { program_id } = router.query; 
-   
+    
     const [data, setData] = useState(null)
-    console.log("Heeee  program_id",program_id)
-console.log("Heeee")
-const[ array,setArray]=useState(null);
 
     useEffect((e) => {
         const getData = async () => {
@@ -38,33 +35,7 @@ const[ array,setArray]=useState(null);
         getData();
     }, [])
 
-    //   const { options } = router.query; 
-    //   const [selectedOptions, setSelectedOptions] = useState([]);
-    //   const [selectedData, setSelectedData] = useState({});
-    const [optionName, setOptionName] = useState('');
-   
-
-    //   const findOptionsByName = (name) => {
-    //     const foundOptions = Data.find((item) => item.name === name);
-    //     if (foundOptions) {
-    //       setSelectedData(foundOptions)
-    //       setSelectedOptions(foundOptions.options);
-    //     } else {
-    //       setSelectedOptions([]);
-    //       setSelectedData({}); 
-    //     }
-    //   };
-
-    //   console.log(optionName)
-
-    //   useEffect(() => {
-
-    //     if (options) {
-    //       const parsedOptions = JSON.parse(options);
-    //       findOptionsByName(parsedOptions);
-
-    //     }
-    //   });
+  
 
     return (
         <div className="">
@@ -80,7 +51,7 @@ const[ array,setArray]=useState(null);
                         <SubjectCard
                             key={index}
                             subject={subject}
-                            link={{pathname:`/items/name/mcqs/unit?index=${index}?program_id=${program_id}`,query:{subject:JSON.stringify(subject),index}}}
+                            link={{pathname:`/items/name/mcqs/unit?`,query:{subject:JSON.stringify(subject),index,program_id}}}
                         />
                     ))}
                 </div>
