@@ -15,14 +15,7 @@ const Home = () => {
   const [programs, setPrograms] = useState(null);
   const [filteredPrograms, setFilteredPrograms] = useState(null);
 
-  const Wrapper = styled.div`
-  
-  /* Your regular styles here */
-
-  @media (max-width: 768px) {
-    /* Styles for screens up to 768px wide */
-  }
-`;
+ 
 
   useEffect(() => {
     const fetchData = async () => {
