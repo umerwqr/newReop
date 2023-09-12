@@ -39,22 +39,6 @@ const Guide = () => {
  
 
 
-    // useEffect(() => {
-    //     console.log('[Guide].js')
-    //     if (index) {
-    //         try {
-    //             const parsedSelectedData = JSON.parse(decodeURIComponent(selectedData));
-    //             setSelectedDataObj(parsedSelectedData);
-    //             setIsLoading(false);
-    //         } catch (error) {
-    //             console.error('Error parsing selectedData:', error);
-    //         }
-    //     }
-    // }, [index, optionName, selectedData]);
-
-    // if (isLoading === true) {
-    //     return <div>Loading...</div>
-    // }
 
     return (
         <div>

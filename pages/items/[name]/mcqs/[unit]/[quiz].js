@@ -33,8 +33,7 @@ export default function Quiz() {
       try {
 
         const response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: unit_id, program_id: program_id, subject_id: subject_id })
-        console.log(response)
-        console.log(response.data.mcqs)
+        
         setMcqs(response.data.mcqs)
 
       } catch (error) {
