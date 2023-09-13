@@ -290,7 +290,7 @@ else if(eachMcq && eachMcq.mcq4 === eachMcq.answer || eachMcq === null && mcqs &
           </div>
           <div className="text-black w-full flex justify-center items-center md:space-x-6 md:px-[2rem]">
             <div className="border border-[#0000001A] w-[200px] rounded-md px-2 hidden lg:flex items-center lg:flex-col">
-              <Image src="/images/portrait.svg" alt="No Image Available" width={140} height={140} />
+            
               <div className="flex flex-col items-center text-center">
                 <h1 className="font-[600] my-4">Are you an Enterpreneur?</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
@@ -367,7 +367,7 @@ else if(eachMcq && eachMcq.mcq4 === eachMcq.answer || eachMcq === null && mcqs &
               <button className="bg-[#268FDA0A] py-3 px-3 rounded-md my-3 w-full text-left"><p>Disscus with community</p></button>
             </div>
             <div className="border lg:flex-col lg:flex hidden border-[#0000001A] w-[200px] rounded-md px-2  items-center ">
-              <Image src="/images/portrait.svg" width={140} height={140} alt='No image available'/>
+             
               <div className="flex flex-col items-center text-center">
                 <h1 className="font-[600] my-4">Are you an Enterpreneur?</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
