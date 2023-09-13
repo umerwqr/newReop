@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useRouter } from 'next/router';
 import { Form, Input, Button, message } from 'antd';
 import Loader from '../components/Loader';
-import Modal from '../components/Modal';
+import Modal from '@/components/Model';
 
 
 function RegisterForm() {
