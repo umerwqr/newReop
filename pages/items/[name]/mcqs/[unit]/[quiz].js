@@ -309,15 +309,15 @@ export default function Quiz() {
                 }
               </div>
             </div>
-            <div className="text-black w-full flex justify-center items-center md:space-x-6 md:px-[2rem]">
-              <div className="border border-[#0000001A] w-[200px] rounded-md px-2 hidden lg:flex items-center lg:flex-col">
+            <div className="text-black  flex justify-center items-center md:space-x-6 md:px-[2rem] " style={{width:"100%"}}>
+              {/* <div className="border border-[#0000001A] w-[200px] rounded-md px-2 hidden lg:flex items-center lg:flex-col">
 
                 <div className="flex flex-col items-center text-center">
                   <h1 className="font-[600] my-4">Are you an Enterpreneur?</h1>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
                   <Link href="#" className="rounded-md my-3 bg-[#16213E] text-white py-2 px-7 font-[500] text-[18px]" >Next Que</Link>
                 </div>
-              </div>
+              </div> */}
               <div className="w-full">
                 <div className="w-full flex flex-col ">
                   <div className="flex flex-col font-[500] text-[18px] space-y-5 mt-14">
@@ -387,14 +387,14 @@ export default function Quiz() {
                 </div>
                 <button className="bg-[#268FDA0A] py-3 px-3 rounded-md my-3 w-full text-left"><p>Disscus with community</p></button>
               </div>
-              <div className="border lg:flex-col lg:flex hidden border-[#0000001A] w-[200px] rounded-md px-2  items-center ">
+              {/* <div className="border lg:flex-col lg:flex hidden border-[#0000001A] w-[200px] rounded-md px-2  items-center ">
 
                 <div className="flex flex-col items-center text-center">
                   <h1 className="font-[600] my-4">Are you an Enterpreneur?</h1>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
                   <Link href="#" className="rounded-md my-3 bg-[#16213E] text-white py-2 px-7 font-[500] text-[18px]" >Next Que</Link>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
           <WebFooter />
