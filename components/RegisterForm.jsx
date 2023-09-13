@@ -24,6 +24,9 @@ function RegisterForm() {
   })
 
   const onFinish = async(e) => {
+    try{
+
+    
     if(newUser.password !==newUser.rePassword){
        setCheck(true)
     }
@@ -31,7 +34,8 @@ function RegisterForm() {
       setLoading(true);
       const response = await axios.post('/api/register', newUser);
         console.log(response)
-      if(response.status===200){
+        
+      if(!response.data.error){
         setLoading(false);
         setTimeout(() => {
           router.push('/');
@@ -39,8 +43,16 @@ function RegisterForm() {
         console.log(response)
         message.success('Registration successful');
       }
+      else{
+        console.log(response.data.error_message)
+        message.error(response.data.error_message);
+        setLoading(false)
+      }
+
     }
-    
+  }catch(error){
+
+  }
   };
 
  

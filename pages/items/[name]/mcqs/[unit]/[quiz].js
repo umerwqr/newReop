@@ -331,25 +331,25 @@ export default function Quiz() {
                               {/* ${eachMcq && eachMcq.mcq4 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq4 === mcqs[0].answer ? "bg-slate-300" : "bg-white"} */}
 
                               <div
-                                className={`rounded-lg ${isASelected && "bg-pink-400"}  ${isAanswer && "bg-slate-300"} ${isASelected && isAanswer && "bg-blue-500"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                className={`rounded-lg ${isASelected && "bg-pink-400"}   ${isASelected && isAanswer && "bg-blue-500"}  ${isAanswer && "bg-slate-300"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                 onClick={handleSelectA}
                               >
                                 A) {eachMcq ? eachMcq.mcq1 : mcqs && mcqs[0].mcq1}
                               </div>
                               <div
-                                className={`rounded-lg ${isBSelected && "bg-pink-400"} ${isBanswer && "bg-slate-300"} ${isBSelected && isBanswer && "bg-blue-500"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer  `}
+                                className={`rounded-lg ${isBSelected && "bg-pink-400"}  ${isBSelected && isBanswer && "bg-blue-500"}  ${isBanswer && "bg-slate-300"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer  `}
                                 onClick={handleSelectB}
                               >
                                 B) {eachMcq ? eachMcq.mcq2 : mcqs && mcqs[0].mcq2}
                               </div>
                               <div
-                                className={`rounded-lg ${isCSelected && "bg-pink-400"} ${isCanswer && "bg-slate-300"} ${isCSelected && isCanswer && "bg-blue-500"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                className={`rounded-lg ${isCSelected && "bg-pink-400"}  ${isCSelected && isCanswer && "bg-blue-500"}  ${isCanswer && "bg-slate-300"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                 onClick={handleSelectC}
                               >
                                 C) {eachMcq ? eachMcq.mcq3 : mcqs && mcqs[0].mcq3}
                               </div>
                               <div
-                                className={`rounded-lg ${isDSelected && "bg-pink-400"} ${isDanswer && "bg-slate-300"} ${isDSelected && isDanswer && "bg-blue-500"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                className={`rounded-lg ${isDSelected && "bg-pink-400"}  ${isDSelected && isDanswer && "bg-blue-500"}  ${isDanswer && "bg-slate-300"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                 onClick={handleSelectD}
                               >
                                 D) {eachMcq ? eachMcq.mcq4 : mcqs && mcqs[0].mcq4}
