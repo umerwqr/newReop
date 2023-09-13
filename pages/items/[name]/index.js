@@ -9,7 +9,7 @@ import Data from '@/data/Data';
 import ItemCard from '@/components/ItemCard';
 import React from 'react';
 import Link from 'next/link'
-
+import Loader from '@/components/Loader';
 const Name = () => {
 
   const router = useRouter();
@@ -20,6 +20,8 @@ const Name = () => {
   const [selectedData, setSelectedData] = useState({});
   const [optionName, setOptionName] = useState('');
   const [filteredOptions, setFilteredOptions] = useState([]);
+
+  const [loading, setLoading] = useState(false);
 
   const findOptionsByName = (name) => {
     const foundOptions = Data.find((item) => true);
@@ -62,6 +64,7 @@ const Name = () => {
     setSelectedRadio(e.target.value);
   };
 
+ 
   function getOptionText(optionName) {
   
       switch (optionName) {
@@ -85,6 +88,14 @@ const Name = () => {
   }
 
   return (
+    <>
+    {loading ? (
+      <div style={{width:"100%",height:"600px",display:"flex",justifyContent:"center",alignItems:"center",}}>
+
+      
+      <Loader />
+      </div>
+    ) : (
     <div className="">
       <WebHeader />
       <main className="w-full h-full xxl:h-[100vh] flex items-center xl:items-start justify-center">
@@ -138,7 +149,6 @@ const Name = () => {
             <div className="flex  sm:w-[90%] w-full flex-wrap justify-center" >
               {filteredOptions.map((option, index) => {
                 const optionName = getOptionText(option.name);
-
                 return (
                   <Link
                     href={`/items/name/${optionName}?index=${index}&optionName=${option.name}&programId=${options}&selectedData=${encodeURIComponent(JSON.stringify(selectedData))}&program_id=${program_id}`}
@@ -156,7 +166,8 @@ const Name = () => {
         </div>
       </main>
       <WebFooter />
-    </div>
+    </div>)}
+    </>
   );
 };
 

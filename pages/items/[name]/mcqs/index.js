@@ -10,7 +10,7 @@ import SubjectCard from '@/components/SubjectCard';
 import React from 'react';
 import Link from 'next/link'
 import axios from 'axios';
-
+import Loader from '@/components/Loader';
 const Subject = () => {
 
     const router = useRouter();
@@ -18,13 +18,17 @@ const Subject = () => {
     
     const [data, setData] = useState(null)
 
+  const [loading, setLoading] = useState(true);
+
     useEffect((e) => {
         const getData = async () => {
             try {
                 const response = await axios.post('/api/subjects_units', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us' })
-                console.log(response.status == 200)
+                setLoading(false)
                 if(response){
+                    
                     setData(response.data.subjects)
+                    
                 }
                
             } catch (error) {
@@ -38,6 +42,14 @@ const Subject = () => {
   
 
     return (
+        <>
+        {loading ? (
+          <div style={{width:"100%",height:"600px",display:"flex",justifyContent:"center",alignItems:"center",}}>
+    
+          
+          <Loader />
+          </div>
+        ) : (
         <div className="">
             <WebHeader />
             <main className="my-[6rem] w-full h-full xxl:h-[100vh] flex flex-col items-center  xl:justify-start">
@@ -57,7 +69,7 @@ const Subject = () => {
                 </div>
             </main>
             <WebFooter />
-        </div>
+        </div>)}</>
     );
 };
 

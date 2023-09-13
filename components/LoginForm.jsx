@@ -8,9 +8,11 @@ import { useAuth } from '../context/AuthProvider';
 import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useUser } from '../context/userContext';
+import Loader from '../components/Loader';
 
 
 function LoginForm() {
+  const [loading, setLoading] = useState(false);
 
   const {updateUser}  = useUser();
 
@@ -35,14 +37,17 @@ function LoginForm() {
 
   const onFinish = async () => {
     try {
+      setLoading(true);
+
       const response = await axios.post('/api/login', formData);
-      console.log(response.data)
-      console.log("typeeeeeeeeeee"+ typeof(response.data))
-      updateUser(response.data);
+    
+      
 
 
       if (response.status === 200 ) {
+        setLoading(false);
         auth.login(response);
+        updateUser(response.data);
         message.success('Logged in successfully');
         setTimeout(() => {
           router.push('/');
@@ -65,6 +70,8 @@ function LoginForm() {
 
   return (
     <div className="flex flex-col text-center px-6 py-5 rounded-md shadow-sm w-[470px] border border-[#00000030]">
+            {loading && <Loader />}
+
       <h2 className="font-[600] text-[24px]">Login</h2>
       <p className="font-[400] text-[18px]">Please login in to continue.</p>
 

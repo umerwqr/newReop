@@ -49,7 +49,7 @@ module.exports = {
         destination:'https://www.medicall.pk/medi-app-api/past-papers/program/get'
       },
       {
-        source:'/api/get_Core_Data',
+        source:'/api/get_CoreData',
         destination:'https://www.medicall.pk/medi-app-api/get-medistudy-core-list'
       },
       {

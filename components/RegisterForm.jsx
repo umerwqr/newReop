@@ -2,8 +2,14 @@ import React, { useState } from 'react';
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import { Form, Input, Button, message } from 'antd';
+import Loader from '../components/Loader';
+import Modal from '../components/Modal';
+
 
 function RegisterForm() {
+
+  const [loading, setLoading] = useState(false);
+
   const [form] = Form.useForm();
   const router = useRouter();
   const [check,setCheck]=useState(false)
@@ -22,9 +28,11 @@ function RegisterForm() {
        setCheck(true)
     }
     else{
+      setLoading(true);
       const response = await axios.post('/api/register', newUser);
         console.log(response)
       if(response.status===200){
+        setLoading(false);
         setTimeout(() => {
           router.push('/');
         }, 2000);
@@ -33,13 +41,19 @@ function RegisterForm() {
       }
     }
     
-    
   };
 
  
 
   return (
     <div className="flex flex-col text-center px-6 py-5 rounded-md shadow-sm w-[470px] border border-[#00000030]">
+    {loading && (
+        <div className="modal-overlay">
+          <Modal>
+            <Loader />
+          </Modal>
+        </div>
+      )}
       <h2 className="font-[600] text-[24px]">Register</h2>
       <p className="font-[400] text-[18px]">Please register to continue.</p>
       
@@ -118,9 +132,10 @@ function RegisterForm() {
          )}
 
         <Form.Item className="my-5">
-          <Button className="bg-[#3F93FF] register-btn py-5  flex w-full items-center justify-center text-white hover:text-white" block htmlType="submit">
+          <Button disabled={loading} className="bg-[#3F93FF] register-btn py-5  flex w-full items-center justify-center text-white hover:text-white" block htmlType="submit">
             Register
           </Button>
+          
         </Form.Item>
       </Form>
     </div>

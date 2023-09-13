@@ -2,7 +2,9 @@ import Image from 'next/image'
 import WebHeader from '@/components/WebHeader'
 import WebFooter from '@/components/WebFooter'
 import RegisterForm from '@/components/RegisterForm'
+
 export default function Register() {
+  
   return (
     <div className="w-full h-full">
     <WebHeader/>
