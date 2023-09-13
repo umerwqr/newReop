@@ -15,6 +15,8 @@ export default function Quiz() {
 
   const [mcqs, setMcqs] = useState(null);
 
+  const [len, SetLen] = useState(1);
+
   console.log(unit_id, " and ", program_id, " and ", subject_id)
   const [question, setQuestion] = useState();
   const [eachMcq, setEachMcq] = useState(null);
@@ -29,6 +31,7 @@ export default function Quiz() {
       setBSelected(null)
       setCSelected(null)
       setDSelected(null)
+
       setEachMcq(mcqs && mcqs[i])
       setI(i + 1)
     }
@@ -50,6 +53,7 @@ export default function Quiz() {
           setLoading(false)
           setMcqs(response.data.mcqs)
 
+
         }
 
       } catch (error) {
@@ -60,82 +64,12 @@ export default function Quiz() {
     }
     getData();
   }, [2])
-  const quizData = [
-    {
-      question: 'After lower premolar extraction patient feels numbness in right side of lower lip. Which nerve is affected?',
-      options: [
-        'A) Articular cartilage and synovial membrane.',
-        'B) Synovial membrane and capsule.',
-        'C) Capsule and ligaments.',
-        'D) Ligaments and articular discs.',
-      ],
-      correctAnswer: 'C) Capsule and ligaments.',
-    },
-    {
-      question: 'After lower premolar extraction patient feels numbness in right side of lower lip. Which nerve is affected?',
-      options: [
-        'A) Articular cartilage and synovial membrane.',
-        'B) Synovial membrane and capsule.',
-        'C) Capsule and ligaments.',
-        'D) Ligaments and articular discs.',
-      ],
-      correctAnswer: 'C) Capsule and ligaments.',
-    },
-    {
-      question: 'After lower premolar extraction patient feels numbness in right side of lower lip. Which nerve is affected?',
-      options: [
-        'A) Articular cartilage and synovial membrane.',
-        'B) Synovial membrane and capsule.',
-        'C) Capsule and ligaments.',
-        'D) Ligaments and articular discs.',
-      ],
-      correctAnswer: 'C) Capsule and ligaments.',
-    },
-    {
-      question: 'After lower premolar extraction patient feels numbness in right side of lower lip. Which nerve is affected?',
-      options: [
-        'A) Articular cartilage and synovial membrane.',
-        'B) Synovial membrane and capsule.',
-        'C) Capsule and ligaments.',
-        'D) Ligaments and articular discs.',
-      ],
-      correctAnswer: 'C) Capsule and ligaments.',
-    },
-    {
-      question: 'After lower premolar extraction patient feels numbness in right side of lower lip. Which nerve is affected?',
-      options: [
-        'A) Articular cartilage and synovial membrane.',
-        'B) Synovial membrane and capsule.',
-        'C) Capsule and ligaments.',
-        'D) Ligaments and articular discs.',
-      ],
-      correctAnswer: 'C) Capsule and ligaments.',
-    },
-    {
-      question: 'After lower premolar extraction patient feels numbness in right side of lower lip. Which nerve is affected?',
-      options: [
-        'A) Articular cartilage and synovial membrane.',
-        'B) Synovial membrane and capsule.',
-        'C) Capsule and ligaments.',
-        'D) Ligaments and articular discs.',
-      ],
-      correctAnswer: 'C) Capsule and ligaments.',
-    },
-    {
-      question: 'After lower premolar extraction patient feels numbness in right side of lower lip. Which nerve is affected?',
-      options: [
-        'A) Articular cartilage and synovial membrane.',
-        'B) Synovial membrane and capsule.',
-        'C) Capsule and ligaments.',
-        'D) Ligaments and articular discs.',
-      ],
-      correctAnswer: 'C) Capsule and ligaments.',
-    },
 
-  ]
+
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
-  const [userAnswers, setUserAnswers] = useState(Array(quizData.length).fill(''));
-  const [timer, setTimer] = useState(10 * 60); // 10 minutes in seconds
+  const [userAnswers, setUserAnswers] = useState(Array(mcqs && mcqs.length).fill(''));
+
+  const [timer, setTimer] = useState(3 * 60); // 10 minutes in seconds
   const [minutes, setMinutes] = useState(3); // 30 minutes in seconds
 
   // Effect to handle the timer
@@ -146,8 +80,9 @@ export default function Quiz() {
         setMinutes(Math.floor(timer / 60));
       } else {
         clearInterval(timerInterval);
-        setTimeUp(true);
+
         message.error("Time's Up!");
+        setCheck(false)
       }
     }, 1000);
 
@@ -173,22 +108,35 @@ export default function Quiz() {
     setCurrentQuestionIndex(currentQuestionIndex - 1);
   };
 
-  const handleSkipQuestion = () => {
-    // Mark the current question as skipped
-    const newAnswers = [...userAnswers];
-    newAnswers[currentQuestionIndex] = 'skipped';
-    setUserAnswers(newAnswers);
+  const [skip, setSkip] = useState(0)
+  const handleSkip = () => {
 
-    // Move to the next question
-    handleNextQuestion();
-  };
+    if (mcqs && mcqs.length > i) {
+
+      setSkip(skip + 1)
+      setAanswer(null)
+      setBanswer(null)
+      setCanswer(null)
+      setDanswer(null)
+      setASelected(null)
+      setBSelected(null)
+      setCSelected(null)
+      setDSelected(null)
+
+      setEachMcq(mcqs && mcqs[i + 1])
+      setI(i + 2)
+
+    }
+    else {
+      setCheck(false)
+
+    }
+
+  }
 
   const skippedQuestions = userAnswers.filter((answer) => answer === 'skipped').length;
-  const totalQuestions = quizData.length;
-  const correctAnswers = userAnswers.filter(
-    (answer, index) => answer === quizData[index].correctAnswer
-  ).length;
-  const wrongAnswers = totalQuestions - skippedQuestions - correctAnswers;
+  const totalQuestions = mcqs && mcqs.length;
+
 
   const [isASelected, setASelected] = useState(false)
   const [isBSelected, setBSelected] = useState(false)
@@ -200,6 +148,7 @@ export default function Quiz() {
     setBSelected(false)
     setCSelected(false)
     setDSelected(false)
+
   }
   const handleSelectB = () => {
     setASelected(false)
@@ -274,31 +223,40 @@ export default function Quiz() {
           <div className=" w-full z-10 flex flex-col items-center text-white py-[1rem] sm:py-[3rem] px-4">
             <div className="flex flex-wrap justify-center items-center space-y-2 lg:space-y-0 lg:space-x-5 w-full">
 
-              <div className="hidden rounded-md border border-[#FFFFFF] py-4 px-5 w-full lg:w-auto  sm:flex sm:flex-col items-center">
+              <div className=" rounded-md border border-[#FFFFFF] py-4 px-5 w-full lg:w-auto  sm:flex sm:flex-col items-center">
+                <div className='flex sm:flex-col text-center'>
+
+                
                 <h1>Time Remaining</h1>
-                <p>{minutes} : {timer % 60 < 10 ? `0${timer % 60}` : timer % 60}</p>
+                <p className="ml-1">{minutes} : {timer % 60 < 10 ? `0${timer % 60}` : timer % 60}</p>
+                </div>
               </div>
               <div className="rounded-md bg-white w-full lg:w-[38%] flex justify-center py-4 px-5">
                 <Image src="/images/logo.svg" alt="No Image Available" width={80} height={80} />
               </div>
               <div className="hidden rounded-md border border-[#FFFFFF] py-4 px-5 w-full lg:w-auto  sm:flex sm:flex-col items-center">
                 <h1>Skipped</h1>
-                <p>{skippedQuestions}</p>
+                <p>{skip}</p>
               </div>
-              <div className="rounded-md border border-[#FFFFFF] py-4 px-5 w-full lg:w-auto flex flex-col items-end">
+              <div className="rounded-md border border-[#FFFFFF] py-4 px-5 w-full lg:w-auto flex flex-col items-center">
                 <div className="flex sm:hidden">
                   <h1>Skipped</h1>
-                  <p className="ml-2">{skippedQuestions}</p>
+                  <p className="ml-2">{skip}</p>
                 </div>
-                <h1>Total MCQs</h1>
-                <p>{mcqs && mcqs.length}</p>
+
+                <div className='flex sm:flex-col sm:text-center'>
+
+
+                  <h1>Total MCQs</h1>
+                  <p className="ml-2">{mcqs && mcqs.length}</p>
+                </div>
               </div>
 
             </div>
 
             <div className="bg-white w-full sm:w-[80%] lg:w-[700px] rounded-lg text-black py-5 px-[1.5rem] my-[3rem] shadow-md ">
-              <div className="flex  items-center justify-center w-full space-x-6">
-                Question
+              <div className="flex  items-center justify-center w-full space-x-6 font-bold">
+                Question # {i}
               </div>
               <div className="my-6  md:mx-[2rem] font-[500] text-[18px]">
 
@@ -309,7 +267,7 @@ export default function Quiz() {
                 }
               </div>
             </div>
-            <div className="text-black  flex justify-center items-center md:space-x-6 md:px-[2rem] " style={{width:"100%"}}>
+            <div className="text-black  flex justify-center items-center md:space-x-6 md:px-[2rem] " style={{ width: "100%" }}>
               {/* <div className="border border-[#0000001A] w-[200px] rounded-md px-2 hidden lg:flex items-center lg:flex-col">
 
                 <div className="flex flex-col items-center text-center">
@@ -365,20 +323,34 @@ export default function Quiz() {
                   </div>
 
                   <div className="flex w-full justify-between my-4">
-                    <button onClick={handleSkipQuestion} className="bg-[#1F5689] py-2 px-7 rounded-md text-white font-[500] text-[18px] hover:bg-[#268FDA] hover:shadow-md transition duration-300 ease-in-out">Skip</button>
-                    <button onClick={handleAnswer} className="bg-[#1F5689] py-2 px-7 rounded-md text-white font-[500] text-[18px] hover:bg-[#268FDA] hover:shadow-md transition duration-300 ease-in-out">Answer</button>
-
-                    <button onClick={handleEachMcq} disabled={currentQuestionIndex === quizData.length - 1} className="bg-[#D7392B] py-2 px-5 rounded-md text-white font-[500] text-[18px] hover:bg-[#FF4D38] hover:shadow-md transition duration-300 ease-in-out" >Next Que</button>
+                    <button
+                      onClick={handleSkip}
+                      className="bg-[#1F5689] py-2 px-7 rounded-md text-white font-[500] text-[16px] mt-2 mr-2 hover:bg-[#268FDA] hover:shadow-md transition duration-300 ease-in-out"
+                    >
+                      Skip
+                    </button>
+                    <button
+                      onClick={handleAnswer}
+                      className="bg-[#1F5689] py-2 px-7 rounded-md text-white font-[500] text-[16px] mt-2 mr-2 hover:bg-[#268FDA] hover:shadow-md transition duration-300 ease-in-out"
+                    >
+                      Answer
+                    </button>
+                    <button
+                      onClick={handleEachMcq}
+                      className="bg-[#D7392B] py-2 px-5 rounded-md text-white font-[500] text-[16px] mt-2 hover:bg-[#FF4D38] hover:shadow-md transition duration-300 ease-in-out"
+                    >
+                      Next Ques
+                    </button>
                   </div>
 
                 </div>
                 <div className="bg-[#146B53] rounded-md py-4 px-4 flex flex-wrap justify-evenly mt-8">
-                  <div><button className="rounded-full py-4 px-4 bg-white"><Image src="/images/btn1.svg" width={15} height={15} /></button></div>
-                  <div><button className="rounded-full py-4 px-4 bg-white"><Image src="/images/btn2.svg" width={12} height={12} /></button></div>
-                  <div><button className="rounded-full py-4 px-4 bg-white"><Image src="/images/btn3.svg" width={15} height={15} /></button></div>
-                  <div><button className="rounded-full py-4 px-4 bg-white"><Image src="/images/btn4.svg" width={15} height={15} /></button></div>
-                  <div><button className="rounded-full py-4 px-4 bg-white" ><Image src="/images/btn5.svg" width={15} height={15} /></button></div>
-                  <div><button className="rounded-full py-4 px-4 bg-white"><Image src="/images/btn6.svg" width={15} height={15} /></button></div>
+                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
+                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
+                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
+                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
+                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
+                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
 
                 </div>
                 <div className="rounded-md border border-[#FAD7DD] mt-3">

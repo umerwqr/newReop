@@ -9,7 +9,21 @@ import Modal from '@/components/Model';
 function RegisterForm() {
 
   const [loading, setLoading] = useState(false);
-
+  const validateEmail = (email) => {
+    // Regular expression to validate email format
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return emailRegex.test(email);
+  }
+  const containsEmail = (name) => {
+    // Regular expression to check if the name contains an email address
+    const emailRegex = /[^\s@]+@[^\s@]+\.[^\s@]+/;
+    return emailRegex.test(name);
+  }
+  const validatePhoneNumber = (phoneNumber) => {
+    // Regular expression to validate phone number with exactly 11 digits
+    const phoneRegex = /^\d{11}$/;
+    return phoneRegex.test(phoneNumber);
+  }  
   const [form] = Form.useForm();
   const router = useRouter();
   const [check,setCheck]=useState(false)
@@ -24,11 +38,21 @@ function RegisterForm() {
   })
 
   const onFinish = async(e) => {
+    const checkEmail=validateEmail(newUser.email)
+    const checkName=containsEmail(newUser.fullname)
+    const checkPhoneNumber=validatePhoneNumber(newUser.mobilenumber)
+console.log(checkEmail, checkName, checkPhoneNumber)
     try{
-
     
+
     if(newUser.password !==newUser.rePassword){
        setCheck(true)
+    }
+    else if(!checkEmail  || checkName){
+      message.error("Registration Failed Due to wrong email or name format")
+    }
+    else if(checkPhoneNumber){
+      message.error("Registeration Failed, phone length should be equal to 11 digits")
     }
     else{
       setLoading(true);
