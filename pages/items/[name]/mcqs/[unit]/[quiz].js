@@ -136,7 +136,7 @@ export default function Quiz() {
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState(Array(quizData.length).fill(''));
   const [timer, setTimer] = useState(10 * 60); // 10 minutes in seconds
-  const [minutes, setMinutes] = useState(10); // 30 minutes in seconds
+  const [minutes, setMinutes] = useState(3); // 30 minutes in seconds
 
   // Effect to handle the timer
   useEffect(() => {
