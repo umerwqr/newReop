@@ -19,6 +19,7 @@ const router = useRouter();
 //   const [selectedData, setSelectedData] = useState({});
 const [selectedRadio, setSelectedRadio] = useState('Speciality wise');
   const [optionName, setOptionName] = useState('');
+  
   const [subjects, setSubjects] = useState([
     {
         name: "Paediatrics",

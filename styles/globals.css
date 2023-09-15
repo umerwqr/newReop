@@ -113,3 +113,8 @@ background: "#1F5689" !important;
   animation: spin 1s linear infinite;
 }
 
+@media screen and (max-width: 641px) {
+  /* Styles for screens up to 600 pixels wide */
+ 
+}
+

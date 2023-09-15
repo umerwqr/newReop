@@ -9,9 +9,10 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { useUser } from '../context/userContext';
 import Loader from '../components/Loader';
-
+import Cookies from 'js-cookie';
 
 function LoginForm() {
+  Cookies.set("loggedIn","hello")
   const [loading, setLoading] = useState(false);
 
   const {updateUser}  = useUser();
@@ -40,7 +41,7 @@ function LoginForm() {
       setLoading(true);
 
       const response = await axios.post('/api/login', formData);
-    
+    console.log(response)
       
 
 
@@ -48,6 +49,11 @@ function LoginForm() {
         setLoading(false);
         auth.login(response);
         updateUser(response.data);
+
+        const serializedUserObject = JSON.stringify(response.data);
+
+        Cookies.set("userObject",serializedUserObject)
+
         message.success('Logged in successfully');
         setTimeout(() => {
           router.push('/');
@@ -73,7 +79,7 @@ function LoginForm() {
             {loading && <Loader />}
 
       <h2 className="font-[600] text-[24px]">Login</h2>
-      <p className="font-[400] text-[18px]">Please login in to continue.</p>
+      <p className="font-[400] text-[18px]">Please login to continue.</p>
 
       <Form
         name="loginForm"
@@ -91,21 +97,22 @@ function LoginForm() {
             onChange={handleChange} />
         </Form.Item>
 
-        <Form.Item className="mb-0">
-          <Button className="bg-[#1F5689] google-btn py-5  flex w-full items-center justify-center" >
-            Continue with Google
-          </Button>
-        </Form.Item>
-
-        <div className="flex justify-center my-3">
-          <div>or</div>
-        </div>
-
         <Form.Item>
           <Button className="bg-[#D7392B] login-btn py-5  flex w-full items-center justify-center text-white hover:text-white" block htmlType="submit">
             Log In
           </Button>
         </Form.Item>
+     
+
+        <div className="flex justify-center my-3">
+          <div>or</div>
+        </div>
+        <Form.Item className="mb-0">
+          <Button onClick={handleSignUpClick} className="bg-[#1F5689] google-btn py-5  flex w-full items-center justify-center" >
+            Continue with Google
+          </Button>
+        </Form.Item>
+        
 
         {loginFailed ?(
         <p className="text-red-500 text-sm">
@@ -116,10 +123,7 @@ function LoginForm() {
           </p>
         )
       }
-          <Button onClick={handleSignUpClick} className="bg-[#D7392B] login-btn py-5  flex w-full items-center justify-center text-white hover:text-white" >
-            Sign Up
-          </Button>
-       
+         
       </Form>
 
      

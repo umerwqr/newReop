@@ -125,7 +125,7 @@ const Home = () => {
                   key={item.name}
                   style={{
                     width: "200px", // Set a fixed width
-                    height: "200px", // Set a fixed height
+                    height: "80px", // Set a fixed height
                     fontSize: "30px", // Increase the font size
                     backgroundColor: item.tag_bg_color,
                     color: item.tag_text_color,

@@ -3,15 +3,23 @@ import { UserOutlined, MenuOutlined } from '@ant-design/icons';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useState } from 'react';
-import { useAuth } from '../context/AuthProvider'; 
+import { useAuth } from '../context/AuthProvider';
 const { Header } = Layout;
-import {message} from 'antd'
+import { message } from 'antd'
 import { useRouter } from 'next/router';
+import Cookies from 'js-cookie';
+import { useUser } from '../context/userContext';
+
 
 function WebHeader() {
-  const auth = useAuth(); 
+  const {user} =useUser()
+ 
+  
+ 
+  const firstname=user&&user.full_name?.split(" ")[0]
+  const auth = useAuth();
   const router = useRouter();
-  const {clearUserFromLocalStorage} = auth
+  const { clearUserFromLocalStorage } = auth
   console.log(auth.user?.firstName)
 
   const [drawerVisible, setDrawerVisible] = useState(false);
@@ -26,6 +34,7 @@ function WebHeader() {
 
   const LogOut = () => {
     clearUserFromLocalStorage();
+    Cookies.remove("loggedIn")
     setTimeout(() => {
       message.info("You have been logged out!");
     }, 2000);
@@ -42,83 +51,84 @@ function WebHeader() {
   );
 
   return (
-    <Header className="bg-white px-3 md:px-[3.5rem]">
-      <div className="flex sm:items-start items-center justify-between">
-      <div className=" items-center hidden sm:flex">
-            <Link href="/" className="mr-3"><Image src="/images/facebook.svg" width={10} height={10} alt="facebookLogo" /></Link>
-            <Link href="/" className="mr-3"><Image src="/images/whatsapp.svg" width={18} height={18} alt="facebookLogo" /></Link>
-            <Link href="/" className="mr-3"><Image src="/images/instagram.svg" width={18} height={18} alt="facebookLogo" /></Link>
-            <Link href="/" className="font-[500]">Home</Link>
-        </div>
+    <Header className="bg-red-700 px-3 h-[180px]">
+      <div style={{paddingLeft:"0px"}} className={`flex text-[16px] pt-4 px-0 md:px-4   text-white font-bold items-center  ${auth.isLoggedIn ? "justify-around":"justify-center"} `}>
+        {auth.isLoggedIn ? <>
+        <Link href="/items/general/mcqs/">
+          <div className="hidden  lg:block xl:block cursor-pointer underline">
+            Subjectwise Mcqs
+          </div>
+          </Link>
+          <Link href="/items/general/papers/">
+          <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
+            Past Papers
+          </div>
+          </Link>
 
-        <Link href="/" className="py-3 hover:text-[#1F5689]">
+          <Link href="/items/general/guide/">
+          <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
+            Guidelines
+          </div>
+          </Link>
+
+          <Link href="/items/general/mock/">
+          <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
+            Mocks
+          </div></Link>
+          </> : <> </>}
+          
+
+        <Link href="/" className="py-3 hover:text-[#1F5689] bg-white rounded w-[90px] h-[90px] md:w-[120px] md:h-[120px] " style={{  display: "flex", justifyContent: "center", borderRadius: "70px", margin: "5px", marginBottom: "15px" }}>
           <Image src="/images/logo.svg" alt="logo" width={70} height={70} />
         </Link>
+        {auth.isLoggedIn ? <>
+          <Link href="/items/general/bookmarks/">
 
-        <div className="hidden sm:block">
-         
-        <div className="hidden sm:block">
-  {auth.isLoggedIn ? (
-    <Dropdown overlay={profileMenu} placement="bottomRight" arrow>
-      <button className="flex items-center">
-        {auth.user && auth.user.firstName} {auth.user && auth.user.lastName}
-        <div  className="p-3 rounded-full ml-1">
-        <Image src="/images/imageProfile.svg" width={40} height={40} alt="userImage" />
-        </div>
-      </button>
-    </Dropdown>
-  ) : (
-    <Link href="/login">
-      <button className="flex items-center">
-        Log In
-        <div className="bg-[#3F93FF1F] p-3 rounded-full ml-2">
-          <Image src="/images/profile.svg" width={20} height={20} alt="login" />
-        </div>
-      </button>
-    </Link>
-  )}
-</div>
+          <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer  underline" style={{width:"110px"}}>
+            Bookmarks
+          </div>
+          </Link>
 
-      
+          <Link href="/items/general/notes/">
+
+          <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
+            MCQ Notes
+          </div>
+          </Link>
+
+          <Link href="/items/general/card/">
+
+          <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
+            Flash Cards
+          </div>
+          </Link>
+           </> : <> </>}
+
+
+
+        <div className="  ml-[8px]">
+          {auth.isLoggedIn ? (
+            <Dropdown overlay={profileMenu} placement="bottomRight" arrow>
+
+              <div className="py-3 rounded-full cursor-pointer ml-1 flex flex-col justify-center items-center h-12  ">
+                
+                <Image className="rounded-full" src={user&&user.profile_img_url} width={40} height={40} alt="userImage" />
+                <span className='p-0 m-0 h-[27px]' style={{display:"flex"}}>{firstname}</span>
+              </div>
+            </Dropdown>
+
+          ) : (
+            <>
+            </>
+          )}
         </div>
-        <div className="block sm:hidden">
-        <Button
-            type="text"
-            icon={<MenuOutlined style={{ fontSize: '20px' }} />}
-            onClick={toggleDrawer}
-            className=""
-          />
+
+
+
       </div>
-      </div>
-      <Drawer
-        title=""
-        placement="right"
-        closable={true}
-        onClose={closeDrawer}
-        visible={drawerVisible}
-        key="left"
-      >
-        <Menu mode="vertical">
-          <Menu.Item key="facebook">
-            <Link href="/">
-              <Image src="/images/facebook.svg" width={10} height={10} alt="facebookLogo" />
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="whatsapp">
-            <Link href="/">
-              <Image src="/images/whatsapp.svg" width={18} height={18} alt="whatsappLogo" />
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="instagram">
-            <Link href="/">
-              <Image src="/images/instagram.svg" width={18} height={18} alt="instagramLogo" />
-            </Link>
-          </Menu.Item>
-          <Menu.Item key="home">
-            <Link href="/">Home</Link>
-          </Menu.Item>
-        </Menu>
-      </Drawer>
+
+      <hr className="border-2  border-white " />
+
     </Header>
   );
 }

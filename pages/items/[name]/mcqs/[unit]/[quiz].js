@@ -48,12 +48,18 @@ export default function Quiz() {
       try {
         if (unit_id && program_id && subject_id) {
 
-          response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: unit_id, program_id: program_id, subject_id: subject_id })
+          response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: unit_id, program_id:program_id, subject_id: subject_id })
           console.log(response)
           setLoading(false)
           setMcqs(response.data.mcqs)
 
 
+        }
+        else{
+          response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: unit_id, subject_id: subject_id })
+          console.log(response)
+          setLoading(false)
+          setMcqs(response.data.mcqs)
         }
 
       } catch (error) {
@@ -63,7 +69,7 @@ export default function Quiz() {
 
     }
     getData();
-  }, [2])
+  }, [])
 
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);

@@ -1,13 +1,18 @@
 // UserContext.js
 import { createContext, useContext, useEffect, useState } from 'react';
-
 const UserContext = createContext();
-
+import Cookies from 'js-cookie';
 
 
 export function UserProvider({ children }) {
+
+
   const [user, setUser] = useState({});
   // Function to update user data
+
+  const serializedUserObject = JSON.stringify(user);
+
+  Cookies.set("userCookie",serializedUserObject)
   const updateUser = (newData) => {
     console.log("heeeeeeeeeeeeee  "+newData.user_id)
     setUser(newData);

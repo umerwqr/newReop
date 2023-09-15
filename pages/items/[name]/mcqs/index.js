@@ -11,6 +11,7 @@ import React from 'react';
 import Link from 'next/link'
 import axios from 'axios';
 import Loader from '@/components/Loader';
+
 const Subject = () => {
 
     const router = useRouter();
