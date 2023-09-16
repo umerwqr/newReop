@@ -14,7 +14,6 @@ export function UserProvider({ children }) {
 
   Cookies.set("userCookie",serializedUserObject)
   const updateUser = (newData) => {
-    console.log("heeeeeeeeeeeeee  "+newData.user_id)
     setUser(newData);
   };
   

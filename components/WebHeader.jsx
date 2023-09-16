@@ -13,7 +13,8 @@ import { useUser } from '../context/userContext';
 
 function WebHeader() {
   const {user} =useUser()
- 
+  const {updateUser }  = useUser();
+
   
  
   const firstname=user&&user.full_name?.split(" ")[0]
@@ -34,6 +35,7 @@ function WebHeader() {
 
   const LogOut = () => {
     clearUserFromLocalStorage();
+    updateUser(null)
     Cookies.remove("loggedIn")
     setTimeout(() => {
       message.info("You have been logged out!");
@@ -52,26 +54,26 @@ function WebHeader() {
 
   return (
     <Header className="bg-red-700 px-3 h-[180px]">
-      <div style={{paddingLeft:"0px"}} className={`flex text-[16px] pt-4 px-0 md:px-4   text-white font-bold items-center  ${auth.isLoggedIn ? "justify-around":"justify-center"} `}>
+      <div style={{paddingLeft:"0px"}} className={`flex text-[16px] pt-4 px-0   text-white font-bold items-center  ${auth.isLoggedIn ? "justify-between md:px-4  ":"justify-center"} `}>
         {auth.isLoggedIn ? <>
-        <Link href="/items/general/mcqs/">
+        <Link className='hidden  lg:block' href="/items/general/mcqs/">
           <div className="hidden  lg:block xl:block cursor-pointer underline">
             Subjectwise Mcqs
           </div>
           </Link>
-          <Link href="/items/general/papers/">
+          <Link className='hidden  lg:block' href="/items/general/papers/">
           <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
             Past Papers
           </div>
           </Link>
 
-          <Link href="/items/general/guide/">
+          <Link className='hidden  lg:block' href="/items/general/guide/">
           <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
             Guidelines
           </div>
           </Link>
 
-          <Link href="/items/general/mock/">
+          <Link className='hidden  lg:block' href="/items/general/mock/">
           <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
             Mocks
           </div></Link>
@@ -110,7 +112,7 @@ function WebHeader() {
           {auth.isLoggedIn ? (
             <Dropdown overlay={profileMenu} placement="bottomRight" arrow>
 
-              <div className="py-3 rounded-full cursor-pointer ml-1 flex flex-col justify-center items-center h-12  ">
+              <div className="py-3 rounded-full cursor-pointer ml-1 flex flex-col justify-center items-center h-18  ">
                 
                 <Image className="rounded-full" src={user&&user.profile_img_url} width={40} height={40} alt="userImage" />
                 <span className='p-0 m-0 h-[27px]' style={{display:"flex"}}>{firstname}</span>

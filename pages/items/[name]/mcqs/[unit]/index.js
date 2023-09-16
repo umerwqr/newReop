@@ -22,12 +22,22 @@ export default function Unit() {
 
   const subjectObject = subject ? JSON.parse(subject) : null;
 
+  const [mcqsData, setMcqsData] = useState(null)
 
+  const unitClicked = (index, sId, uId,name, pId) => {
+    setIsSelected(index)
+    setMcqsData({ subject_id: sId, unit_id: uId,name:name, program_id: pId })
+
+
+  }
+  console.log("mcq Data ", mcqsData)
 
 
   const [isSelected, setIsSelected] = useState(-1);
+
   const [sliderValue, setSliderValue] = React.useState(0);
 
+  console.log(sliderValue)
   const handleSliderChange = (value) => {
     setSliderValue(value);
   };
@@ -56,41 +66,45 @@ export default function Unit() {
             <div className="my-[3rem] md:px-[6rem] lg:px-[15rem] w-full flex-wrap px-6 grid grid-cols-1 md:grid-cols-2 gap-3">
 
               {subjectObject?.units?.map((each, index) => (
-                
+
                 <div
 
                   key={index}
                   className={`cursor-pointer text-center my-[.5rem] py-5 w-full  mx-auto md:mx-0 ${isSelected === index ? 'bg-[#D7392B]' : 'bg-[#1F5689]'
                     } py-2 px-7 rounded-lg`}
-                  onClick={() => setIsSelected(index)}
+                  onClick={() => unitClicked(index, each.subject_id, each.id,each.name, program_id)}
                 >
-                  <Link href={`/items/name/mcqs/unit/quiz.js?subject_id=${each.subject_id}&unit_id=${each.id}&program_id=${program_id}`}>
 
-                    <p className={`font-[600] text-[24px] text-white`}
 
-                    >{each.name}
+                  <p className={`font-[600] text-[24px] text-white`}
 
-                    </p>
-                  </Link>
+                  >{each.name}
+
+                  </p>
+
                 </div>
               ))}
             </div>
             <div className="w-full px-[2rem] md:px-[6rem] lg:px-[15rem] ">
-              <div className="bg-[#3F93FF12] text-black  border border-[#3F93FF2B] px-4 py-3 rounded-md w-full font-[500] text-[20px]">All MCQs of this unit</div>
+              <div className="bg-[#3F93FF12] text-black  border border-[#3F93FF2B] px-4 py-3 rounded-md w-full font-[500] text-[20px]">{sliderValue} MCQs of {mcqsData?.name} unit</div>
               <div className="w-full my-3">
                 <h1 className="font-[500] text-[20px] text-center mb-2">Total Questions</h1>
                 <div className="rounded-full bg-[#D7392B] py-[10px] w-full"></div>
-                <div className="w-full flex justify-between my-1"><span className="font-[500] text-[20px]">0</span> <span className="font-[500] text-[20px]">2000</span></div>
+                <div className="w-full flex justify-between my-1"><span className="font-[500] text-[20px]">0</span><span className="font-[500] text-[20px]">200</span></div>
                 <Slider
                   min={0}
-                  max={2000}
+                  max={200}
                   value={sliderValue}
                   onChange={handleSliderChange}
 
                 />
               </div>
             </div>
+            <Link href={{ pathname: `/items/name/mcqs/unit/quiz.js?`, query: { subject: JSON.stringify(mcqsData), sliderValue } }} >
+              <button disabled={isSelected === -1 || sliderValue === 0} className={`mt-8 border p-4 rounded ${isSelected === -1 || sliderValue === 0 ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-blue-900 text-white hover:bg-blue-800 hover:text-white hover:scale-105 transition-transform hover:shadow-lg'}`}
+              > Start Test</button>
 
+            </Link>
           </main>
           <WebFooter />
         </div>)}</>

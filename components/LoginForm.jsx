@@ -15,7 +15,7 @@ function LoginForm() {
   Cookies.set("loggedIn","hello")
   const [loading, setLoading] = useState(false);
 
-  const {updateUser}  = useUser();
+  const {updateUser ,user}  = useUser();
 
   const auth = useAuth();
   const router = useRouter();
@@ -73,63 +73,69 @@ function LoginForm() {
   const handleSignUpClick = () => {
     router.push('/Register'); 
   };
+const goToHome=()=>{
 
+  router.push('/')
+}
   return (
-    <div className="flex flex-col text-center px-6 py-5 rounded-md shadow-sm w-[470px] border border-[#00000030]">
-            {loading && <Loader />}
+    <> <div className="flex flex-col text-center px-6 py-5 rounded-md shadow-sm w-[470px] border border-[#00000030]">
+      {loading && <Loader />}
 
-      <h2 className="font-[600] text-[24px]">Login</h2>
-      <p className="font-[400] text-[18px]">Please login to continue.</p>
+<h2 className="font-[600] text-[24px]">Login</h2>
+<p className="font-[400] text-[18px]">Please login to continue.</p>
 
-      <Form
-        name="loginForm"
-        onFinish={onFinish}
-        style={{ marginTop: '20px' }}
-        layout="vertical"
-      >
-       <Form.Item label="Email Address" className="text-[#777777] mb-2" name="email">
-          <Input placeholder="Enter your email" className="border border-[#0000000F] py-2 px-3 " name="text" value={text}
-            onChange={handleChange} />
-        </Form.Item>
+<Form
+  name="loginForm"
+  onFinish={onFinish}
+  style={{ marginTop: '20px' }}
+  layout="vertical"
+>
+ <Form.Item label="Email Address" className="text-[#777777] mb-2" name="email">
+    <Input placeholder="Enter your email" className="border border-[#0000000F] py-2 px-3 " name="text" value={text}
+      onChange={handleChange} />
+  </Form.Item>
 
-        <Form.Item label="Password" className="text-[#777777] " name="password">
-          <Input.Password className="border border-[#0000000F] py-2 px-3" placeholder="Enter your password" name="password"  value={password}
-            onChange={handleChange} />
-        </Form.Item>
+  <Form.Item label="Password" className="text-[#777777] " name="password">
+    <Input.Password className="border border-[#0000000F] py-2 px-3" placeholder="Enter your password" name="password"  value={password}
+      onChange={handleChange} />
+  </Form.Item>
 
-        <Form.Item>
-          <Button className="bg-[#D7392B] login-btn py-5  flex w-full items-center justify-center text-white hover:text-white" block htmlType="submit">
-            Log In
-          </Button>
-        </Form.Item>
-     
+  <Form.Item>
+    <Button className="bg-[#D7392B] login-btn py-5  flex w-full items-center justify-center text-white hover:text-white" block htmlType="submit">
+      Log In
+    </Button>
+  </Form.Item>
 
-        <div className="flex justify-center my-3">
-          <div>or</div>
-        </div>
-        <Form.Item className="mb-0">
-          <Button onClick={handleSignUpClick} className="bg-[#1F5689] google-btn py-5  flex w-full items-center justify-center" >
-            Continue with Google
-          </Button>
-        </Form.Item>
-        
 
-        {loginFailed ?(
-        <p className="text-red-500 text-sm">
-          You are not registered. Please sign up first.
-        </p>):(
-          <p>
+  <div className="flex justify-center my-3">
+    <div>or</div>
+  </div>
+  <Form.Item className="mb-0">
+    <Button onClick={handleSignUpClick} className="bg-[#1F5689] google-btn py-5  flex w-full items-center justify-center" >
+      Continue with Google
+    </Button>
+  </Form.Item>
+  
 
-          </p>
-        )
-      }
-         
-      </Form>
+  {loginFailed ?(
+  <p className="text-red-500 text-sm">
+    You are not registered. Please sign up first.
+  </p>):(
+    <p>
 
-     
+    </p>
+  )
+}
+   
+</Form>
 
-     
-    </div>
+
+
+
+</div> </>
+   
+   
+  
   );
 }
 
