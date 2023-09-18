@@ -418,7 +418,7 @@ export default function Quiz() {
                                   handleSelect(1);
                                 }}
                               >
-                                A) {eachMcq ? eachMcq?.mcq1 : mcqs[0]?.mcq1}
+                                A) {eachMcq ? eachMcq?.mcq1 : mcqs[0]?.mcq1 }  {isAanswer && <div>  <div dangerouslySetInnerHTML={{ __html:(eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation)}} /> </div> }
                               </div>
                               <div
                                 className={`rounded-lg ${isBSelected && !isBanswer && "bg-pink-400"
@@ -429,7 +429,7 @@ export default function Quiz() {
                                   handleSelect(2);
                                 }}
                               >
-                                B) {eachMcq ? eachMcq?.mcq2 : mcqs[0]?.mcq2}
+                                B) {eachMcq ? eachMcq?.mcq2 : mcqs[0]?.mcq2}{isBanswer && <div>    <div dangerouslySetInnerHTML={{ __html:(eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation)}} /> </div> }
                               </div>
                               <div
                                 className={`rounded-lg ${isCSelected && !isCanswer && "bg-pink-400"
@@ -440,7 +440,7 @@ export default function Quiz() {
                                   handleSelect(3);
                                 }}
                               >
-                                C) {eachMcq ? eachMcq.mcq3 : mcqs[0]?.mcq3}
+                                C) {eachMcq ? eachMcq.mcq3 : mcqs[0]?.mcq3} {isCanswer && <div>    <div dangerouslySetInnerHTML={{ __html:(eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation)}} /> </div> }
                               </div>
                               <div
                                 className={`rounded-lg    
@@ -450,7 +450,7 @@ export default function Quiz() {
                                   handleSelect(4);
                                 }}
                               >
-                                D) {eachMcq ? eachMcq?.mcq4 : mcqs[0]?.mcq4}
+                                D) {eachMcq ? eachMcq?.mcq4 : mcqs[0]?.mcq4} {isDanswer && <div>     <div dangerouslySetInnerHTML={{ __html:(eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation)}} /> </div> }
                               </div>
                               <div
                                 className={`rounded-lg    
@@ -460,7 +460,7 @@ export default function Quiz() {
                                   handleSelect(5);
                                 }}
                               >
-                                E) {(eachMcq ? eachMcq?.mcq5 : mcqs[0]?.mcq5)!==""?eachMcq ? eachMcq?.mcq5 : mcqs[0]?.mcq5: " None"}
+                                E) {(eachMcq ? eachMcq?.mcq5 : mcqs[0]?.mcq5)!==""?eachMcq ? eachMcq?.mcq5 : mcqs[0]?.mcq5: " None"} {isEanswer && <div>   :  <div dangerouslySetInnerHTML={{ __html:(eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation)}} /> </div> }
                               </div>
                             </>
                           )}
