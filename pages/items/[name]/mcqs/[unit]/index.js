@@ -24,9 +24,9 @@ export default function Unit() {
 
   const [mcqsData, setMcqsData] = useState(null)
 
-  const unitClicked = (index, sId, uId,name, pId) => {
+  const unitClicked = (index, sId, uId, name, pId) => {
     setIsSelected(index)
-    setMcqsData({ subject_id: sId, unit_id: uId,name:name, program_id: pId })
+    setMcqsData({ subject_id: sId, unit_id: uId, name: name, program_id: pId })
 
 
   }
@@ -41,6 +41,14 @@ export default function Unit() {
   const handleSliderChange = (value) => {
     setSliderValue(value);
   };
+  const [sliderValue2, setSliderValue2] = React.useState(0);
+
+  console.log(sliderValue2)
+  const handleSliderChange2 = (value) => {
+    setSliderValue2(value);
+  };
+
+
 
 
   const handleRadioChange = (e) => {
@@ -72,7 +80,7 @@ export default function Unit() {
                   key={index}
                   className={`cursor-pointer text-center my-[.5rem] py-5 w-full  mx-auto md:mx-0 ${isSelected === index ? 'bg-[#D7392B]' : 'bg-[#1F5689]'
                     } py-2 px-7 rounded-lg`}
-                  onClick={() => unitClicked(index, each.subject_id, each.id,each.name, program_id)}
+                  onClick={() => unitClicked(index, each.subject_id, each.id, each.name, program_id)}
                 >
 
 
@@ -86,7 +94,7 @@ export default function Unit() {
               ))}
             </div>
             <div className="w-full px-[2rem] md:px-[6rem] lg:px-[15rem] ">
-              <div className="bg-[#3F93FF12] text-black  border border-[#3F93FF2B] px-4 py-3 rounded-md w-full font-[500] text-[20px]">{sliderValue} MCQs of {mcqsData?.name} unit</div>
+              <div className="bg-[#3F93FF12] text-black  border border-[#3F93FF2B] px-4 py-3 rounded-md w-full font-[500] text-[20px]">{sliderValue} MCQs of {mcqsData?.name} unit in {sliderValue2} minutes</div>
               <div className="w-full my-3">
                 <h1 className="font-[500] text-[20px] text-center mb-2">Total Questions</h1>
                 <div className="rounded-full bg-[#D7392B] py-[10px] w-full"></div>
@@ -99,9 +107,24 @@ export default function Unit() {
 
                 />
               </div>
+              <div className="w-full my-3">
+                <h1 className="font-[500] text-[20px] text-center mb-2">Total Time</h1>
+                <div className="rounded-full bg-[#D7392B] py-[10px] w-full"></div>
+                <div className="w-full flex justify-between my-1"><span className="font-[500] text-[20px]">0</span><span className="font-[500] text-[20px]">60</span></div>
+                <Slider
+                  min={0}
+                  max={60}
+                  value={sliderValue2}
+                  onChange={handleSliderChange2}
+
+                />
+              </div>
+
+
             </div>
-            <Link href={{ pathname: `/items/name/mcqs/unit/quiz.js?`, query: { subject: JSON.stringify(mcqsData), sliderValue } }} >
-              <button disabled={isSelected === -1 || sliderValue === 0} className={`mt-8 border p-4 rounded ${isSelected === -1 || sliderValue === 0 ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-blue-900 text-white hover:bg-blue-800 hover:text-white hover:scale-105 transition-transform hover:shadow-lg'}`}
+
+            <Link href={{ pathname: `/items/name/mcqs/unit/quiz.js?`, query: { subject: JSON.stringify(mcqsData), sliderValue ,sliderValue2} }} >
+              <button disabled={isSelected === -1 || sliderValue === 0 || sliderValue2 ===0} className={`mt-8 border p-4 rounded ${isSelected === -1 || sliderValue === 0 || sliderValue2 === 0? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-blue-900 text-white hover:bg-blue-800 hover:text-white hover:scale-105 transition-transform hover:shadow-lg'}`}
               > Start Test</button>
 
             </Link>

@@ -12,7 +12,7 @@ export default function Quiz() {
 
 
   const router = useRouter();
-  const { subject, sliderValue } = router.query;
+  const { subject, sliderValue, sliderValue2 } = router.query;
 
   const [subjectObject, setSubjectObject] = useState(subject ? JSON.parse(subject) : null)
 
@@ -53,40 +53,33 @@ export default function Quiz() {
   const [i, setI] = useState(1)
 
   var response = null;
-  useEffect((e) => {
+
+  useEffect(() => {
     const getData = async () => {
       try {
         if (subjectObject.unit_id && subjectObject.program_id && subjectObject.subject_id) {
-
-          response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: subjectObject.unit_id, program_id: subjectObject.program_id, subject_id: subjectObject.subject_id })
-          console.log(response)
-          setLoading(false)
+          const response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: subjectObject.unit_id, program_id: subjectObject.program_id, subject_id: subjectObject.subject_id })
           setMcqs(response.data.mcqs)
-
-
-        }
-        else {
-          response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: subjectObject.unit_id, subject_id: subjectObject.subject_id })
-          console.log("hello")
-          console.log(response)
-          setLoading(false)
+        } else {
+          const response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: subjectObject.unit_id, subject_id: subjectObject.subject_id })
           setMcqs(response.data.mcqs)
         }
-
+        setLoading(false);
       } catch (error) {
-        console.log("errrror")
-        console.log(error)
+        console.log("Error:", error);
+        setLoading(false);
       }
-
     }
-    getData();
-  }, [])
+    if (subjectObject) {
+      getData();
+    }
+  }, [subjectObject]);
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState(Array(mcqs && mcqs.length).fill(''));
 
-  const [timer, setTimer] = useState(sliderValue * 60); // 10 minutes in seconds
-  const [minutes, setMinutes] = useState(sliderValue); // 30 minutes in seconds
+  const [timer, setTimer] = useState(sliderValue2 * 60); // 10 minutes in seconds
+  const [minutes, setMinutes] = useState(sliderValue2); // 30 minutes in seconds
 
   // Effect to handle the timer
   useEffect(() => {
