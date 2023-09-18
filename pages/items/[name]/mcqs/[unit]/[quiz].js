@@ -14,9 +14,9 @@ export default function Quiz() {
   const router = useRouter();
   const { subject, sliderValue } = router.query;
 
-  const subjectObject = subject ? JSON.parse(subject) : null;
-  console.log(subjectObject)
-  console.log("slider Value", sliderValue)
+  const [subjectObject, setSubjectObject] = useState(subject ? JSON.parse(subject) : null)
+
+  console.log(" subject Object ", subjectObject, "   and  ", sliderValue)
 
 
   const [mcqs, setMcqs] = useState(null);
@@ -35,10 +35,12 @@ export default function Quiz() {
       setBanswer(null)
       setCanswer(null)
       setDanswer(null)
+      setEanswer(null)
       setIsASelected(null)
       setIsBSelected(null)
       setIsCSelected(null)
       setIsDSelected(null)
+      setIsESelected(null)
 
       setEachMcq(mcqs && mcqs[i])
       setI(i + 1)
@@ -78,7 +80,7 @@ export default function Quiz() {
 
     }
     getData();
-  }, [2])
+  }, [])
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [userAnswers, setUserAnswers] = useState(Array(mcqs && mcqs.length).fill(''));
@@ -135,10 +137,13 @@ export default function Quiz() {
       setBanswer(null)
       setCanswer(null)
       setDanswer(null)
+      setEanswer(null)
+
       setIsASelected(null)
       setIsBSelected(null)
       setIsCSelected(null)
       setIsDSelected(null)
+      setIsESelected(null)
       setEachMcq(mcqs && mcqs[i + 1])
       setI(i + 1)
 
@@ -158,12 +163,14 @@ export default function Quiz() {
   const [isBSelected, setIsBSelected] = useState(false)
   const [isCSelected, setIsCSelected] = useState(false)
   const [isDSelected, setIsDSelected] = useState(false)
+  const [isESelected, setIsESelected] = useState(false)
 
   const handleSelectA = () => {
     setASelected(true)
     setBSelected(false)
     setCSelected(false)
     setDSelected(false)
+    setESelected(false)
 
   }
   const handleSelectB = () => {
@@ -171,6 +178,8 @@ export default function Quiz() {
     setBSelected(true)
     setCSelected(false)
     setDSelected(false)
+    setESelected(false)
+
 
   }
   const handleSelectC = () => {
@@ -178,27 +187,22 @@ export default function Quiz() {
     setBSelected(false)
     setCSelected(true)
     setDSelected(false)
+    setESelected(false)
+
   }
   const handleSelectD = () => {
     setASelected(false)
     setBSelected(false)
     setCSelected(false)
     setDSelected(true)
+    setESelected(false)
+
   }
   const [isAanswer, setAanswer] = useState(null);
   const [isBanswer, setBanswer] = useState(null);
   const [isCanswer, setCanswer] = useState(null);
   const [isDanswer, setDanswer] = useState(null);
-
-  const [isAnswerA, setAnswerA] = useState(null);
-  const [isAnswerB, setAnswerB] = useState(null);
-  const [isAnswerC, setAnswerC] = useState(null);
-  const [isAnswerD, setAnswerD] = useState(null);
-
-  const [isSelectA, setIsSelectA] = useState(false);
-  const [isSelectB, setIsSelectB] = useState(false);
-  const [isSelectC, setIsSelectC] = useState(false);
-  const [isSelectD, setIsSelectD] = useState(false);
+  const [isEanswer, setEanswer] = useState(null);
 
 
 
@@ -210,6 +214,8 @@ export default function Quiz() {
       setBanswer(null)
       setCanswer(null)
       setDanswer(null)
+      setEanswer(null)
+
 
     }
     else if (eachMcq && eachMcq.mcq2 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq2 === mcqs[0].answer) {
@@ -218,6 +224,9 @@ export default function Quiz() {
       setAanswer(null)
       setCanswer(null)
       setDanswer(null)
+      setEanswer(null)
+
+
     }
     else if (eachMcq && eachMcq.mcq3 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq3 === mcqs[0].answer) {
 
@@ -225,6 +234,8 @@ export default function Quiz() {
       setBanswer(null)
       setAanswer(null)
       setDanswer(null)
+      setEanswer(null)
+
     }
     else if (eachMcq && eachMcq.mcq4 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq4 === mcqs[0].answer) {
 
@@ -232,12 +243,22 @@ export default function Quiz() {
       setBanswer(null)
       setCanswer(null)
       setAanswer(null)
+      setEanswer(null)
+    }
+    else if (eachMcq && eachMcq.mcq5 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq5 === mcqs[0].answer) {
+
+      setEanswer(eachMcq && eachMcq.mcq5 || eachMcq === null && mcqs && mcqs[0].mcq5)
+      setBanswer(null)
+      setCanswer(null)
+      setAanswer(null)
+      setDanswer(null)
     }
     if (
       isASelected ||
       isBSelected ||
       isCSelected ||
       isDSelected ||
+      isESelected ||
       userAnswers[currentQuestionIndex] !== ''
     ) {
       return;
@@ -256,6 +277,9 @@ export default function Quiz() {
       case 4:
         setIsDSelected(true);
         break;
+      case 5:
+        setIsESelected(true);
+        break;
       default:
         break;
     }
@@ -267,6 +291,8 @@ export default function Quiz() {
       setBanswer(null)
       setCanswer(null)
       setDanswer(null)
+      setEanswer(null)
+
 
     }
     else if (eachMcq && eachMcq.mcq2 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq2 === mcqs[0].answer) {
@@ -275,6 +301,8 @@ export default function Quiz() {
       setAanswer(null)
       setCanswer(null)
       setDanswer(null)
+      setEanswer(null)
+
     }
     else if (eachMcq && eachMcq.mcq3 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq3 === mcqs[0].answer) {
 
@@ -282,6 +310,8 @@ export default function Quiz() {
       setBanswer(null)
       setAanswer(null)
       setDanswer(null)
+      setEanswer(null)
+
     }
     else if (eachMcq && eachMcq.mcq4 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq4 === mcqs[0].answer) {
 
@@ -289,6 +319,15 @@ export default function Quiz() {
       setBanswer(null)
       setCanswer(null)
       setAanswer(null)
+      setEanswer(null)
+    }
+    else if (eachMcq && eachMcq.mcq5 === eachMcq.answer || eachMcq === null && mcqs && mcqs[0].mcq5 === mcqs[0].answer) {
+
+      setEanswer(eachMcq && eachMcq.mcq5 || eachMcq === null && mcqs && mcqs[0].mcq5)
+      setBanswer(null)
+      setCanswer(null)
+      setAanswer(null)
+      setDanswer(null)
     }
   }
 
@@ -310,7 +349,7 @@ export default function Quiz() {
           </div>
           <div className=" w-full z-10 flex flex-col items-center text-white py-[1rem] sm:py-[3rem] px-4">
             <div className="flex flex-wrap justify-center items-center space-y-2 lg:space-y-0 lg:space-x-5 w-full">
-            <div style={{width:"65px"}}>
+              <div style={{ width: "65px" }}>
                 <h1></h1>
                 <p></p>
               </div>
@@ -380,8 +419,8 @@ export default function Quiz() {
                               <div
                                 className={`rounded-lg ${isASelected && !isAanswer && "bg-pink-400"
                                   }   
-                                  ${isAanswer && isASelected &&"bg-green-500" || !isAanswer && isASelected && "bg-pink-400" || !isASelected && isAanswer && "bg-red-500"
-                                } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  ${isAanswer && isASelected && "bg-green-500" || !isAanswer && isASelected && "bg-pink-400" || !isASelected && isAanswer && "bg-red-500"
+                                  } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                 onClick={() => {
                                   handleSelect(1);
                                 }}
@@ -390,9 +429,9 @@ export default function Quiz() {
                               </div>
                               <div
                                 className={`rounded-lg ${isBSelected && !isBanswer && "bg-pink-400"
-                              }   
-                              ${isBanswer && isBSelected &&"bg-green-500" || !isBanswer && isBSelected && "bg-pink-400" || !isBSelected && isBanswer && "bg-red-500"
-                            }  border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  }   
+                              ${isBanswer && isBSelected && "bg-green-500" || !isBanswer && isBSelected && "bg-pink-400" || !isBSelected && isBanswer && "bg-red-500"
+                                  }  border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                 onClick={() => {
                                   handleSelect(2);
                                 }}
@@ -401,9 +440,9 @@ export default function Quiz() {
                               </div>
                               <div
                                 className={`rounded-lg ${isCSelected && !isCanswer && "bg-pink-400"
-                              }   
-                              ${isCanswer && isCSelected &&"bg-green-500" || !isCanswer && isCSelected && "bg-pink-400" || !isCSelected && isCanswer && "bg-red-500"
-                            } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  }   
+                              ${isCanswer && isCSelected && "bg-green-500" || !isCanswer && isCSelected && "bg-pink-400" || !isCSelected && isCanswer && "bg-red-500"
+                                  } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                 onClick={() => {
                                   handleSelect(3);
                                 }}
@@ -412,13 +451,23 @@ export default function Quiz() {
                               </div>
                               <div
                                 className={`rounded-lg    
-                               ${isDanswer && isDSelected &&"bg-green-500" || !isDanswer && isDSelected && "bg-pink-400" || !isDSelected && isDanswer &&"bg-red-500"
-                              } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                               ${isDanswer && isDSelected && "bg-green-500" || !isDanswer && isDSelected && "bg-pink-400" || !isDSelected && isDanswer && "bg-red-500"
+                                  } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                 onClick={() => {
                                   handleSelect(4);
                                 }}
                               >
                                 D) {eachMcq ? eachMcq?.mcq4 : mcqs[0]?.mcq4}
+                              </div>
+                              <div
+                                className={`rounded-lg    
+                               ${isEanswer && isESelected && "bg-green-500" || !isEanswer && isESelected && "bg-pink-400" || !isESelected && isEanswer && "bg-red-500"
+                                  } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                onClick={() => {
+                                  handleSelect(5);
+                                }}
+                              >
+                                E) {(eachMcq ? eachMcq?.mcq5 : mcqs[0]?.mcq5)!==""?eachMcq ? eachMcq?.mcq5 : mcqs[0]?.mcq5: " None"}
                               </div>
                             </>
                           )}
@@ -475,7 +524,7 @@ export default function Quiz() {
                     >
                       Answer
                     </button> */}
-                   
+
 
 
 
@@ -484,8 +533,8 @@ export default function Quiz() {
                     <button
 
                       onClick={handleEachMcq}
-                      disabled={isASelected || isBSelected || isCSelected || isDSelected ===true? false: true}
-                      className={` ${isASelected || isBSelected || isCSelected || isDSelected ? "bg-[#cc2c2c] hover:bg-[#e64e4e]" : 'bg-gray-400'} py-2 px-7 rounded-md text-white font-[500] text-[16px] mt-2 mr-2  hover:shadow-md transition duration-300 ease-in-out `}
+                      disabled={isASelected || isBSelected || isCSelected || isDSelected || isESelected === true ? false : true}
+                      className={` ${isASelected || isBSelected || isCSelected || isDSelected || isESelected ? "bg-[#cc2c2c] hover:bg-[#e64e4e]" : 'bg-gray-400'} py-2 px-7 rounded-md text-white font-[500] text-[16px] mt-2 mr-2  hover:shadow-md transition duration-300 ease-in-out `}
                     >
                       Next Ques
                     </button>
