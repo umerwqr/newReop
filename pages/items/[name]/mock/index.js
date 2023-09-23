@@ -16,6 +16,7 @@ import Loader from '@/components/Loader';
 const Subject = () => {
 
     const router = useRouter();
+    const {program_id} =router.query
     //   const { options } = router.query; 
     //   const [selectedOptions, setSelectedOptions] = useState([]);
     //   const [selectedData, setSelectedData] = useState({});
@@ -93,8 +94,8 @@ const Subject = () => {
                                     subject={subject}
                                     url={subject.image_url}
                                     name={subject.name}
-                                    
-                                    link=''
+                                    count={subject.mcqs_count}
+                                    link={{pathname:`/items/name/mcqs/unit?`,query:{subject:JSON.stringify(subject), program_id}}}
                                 />
                             ))}
                         </div>
