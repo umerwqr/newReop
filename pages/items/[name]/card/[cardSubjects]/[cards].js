@@ -16,7 +16,8 @@ const Cards = () => {
     const{ sliderValue, subject}=router.query
 
     const [subjectObject, setSubjectObject] = useState(subject ? JSON.parse(subject) : null)
-  
+
+    
  
 
     const [data, setData] = useState(null)
