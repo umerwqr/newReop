@@ -47,7 +47,6 @@ console.log(checkEmail, checkName, checkPhoneNumber)
 
     if(newUser.password !==newUser.rePassword){
        setCheck(true)
-       setLoading(false)
     }
     else if(!checkEmail  || checkName){
       message.error("Registration Failed Due to wrong email or name format")
@@ -58,10 +57,10 @@ console.log(checkEmail, checkName, checkPhoneNumber)
       message.error("Registeration Failed, phone length should be equal to 11 digits")
       setLoading(false)
     }
-    else if(password.length<7){
-      message.error("Registeration Failed, Password Length should be more than 6 digits")
-      setLoading(false)
-    }
+    // else if(password.length<7){
+    //   message.error("Registeration Failed, Password Length should be more than 6 digits")
+    //   setLoading(false)
+    // }
     else{
       setLoading(true);
       const response = await axios.post('/api/register', newUser);

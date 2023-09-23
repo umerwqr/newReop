@@ -82,6 +82,14 @@ const Name = () => {
         return 'notes';
       case 'Bookmarked':
         return 'bookmarks';
+      case 'Tutorials':
+        return 'tutorials';
+      case 'MCQs_Discussion':
+        return 'Discussion';
+      case 'Join_Us':
+        return 'join_us';
+      case 'Mentors':
+        return 'mentors';
       default:
         return '';
     }
@@ -152,7 +160,13 @@ const Name = () => {
                     const optionName = getOptionText(option.name);
                     return (
                       <Link
-                        href={`/items/name/${optionName}?index=${index}&optionName=${option.name}&programId=${options}&selectedData=${encodeURIComponent(JSON.stringify(selectedData))}&program_id=${program_id}`}
+                      href={{
+                        pathname: `/items/name/${optionName}`,
+                        query: {
+                          
+                          program_id: program_id
+                        }
+                      }}
                         key={index}
                       >
                         <ItemCard

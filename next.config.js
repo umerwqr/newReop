@@ -63,6 +63,10 @@ module.exports = {
       {
         source:'/api/get_mcqs',
         destination:'https://www.medicall.pk/medi-app-api/get-subject-wise-mcqs'
+      },
+      {
+        source:'/api/get_flash_cards',
+        destination:'https://www.medicall.pk/medi-app-api/get-flash-cards'
       }
       
     ];

@@ -12,7 +12,7 @@ import Link from 'next/link'
 import axios from 'axios';
 import { Slider } from 'antd';
 import Loader from '@/components/Loader';
-export default function Unit() {
+export default function cardSubjects() {
 
   const [loading, setLoading] = useState(false);
 
@@ -23,21 +23,14 @@ export default function Unit() {
   const subjectObject = subject ? JSON.parse(subject) : null;
 
   const [mcqsData, setMcqsData] = useState(null)
-  const [topics, setTopics] = useState(null)
 
-  const unitClicked = (index, sId, uId, name, pId, topics) => {
+  const unitClicked = (index, sId, uId, name, pId) => {
     setIsSelected(index)
     setMcqsData({ subject_id: sId, unit_id: uId, name: name, program_id: pId })
-
-    setTopics(topics)
 
 
   }
   console.log("mcq Data ", mcqsData)
-
-  const handleTopicClick = (id) => {
-    setMcqsData({ ...mcqsData, topic_id: id })
-  }
 
 
   const [isSelected, setIsSelected] = useState(-1);
@@ -76,7 +69,7 @@ export default function Unit() {
           <WebHeader />
           <main className="my-[6rem] w-full h-full xxl:h-[100vh] flex flex-col items-center  xl:justify-start">
             <div className="text-center w-full">
-              <h1 className="font-[700] text-[32px]">Select Unit For MCQs</h1>
+              <h1 className="font-[700] text-[32px]">Select Unit For Flash Card</h1>
             </div>
             <div className="my-[3rem] md:px-[6rem] lg:px-[15rem] w-full flex-wrap px-6 grid grid-cols-1 md:grid-cols-2 gap-3">
 
@@ -87,42 +80,23 @@ export default function Unit() {
                   key={index}
                   className={`cursor-pointer text-center my-[.5rem] py-5 w-full  mx-auto md:mx-0 ${isSelected === index ? 'bg-[#D7392B]' : 'bg-[#1F5689]'
                     } py-2 px-7 rounded-lg`}
-                  onClick={() => unitClicked(index, each.subject_id, each.id, each.name, program_id, each._topics)}
+                  onClick={() => unitClicked(index, each.subject_id, each.id, each.name, program_id, each)}
                 >
 
 
                   <p className={`font-[600] text-[24px] text-white`}
 
                   >{each.name}
-                    {/* >{each._topics[2].topic?.title} */}
 
                   </p>
 
                 </div>
               ))}
-
-
             </div>
             <div className="w-full px-[2rem] md:px-[6rem] lg:px-[15rem] ">
-              <div className='my-12'>
-
-
-                <select
-                  onChange={(e) => handleTopicClick(e.target.value)}
-                  className=" cursor-pointer block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-                  <option value="">Select a topic from Unit : {mcqsData?.name?mcqsData?.name: <>( First Select Unit )</>} </option>
-                  {topics && topics.map(topic => (
-                    <option key={topic.topic_id} value={topic.topic_id}>
-                      {topic?.topic?.title}
-                    </option>
-                  ))}
-                </select>
-              </div>
-              <div className="bg-[#3F93FF12] text-black  border border-[#3F93FF2B] px-4 py-3 rounded-md w-full font-[500] text-[20px]">{sliderValue} MCQs of {mcqsData?.name} unit in {sliderValue2} minutes</div>
-
+              <div className="bg-[#3F93FF12] text-black  border border-[#3F93FF2B] px-4 py-3 rounded-md w-full font-[500] text-[20px]">{sliderValue} Flash card of {mcqsData?.name} unit </div>
               <div className="w-full my-3">
-
-                <h1 className="font-[500] text-[20px] text-center mb-2">Total Questions</h1>
+                <h1 className="font-[500] text-[20px] text-center mb-2">Total Flash Cards</h1>
                 <div className="rounded-full bg-[#D7392B] py-[10px] w-full"></div>
                 <div className="w-full flex justify-between my-1"><span className="font-[500] text-[20px]">0</span><span className="font-[500] text-[20px]">200</span></div>
                 <Slider
@@ -133,23 +107,13 @@ export default function Unit() {
 
                 />
               </div>
-              <div className="w-full my-3">
-                <h1 className="font-[500] text-[20px] text-center mb-2">Total Time</h1>
-                <div className="rounded-full bg-[#D7392B] py-[10px] w-full"></div>
-                <div className="w-full flex justify-between my-1"><span className="font-[500] text-[20px]">0</span><span className="font-[500] text-[20px]">60</span></div>
-                <Slider
-                  min={0}
-                  max={60}
-                  value={sliderValue2}
-                  onChange={handleSliderChange2}
+         
 
-                />
-              </div>
 
             </div>
 
-            <Link href={{ pathname: `/items/name/mcqs/unit/quiz.js?`, query: { subject: JSON.stringify(mcqsData), sliderValue, sliderValue2 } }} >
-              <button disabled={isSelected === -1 || sliderValue === 0 || sliderValue2 === 0} className={`mt-8 border p-4 rounded ${isSelected === -1 || sliderValue === 0 || sliderValue2 === 0 ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-blue-900 text-white hover:bg-blue-800 hover:text-white hover:scale-105 transition-transform hover:shadow-lg'}`}
+            <Link href={{ pathname: `/items/name/card/cardSubjects/cards.js?`, query: { subject: JSON.stringify(mcqsData), sliderValue } }} >
+              <button disabled={isSelected === -1 || sliderValue === 0 } className={`mt-8 border p-4 rounded ${isSelected === -1 || sliderValue === 0 ? 'bg-gray-400 text-gray-700 cursor-not-allowed' : 'bg-blue-900 text-white hover:bg-blue-800 hover:text-white hover:scale-105 transition-transform hover:shadow-lg'}`}
               > Start Test</button>
 
             </Link>

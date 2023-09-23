@@ -18,6 +18,7 @@ const Subject = () => {
     const { program_id } = router.query; 
     
     const [data, setData] = useState(null)
+    console.log("UNITS data",data)
 
   const [loading, setLoading] = useState(true);
 
@@ -64,7 +65,10 @@ const Subject = () => {
                         <SubjectCard
                             key={index}
                             subject={subject}
-                            link={{pathname:`/items/name/mcqs/unit?`,query:{subject:JSON.stringify(subject),index,program_id}}}
+                            name={subject.name}
+                            url={subject.image_url}
+                            count={subject.mcqs_count}
+                            link={{pathname:`/items/name/mcqs/unit?`,query:{subject:JSON.stringify(subject), program_id}}}
                         />
                     ))}
                 </div>

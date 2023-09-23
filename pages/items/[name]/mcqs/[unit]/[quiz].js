@@ -20,7 +20,7 @@ export default function Quiz() {
 
 
   const [mcqs, setMcqs] = useState(null);
-  console.log(mcqs)
+  console.log("mcsssqs",mcqs)
   const [len, SetLen] = useState(1);
 
   const [question, setQuestion] = useState();
@@ -58,7 +58,7 @@ export default function Quiz() {
     const getData = async () => {
       try {
         if (subjectObject.unit_id && subjectObject.program_id && subjectObject.subject_id) {
-          const response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: subjectObject.unit_id, program_id: subjectObject.program_id, subject_id: subjectObject.subject_id })
+          const response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', topic_id:subjectObject.topic_id?subjectObject.topic_id:"", unit_id: subjectObject.unit_id, program_id: subjectObject.program_id, subject_id: subjectObject.subject_id })
           setMcqs(response.data.mcqs)
         } else {
           const response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: subjectObject.unit_id, subject_id: subjectObject.subject_id })
@@ -424,7 +424,7 @@ export default function Quiz() {
                                 {isAanswer && <div
                                   className={`rounded-lg ${isASelected && !isAanswer && "bg-red-500"
                                     }   
-                                  ${isAanswer && isASelected && "bg-green-500" || !isAanswer && isASelected && "bg-red-500" || !isASelected && isAanswer && "bg-green-500"
+                                  ${isAanswer && isASelected && "bg-yellow-400" || !isAanswer && isASelected && "bg-red-500" || !isASelected && isAanswer && "bg-yellow-400"
                                     } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                   onClick={() => {
                                     handleSelect(1);
@@ -448,7 +448,7 @@ export default function Quiz() {
                                 {isBanswer && <div
                                   className={`rounded-lg ${isBSelected && !isBanswer && "bg-red-500"
                                     }   
-                              ${isBanswer && isBSelected && "bg-green-500" || !isBanswer && isBSelected && "bg-red-500" || !isBSelected && isBanswer && "bg-green-500"
+                              ${isBanswer && isBSelected && "bg-yellow-400" || !isBanswer && isBSelected && "bg-red-500" || !isBSelected && isBanswer && "bg-yellow-400"
                                     }  border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                   onClick={() => {
                                     handleSelect(2);
@@ -474,7 +474,7 @@ export default function Quiz() {
                                 {isCanswer && <div
                                   className={`rounded-lg ${isCSelected && !isCanswer && "bg-red-500"
                                     }   
-                              ${isCanswer && isCSelected && "bg-green-500" || !isCanswer && isCSelected && "bg-red-500" || !isCSelected && isCanswer && "bg-green-500"
+                              ${isCanswer && isCSelected && "bg-yellow-400" || !isCanswer && isCSelected && "bg-red-500" || !isCSelected && isCanswer && "bg-yellow-400"
                                     } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                   onClick={() => {
                                     handleSelect(3);
@@ -502,7 +502,7 @@ export default function Quiz() {
                                 {
                                   isDanswer && <div
                                     className={`rounded-lg    
-                               ${isDanswer && isDSelected && "bg-green-500" || !isDanswer && isDSelected && "bg-red-500" || !isDSelected && isDanswer && "bg-green-500"
+                               ${isDanswer && isDSelected && "bg-yellow-400" || !isDanswer && isDSelected && "bg-red-500" || !isDSelected && isDanswer && "bg-yellow-400"
                                       } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
                                     onClick={() => {
                                       handleSelect(4);

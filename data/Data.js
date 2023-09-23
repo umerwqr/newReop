@@ -146,6 +146,26 @@ const Data = [
             name: "Bookmarked",
             img: '/images/options/bookmarks.svg',
             bg: "#F3ECEA",
+        },
+        {
+            name:"Tutorials",
+            img:'/images/options/papers.svg',
+            bg:"#F3ECEA"
+        },
+        {
+            name:"MCQs_Discussion",
+            img:'/images/options/flash.svg',
+            bg:"#F5EFC2"
+        },
+        {
+            name:"Join_Us",
+            img:'/images/options/mock.svg',
+            bg:"#F5EFC2"
+        },
+        {
+            name:"Mentors",
+            img:'/images/options/notes.svg',
+            bg:"#96D4D4"
         }
      ],
      bg: '#D7392B',
@@ -297,6 +317,26 @@ const Data = [
                 name: "Bookmarked",
                 img: '/images/options/bookmarks.svg',
                 bg: "#F3ECEA",
+            },
+            {
+                name:"Tutorials",
+                img:'/images/options/papers.svg',
+                bg:"#F3ECEA"
+            },
+            {
+                name:"MCQs_Discussion",
+                img:'/images/options/flash.svg',
+                bg:"#F5EFC2"
+            },
+            {
+                name:"Join_Us",
+                img:'/images/options/mock.svg',
+                bg:"#F5EFC2"
+            },
+            {
+                name:"Mentors",
+                img:'/images/options/notes.svg',
+                bg:"#96D4D4"
             }
          ],
         bg: '#1F5689',
@@ -448,6 +488,26 @@ const Data = [
                 name: "Bookmarked",
                 img: '/images/options/bookmarks.svg',
                 bg: "#F3ECEA",
+            },
+            {
+                name:"Tutorials",
+                img:'/images/options/papers.svg',
+                bg:"#F3ECEA"
+            },
+            {
+                name:"MCQs_Discussion",
+                img:'/images/options/flash.svg',
+                bg:"#F5EFC2"
+            },
+            {
+                name:"Join_Us",
+                img:'/images/options/mock.svg',
+                bg:"#F5EFC2"
+            },
+            {
+                name:"Mentors",
+                img:'/images/options/notes.svg',
+                bg:"#96D4D4"
             }
          ],
         bg: '#146B53',

@@ -17,7 +17,7 @@ const Subject = () => {
     const router = useRouter();
 
     const [data, setData] = useState(null)
-
+    const {program_id } =router.query
     const [loading, setLoading] = useState(true);
 
     useEffect((e) => {
@@ -59,11 +59,15 @@ const Subject = () => {
 
                     <div className="my-[3rem]   flex justify-center w-full   flex-wrap px-6">
 
-                        {subjects.map((subject, index) => (
+                        {data&&data.map((subject, index) => (
                             <SubjectCard
                                 key={index}
                                 subject={subject}
-                                link=''
+                                name={subject.name}
+                                url={subject.image_url}
+                                count={subject.flash_cards_count}
+                                link={{pathname:`/items/name/card/cardSubjects?`,query:{subject:JSON.stringify(subject),index,program_id}}}
+
                             />
                         ))}
                     </div>

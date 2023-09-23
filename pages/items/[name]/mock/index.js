@@ -91,6 +91,9 @@ const Subject = () => {
                                 <SubjectCard
                                     key={index}
                                     subject={subject}
+                                    url={subject.image_url}
+                                    name={subject.name}
+                                    
                                     link=''
                                 />
                             ))}
