@@ -16,25 +16,15 @@ const Cards = () => {
     const{ sliderValue, subject}=router.query
 
     const [subjectObject, setSubjectObject] = useState(subject ? JSON.parse(subject) : null)
-    console.log(subject.unit_id, "  and  ",subject.subject_id ," and ",subject.unit_id,"   and  ", sliderValue)
-
-
-    useEffect(()=>{
-
-
-    },[])
-    // const {index, optionName, selectedData} = router2.query;
-    // const [selectedDataObj, setSelectedDataObj] = useState({});
-    // const [isLoading, setIsLoading] = useState(false);
-
+  
+ 
 
     const [data, setData] = useState(null)
-   console.log("daaaaattttaaaa",data)
 
     useEffect((e) => {
         const getData = async () => {
             try {
-                const response = await axios.post('/api/get_flash_cards', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id:subjectObject?.unit_id, program_id:subjectObject?.program_id, subject_id:subjectObject?.subject_id })
+                const response = await axios.post('/api/get_flash_cards', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id:subjectObject?.unit_id , program_id:subjectObject?.program_id, subject_id:subjectObject?.subject_id })
                 console.log(response)
                 if (response.data.error === false) {
                     setData(response.data.slides)
