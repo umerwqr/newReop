@@ -1,13 +1,12 @@
 import WebFooter from '@/components/WebFooter';
 import WebHeader from '@/components/WebHeader';
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Input, Radio } from 'antd';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 import Data from '@/data/Data';
 import SubjectCard from '@/components/SubjectCard';
-import React from 'react';
 import Link from 'next/link'
 import Loader from '@/components/Loader';
 import axios from 'axios';

@@ -1,20 +1,19 @@
 import WebFooter from '@/components/WebFooter';
 import WebHeader from '@/components/WebHeader';
-import { useState, useEffect } from 'react';
+import React,{ useState, useEffect } from 'react';
 import Image from 'next/image';
 import { Input, Radio } from 'antd';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 import Data from '@/data/Data';
 import SubjectCard from '@/components/SubjectCard';
-import React from 'react';
 import Link from 'next/link'
 import axios from 'axios';
 import { Slider } from 'antd';
 import Loader from '@/components/Loader';
-export default function cardSubjects() {
+export default function Index() {
 
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(false)
 
   const router = useRouter();
 
@@ -30,18 +29,17 @@ export default function cardSubjects() {
 
 
   }
-  console.log("mcq Data ", mcqsData)
 
 
   const [isSelected, setIsSelected] = useState(-1);
 
-  const [sliderValue, setSliderValue] = React.useState(0);
+  const [sliderValue, setSliderValue] = useState(0);
 
   console.log(sliderValue)
   const handleSliderChange = (value) => {
     setSliderValue(value);
   };
-  const [sliderValue2, setSliderValue2] = React.useState(0);
+  const [sliderValue2, setSliderValue2] = useState(0);
 
   console.log(sliderValue2)
   const handleSliderChange2 = (value) => {
