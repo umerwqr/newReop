@@ -52,14 +52,7 @@ const Home = () => {
   };
 
   return (
-    <>
-    {loading ? (
-      <div style={{width:"100%",height:"600px",display:"flex",justifyContent:"center",alignItems:"center",}}>
-
-      
-      <Loader />
-      </div>
-    ) : (
+  
     <div>
       <WebHeader />
       <main className="w-full flex items-center justify-center">
@@ -142,8 +135,7 @@ const Home = () => {
       </main>
       <WebFooter />
     </div>
-    )}
-    </>
+   
   );
 };
 

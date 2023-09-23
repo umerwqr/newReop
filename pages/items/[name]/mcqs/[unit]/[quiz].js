@@ -409,92 +409,141 @@ export default function Quiz() {
 
                           {mcqs && (
                             <>
-                              <div
-                                className={`rounded-lg ${isASelected && !isAanswer && "bg-pink-400"
-                                  }   
-                                  ${isAanswer && isASelected && "bg-green-500" || !isAanswer && isASelected && "bg-pink-400" || !isASelected && isAanswer && "bg-red-500"
-                                  } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                onClick={() => {
-                                  handleSelect(1);
-                                }}
-                              >
-                                A) {eachMcq ? eachMcq?.mcq1 : mcqs[0]?.mcq1 }  {isAanswer && <div>  <div dangerouslySetInnerHTML={{ __html:(eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation)}} /> </div> }
+                              <div>
+                                <div
+                                  className={`rounded-lg ${isASelected && !isAanswer && "bg-red-500"
+                                    }   
+                                  ${isAanswer && isASelected && "bg-green-500" || !isAanswer && isASelected && "bg-red-500" || !isASelected && isAanswer && "bg-green-500"
+                                    } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  onClick={() => {
+                                    handleSelect(1);
+                                  }}
+                                >
+                                  A) {eachMcq ? eachMcq?.mcq1 : mcqs[0]?.mcq1} {isAanswer && <div className='  text-white  text-3xl ml-9'> &#10003;</div>} {!isAanswer && isASelected && <div className='  text-white  text-3xl ml-9'> &#10007;</div>}
+                                </div>
+                                {isAanswer && <div
+                                  className={`rounded-lg ${isASelected && !isAanswer && "bg-red-500"
+                                    }   
+                                  ${isAanswer && isASelected && "bg-green-500" || !isAanswer && isASelected && "bg-red-500" || !isASelected && isAanswer && "bg-green-500"
+                                    } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  onClick={() => {
+                                    handleSelect(1);
+                                  }}
+                                >
+                                  {isAanswer && <div>  <div dangerouslySetInnerHTML={{ __html: (eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation) }} /> </div>}
+                                </div>}
                               </div>
-                              <div
-                                className={`rounded-lg ${isBSelected && !isBanswer && "bg-pink-400"
-                                  }   
-                              ${isBanswer && isBSelected && "bg-green-500" || !isBanswer && isBSelected && "bg-pink-400" || !isBSelected && isBanswer && "bg-red-500"
-                                  }  border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                onClick={() => {
-                                  handleSelect(2);
-                                }}
-                              >
-                                B) {eachMcq ? eachMcq?.mcq2 : mcqs[0]?.mcq2}{isBanswer && <div>    <div dangerouslySetInnerHTML={{ __html:(eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation)}} /> </div> }
+                              <div>
+                                <div
+                                  className={`rounded-lg ${isBSelected && !isBanswer && "bg-red-500"
+                                    }   
+                              ${isBanswer && isBSelected && "bg-green-500" || !isBanswer && isBSelected && "bg-red-500" || !isBSelected && isBanswer && "bg-green-500"
+                                    }  border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  onClick={() => {
+                                    handleSelect(2);
+                                  }}
+                                >
+                                  B) {eachMcq ? eachMcq?.mcq2 : mcqs[0]?.mcq2}  {isBanswer && <div className='  text-white  text-3xl ml-9'> &#10003;</div>} {!isBanswer && isBSelected && <div className='  text-white  text-3xl ml-9'> &#10007;</div>}
+                                </div>
+                                {isBanswer && <div
+                                  className={`rounded-lg ${isBSelected && !isBanswer && "bg-red-500"
+                                    }   
+                              ${isBanswer && isBSelected && "bg-green-500" || !isBanswer && isBSelected && "bg-red-500" || !isBSelected && isBanswer && "bg-green-500"
+                                    }  border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  onClick={() => {
+                                    handleSelect(2);
+                                  }}
+                                >
+                                  {isBanswer && <div>    <div dangerouslySetInnerHTML={{ __html: (eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation) }} /> </div>}
+                                </div>}
                               </div>
-                              <div
-                                className={`rounded-lg ${isCSelected && !isCanswer && "bg-pink-400"
-                                  }   
-                              ${isCanswer && isCSelected && "bg-green-500" || !isCanswer && isCSelected && "bg-pink-400" || !isCSelected && isCanswer && "bg-red-500"
-                                  } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                onClick={() => {
-                                  handleSelect(3);
-                                }}
-                              >
-                                C) {eachMcq ? eachMcq.mcq3 : mcqs[0]?.mcq3} {isCanswer && <div>    <div dangerouslySetInnerHTML={{ __html:(eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation)}} /> </div> }
+                              <div>
+
+
+                                <div
+                                  className={`rounded-lg ${isCSelected && !isCanswer && "bg-red-500"
+                                    }   
+                              ${isCanswer && isCSelected && "bg-green-500" || !isCanswer && isCSelected && "bg-red-500" || !isCSelected && isCanswer && "bg-green-500"
+                                    } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  onClick={() => {
+                                    handleSelect(3);
+                                  }}
+                                >
+                                  C) {eachMcq ? eachMcq.mcq3 : mcqs[0]?.mcq3}  {isCanswer && <div className='  text-white  text-3xl ml-9'> &#10003;</div>} {!isCanswer && isCSelected && <div className='  text-white  text-3xl ml-9'> &#10007;</div>}
+                                </div>
+                                {isCanswer && <div
+                                  className={`rounded-lg ${isCSelected && !isCanswer && "bg-red-500"
+                                    }   
+                              ${isCanswer && isCSelected && "bg-green-500" || !isCanswer && isCSelected && "bg-red-500" || !isCSelected && isCanswer && "bg-green-500"
+                                    } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  onClick={() => {
+                                    handleSelect(3);
+                                  }}
+                                >
+                                  {isCanswer && <div>    <div dangerouslySetInnerHTML={{ __html: (eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation) }} /> </div>}
+                                </div>}
                               </div>
-                              <div
-                                className={`rounded-lg    
-                               ${isDanswer && isDSelected && "bg-green-500" || !isDanswer && isDSelected && "bg-pink-400" || !isDSelected && isDanswer && "bg-red-500"
-                                  } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                onClick={() => {
-                                  handleSelect(4);
-                                }}
-                              >
-                                D) {eachMcq ? eachMcq?.mcq4 : mcqs[0]?.mcq4} {isDanswer && <div>     <div dangerouslySetInnerHTML={{ __html:(eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation)}} /> </div> }
+
+                              <div>
+
+
+
+
+                                <div
+                                  className={`rounded-lg    
+                               ${isDanswer && isDSelected && "bg-green-500" || !isDanswer && isDSelected && "bg-red-500" || !isDSelected && isDanswer && "bg-green-500"
+                                    } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  onClick={() => {
+                                    handleSelect(4);
+                                  }}
+                                >
+                                  D) {eachMcq ? eachMcq?.mcq4 : mcqs[0]?.mcq4}  {isDanswer && <div className='  text-white  text-3xl ml-9'> &#10003;</div>} {!isDanswer && isDSelected && <div className='  text-white  text-3xl ml-9'> &#10007;</div>}
+                                </div>
+                                {
+                                  isDanswer && <div
+                                    className={`rounded-lg    
+                               ${isDanswer && isDSelected && "bg-green-500" || !isDanswer && isDSelected && "bg-red-500" || !isDSelected && isDanswer && "bg-green-500"
+                                      } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                    onClick={() => {
+                                      handleSelect(4);
+                                    }}
+                                  >
+                                    {isDanswer && <div>     <div dangerouslySetInnerHTML={{ __html: (eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation) }} /> </div>}
+                                  </div>
+                                }
+
                               </div>
-                              <div
-                                className={`rounded-lg    
-                               ${isEanswer && isESelected && "bg-green-500" || !isEanswer && isESelected && "bg-pink-400" || !isESelected && isEanswer && "bg-red-500"
-                                  } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                onClick={() => {
-                                  handleSelect(5);
-                                }}
-                              >
-                                E) {(eachMcq ? eachMcq?.mcq5 : mcqs[0]?.mcq5)!==""?eachMcq ? eachMcq?.mcq5 : mcqs[0]?.mcq5: " None"} {isEanswer && <div>   :  <div dangerouslySetInnerHTML={{ __html:(eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation)}} /> </div> }
+
+
+                              <div>
+
+
+                                <div
+                                  className={`rounded-lg    
+                               ${isEanswer && isESelected && "bg-green-500" || !isEanswer && isESelected && "bg-red-500" || !isESelected && isEanswer && "bg-green-500"
+                                    } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  onClick={() => {
+                                    handleSelect(5);
+                                  }}
+                                >
+                                  E) {(eachMcq ? eachMcq?.mcq5 : mcqs[0]?.mcq5) !== "" ? eachMcq ? eachMcq?.mcq5 : mcqs[0]?.mcq5 : " None"} {isEanswer && <div className='  text-white  text-3xl ml-9'> &#10003;</div>} {!isEanswer && isESelected && <div className='  text-white  text-3xl ml-9'> &#10007;</div>}
+                                </div>
+
+                                {isEanswer && <div
+                                  className={`rounded-lg    
+                               ${isEanswer && isESelected && "bg-green-500" || !isEanswer && isESelected && "bg-red-500" || !isESelected && isEanswer && "bg-green-500"
+                                    } border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                  onClick={() => {
+                                    handleSelect(5);
+                                  }}
+                                >
+                                  {isEanswer && <div>   :  <div dangerouslySetInnerHTML={{ __html: (eachMcq ? eachMcq?.explanation : mcqs[0]?.explanation) }} /> </div>}
+                                </div>}
                               </div>
+
                             </>
                           )}
-                          {/* {mcqs &&
-                            <>
 
-                              
-
-                              <div
-                                className={`rounded-lg ${isASelected && "bg-pink-400"}   ${isASelected && isAanswer && "bg-blue-500"}  ${isAanswer && "bg-slate-300"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                onClick={handleSelectA}
-                              >
-                                A) {eachMcq ? eachMcq.mcq1 : mcqs && mcqs[0].mcq1}
-                              </div>
-                              <div
-                                className={`rounded-lg ${isBSelected && "bg-pink-400"}  ${isBSelected && isBanswer && "bg-blue-500"}  ${isBanswer && "bg-slate-300"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer  `}
-                                onClick={handleSelectB}
-                              >
-                                B) {eachMcq ? eachMcq.mcq2 : mcqs && mcqs[0].mcq2}
-                              </div>
-                              <div
-                                className={`rounded-lg ${isCSelected && "bg-pink-400"}  ${isCSelected && isCanswer && "bg-blue-500"}  ${isCanswer && "bg-slate-300"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                onClick={handleSelectC}
-                              >
-                                C) {eachMcq ? eachMcq.mcq3 : mcqs && mcqs[0].mcq3}
-                              </div>
-                              <div
-                                className={`rounded-lg ${isDSelected && "bg-pink-400"}  ${isDSelected && isDanswer && "bg-blue-500"}  ${isDanswer && "bg-slate-300"} border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                onClick={handleSelectD}
-                              >
-                                D) {eachMcq ? eachMcq.mcq4 : mcqs && mcqs[0].mcq4}
-                              </div>
-                            </>
-                          } */}
                         </> : <>
                           No Option because Either Questions Ended or Time Up
                         </>
@@ -505,22 +554,12 @@ export default function Quiz() {
 
                   <div className="flex w-full justify-around my-4">
                     <button
+                      disabled={check ? false : true}
                       onClick={handleSkip}
-                      className="bg-[#1F5689] py-2 px-7 rounded-md text-white font-[500] text-[16px] mt-2 mr-2 hover:bg-[#268FDA] hover:shadow-md transition duration-300 ease-in-out"
+                      className={`${check ? "bg-[#1F5689]  hover:bg-[#268FDA]" : 'bg-gray-400 '}  py-2 px-7 rounded-md text-white font-[500] text-[16px] mt-2 mr-2  hover:shadow-md transition duration-300 ease-in-out`}
                     >
                       Skip
                     </button>
-                    {/* <button
-                      onClick={handleAnswer}
-                      disabled={isASelected || isBSelected || isCSelected || isDSelected ===true? false: true}
-                      className={` ${isASelected || isBSelected || isCSelected || isDSelected ? "bg-[#3d7ab3] hover:bg-[#268FDA]" : 'bg-gray-400'} py-2 px-7 rounded-md text-white font-[500] text-[16px] mt-2 mr-2  hover:shadow-md transition duration-300 ease-in-out `}
-                    >
-                      Answer
-                    </button> */}
-
-
-
-
 
 
                     <button

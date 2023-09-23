@@ -45,8 +45,12 @@ module.exports = {
         destination:'https://www.medicall.pk/medi-app-api/medistudy/specialities/guidelines/get'
       },
       {
-        source:'/api/get_past_paper/Medicine',
+        source:'/api/get_past_paper',
         destination:'https://www.medicall.pk/medi-app-api/past-papers/program/get'
+      },
+      {
+        source:'/api/get_past_paper_mcqs',
+        destination:'https://www.medicall.pk/medi-app-api/past-papers/get-mcqs'
       },
       {
         source:'/api/get_CoreData',

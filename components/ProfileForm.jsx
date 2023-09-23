@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState ,useEffect} from 'react';
 import { Form, Input, Button, message, Upload, Avatar } from 'antd';
 import axios from 'axios';
 import { useAuth } from '../context/AuthProvider';
@@ -10,20 +10,29 @@ import Cookies from 'js-cookie';
 
 function ProfileForm() {
 
-  const userCookie=Cookies.get("loggedIn");
+  const userCookie=Cookies.get("user");
+  
 console.log("cookie",userCookie)
+const [userObject, setUserObject] = useState(null)
+console.log("iiuuuuuu",userObject?.data.user_email)
+useEffect(() => {
+  if (userCookie) {
+    setUserObject(JSON.parse(userCookie))
+  }
+}, [userCookie]);
+
+
   const {user} = useUser();
-  const[email,setEmail]=useState(user.user_email)
+  const[email,setEmail]=useState(user?.user_email)
 console.log("userrr",user);
-console.log(user.name, " And " , user.user_email)
+console.log(user?.name, " And " , user?.user_email)
   const auth = useAuth();
   const router = useRouter();
   const [formData, setFormData] = useState({
-    user_id:user.user_id,
+    user_id:user?.user_id,
     key:"Vx0cbjkzfQpyTObY8vfqgN1us",
-    full_name:user.full_name,
-    email:user.user_email,
-    phone:user.user_phone,
+    full_name:user?.full_name,
+    phone:user?.user_phone,
     pmdc_number:'',
     city_id:'',
   });
@@ -44,7 +53,7 @@ console.log(user.name, " And " , user.user_email)
     console.log(formData);
 
     try {
-      const response = await axios.post('/api/update', formData);
+      const response = await axios.post('/api/update', {...formData,email:userObject?.data.user_email});
       console.log(response)
       if (response.status === 200 ) {
         auth.login(response);
@@ -80,11 +89,11 @@ console.log(user.name, " And " , user.user_email)
           />
         </Form.Item>
 
-        <Form.Item label="Email Address" className="text-[#777777] mb-2" name="email">
+        <Form.Item label="Email Address" className="text-[#777777] mb-2" >
           <Input
             placeholder="Email Address"
             className="border border-[#0000000F] py-2 px-3"
-            value={formData.email}
+            value={userObject?.data.user_email}
            disabled
           />
         </Form.Item>

@@ -47,12 +47,20 @@ console.log(checkEmail, checkName, checkPhoneNumber)
 
     if(newUser.password !==newUser.rePassword){
        setCheck(true)
+       setLoading(false)
     }
     else if(!checkEmail  || checkName){
       message.error("Registration Failed Due to wrong email or name format")
+      setLoading(false)
     }
     else if(checkPhoneNumber){
+
       message.error("Registeration Failed, phone length should be equal to 11 digits")
+      setLoading(false)
+    }
+    else if(password.length<7){
+      message.error("Registeration Failed, Password Length should be more than 6 digits")
+      setLoading(false)
     }
     else{
       setLoading(true);
@@ -85,9 +93,9 @@ console.log(checkEmail, checkName, checkPhoneNumber)
     <div className="flex flex-col text-center px-6 py-5 rounded-md shadow-sm w-[470px] border border-[#00000030]">
     {loading && (
         <div className="modal-overlay">
-          <Modal>
+          
             <Loader />
-          </Modal>
+          
         </div>
       )}
       <h2 className="font-[600] text-[24px]">Register</h2>
