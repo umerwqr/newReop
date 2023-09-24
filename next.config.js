@@ -57,6 +57,10 @@ module.exports = {
         destination:'https://www.medicall.pk/medi-app-api/get-medistudy-core-list'
       },
       {
+        source:'/api/search_mcqs',
+        destination:'https://www.medicall.pk/medi-app-api/search/mcqs'
+      },
+      {
         source:'/api/subjects_units',
         destination:'https://www.medicall.pk/medi-app-api/mcqs/subjects/get'
       },

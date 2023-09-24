@@ -68,25 +68,25 @@ function WebHeader() {
     <Header className="bg-red-700 px-3 h-[180px]">
       <div style={{ paddingLeft: "0px" }} className={`flex text-[16px] pt-4 px-0   text-white font-bold items-center  ${auth.isLoggedIn ? "justify-between md:px-4  " : "justify-center"} `}>
         {auth.isLoggedIn ? <>
-          <Link className='hidden  lg:block' href="/items/general/mcqs/">
-            <div className="hidden  lg:block xl:block cursor-pointer underline">
+          <Link className='hidden  lg:block custom-link' href="/items/general/mcqs/">
+            <div className="hidden  lg:block xl:block cursor-pointer">
               Subjectwise Mcqs
             </div>
           </Link>
-          <Link className='hidden  lg:block' href="/items/general/papers/">
-            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
+          <Link className='hidden  lg:block custom-link' href="/items/general/papers/">
+            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer">
               Past Papers
             </div>
           </Link>
 
-          <Link className='hidden  lg:block' href="/items/general/guide/">
-            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
+          <Link className='hidden  lg:block custom-link' href="/items/general/guide/">
+            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer">
               Guidelines
             </div>
           </Link>
 
-          <Link className='hidden  lg:block' href="/items/general/mock/">
-            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
+          <Link className='hidden  lg:block custom-link' href="/items/general/mock/">
+            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer">
               Mocks
             </div></Link>
         </> : <> </>}
@@ -96,23 +96,23 @@ function WebHeader() {
           <Image src="/images/logo.svg" alt="logo" width={70} height={70} />
         </Link>
         {auth.isLoggedIn ? <>
-          <Link href="/items/general/bookmarks/">
+          <Link href="/items/general/bookmarks/" className='custom-link'>
 
-            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer  underline" style={{ width: "110px" }}>
+            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer" style={{ width: "110px" }}>
               Bookmarks
             </div>
           </Link>
 
-          <Link href="/items/general/notes/">
+          <Link href="/items/general/notes/" className='custom-link'>
 
-            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
+            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer">
               MCQ Notes
             </div>
           </Link>
 
-          <Link href="/items/general/card/">
+          <Link href="/items/general/card/" className='custom-link'>
 
-            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer underline">
+            <div className="hidden sm:hidden md:hidden lg:block xl:block cursor-pointer">
               Flash Cards
             </div>
           </Link>

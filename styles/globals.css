@@ -21,6 +21,11 @@ html,body{
   width: 100% !important;
 }
 
+.custom-link:hover {
+  text-decoration: none; /* Remove underline */
+  color: white !important;
+}
+
 .ant-form-item-label label{
   color: #777777 !important;
 }

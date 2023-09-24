@@ -41,7 +41,7 @@ function RegisterForm() {
     const checkEmail=validateEmail(newUser.email)
     const checkName=containsEmail(newUser.fullname)
     const checkPhoneNumber=validatePhoneNumber(newUser.mobilenumber)
-console.log(checkEmail, checkName, checkPhoneNumber)
+console.log('check   --- ',checkEmail, checkName, checkPhoneNumber)
     try{
     
 
@@ -52,7 +52,7 @@ console.log(checkEmail, checkName, checkPhoneNumber)
       message.error("Registration Failed Due to wrong email or name format")
       setLoading(false)
     }
-    else if(checkPhoneNumber){
+    else if(!checkPhoneNumber){
 
       message.error("Registeration Failed, phone length should be equal to 11 digits")
       setLoading(false)
