@@ -71,7 +71,7 @@ const Name = () => {
       case 'Subject MCQs':
         return 'mcqs';
       case 'Guidlines':
-        return 'guide';
+        return 'guideCard';
       case 'Past Papers':
         return 'papers';
       case 'Mock Exams':

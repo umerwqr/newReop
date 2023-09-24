@@ -12,7 +12,8 @@ import axios from 'axios';
 
 const Guide = () => {
 
-    // const router2 = useRouter();
+    const router2 = useRouter();
+    const { program_id} = router2.query;
     // const {index, optionName, selectedData} = router2.query;
     // const [selectedDataObj, setSelectedDataObj] = useState({});
     // const [isLoading, setIsLoading] = useState(false);
@@ -51,7 +52,7 @@ const Guide = () => {
                     </div>
                     <div className="my-[3rem] h-full  w-full grid md:grid-cols-1 lg:grid-cols-2 xl:grid-cols-2 gap-4">
                         {data && data.map((guide, index) => (
-                            <GuideCard key={index} guide={guide} question={guide.speciality_designation}  />
+                            <GuideCard key={index} guide={guide} program_id={program_id} question={guide.speciality_designation} id={guide.speciality_id} />
                         ))}
                     </div>
 

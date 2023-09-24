@@ -67,7 +67,12 @@ module.exports = {
       {
         source:'/api/get_flash_cards',
         destination:'https://www.medicall.pk/medi-app-api/get-flash-cards'
+      },
+      {
+        source:'/api/get_guidelines',
+        destination:'https://www.medicall.pk/medi-app-api//medistudy/med/guidelines/get'
       }
+      
       
     ];
     
