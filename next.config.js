@@ -92,7 +92,10 @@ module.exports = {
         source:'/api/search_mcqs',
         destination:'https://www.medicall.pk/medi-app-api/search/mcqs'
       },
-      
+      {
+        source:'/api/get_mock_test',
+        destination:'https://www.medicall.pk/medi-app-api/get-mock-test-mcqs'
+      },
       
     ];
     

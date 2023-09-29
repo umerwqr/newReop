@@ -148,7 +148,8 @@ const Home = () => {
                   </Radio.Group>
                 </div>
               </div>
-              {!searchText &&  <div className="my-6 flex justify-center flex-wrap ">
+              
+              {!searchText &&  <div className="my-6 flex justify-center  flex-wrap ">
                    {programs && programs.map((item, index) => (
                   <Link
                     key={index}
@@ -172,12 +173,13 @@ const Home = () => {
                 ))}
               </div>
             }
+           <div className='flex flex-col items-center justify-center w-full'> 
             {currentItems && currentItems?.map((item, index) => (
             <div key={item?.id}>
             <div 
             onClick={()=>{handleMcq(item)}}
-            className="bg-white cursor-pointer w-full sm:w-[80%] lg:w-[700px] rounded-lg text-black py-5 px-[1.5rem] my-[3rem] shadow-md ">
-            <div className="flex  items-center justify-center w-full space-x-6 font-bold">
+            className="bg-white items-center cursor-pointer w-full sm:w-[80%] lg:w-[700px] rounded-lg text-black py-5 px-[1.5rem] my-[3rem] shadow-md ">
+            <div className="flex  items-center justify-center space-x-6 font-bold">
               Question # {index+1}
             </div>
             <div className="my-6  md:mx-[2rem] font-[500] text-[18px]">
@@ -226,7 +228,7 @@ const Home = () => {
             </div>
           </div> */}
             </div>
-            ))}
+            ))}</div>
             <Pagination defaultCurrent={1} onChange={handlePageChange} total={filteredPrograms && filteredPrograms?.length}/>
               
             </div>
