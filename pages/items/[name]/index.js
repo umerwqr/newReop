@@ -9,8 +9,8 @@ import Data from '@/data/Data';
 import ItemCard from '@/components/ItemCard';
 import React from 'react';
 import Link from 'next/link'
-import Loader from '@/components/Loader';
 import axios from 'axios';
+import Loader from '@/components/Loader';
 const Name = () => {
 
   const router = useRouter();
@@ -23,6 +23,7 @@ const Name = () => {
   const [filteredOptions, setFilteredOptions] = useState([]);
 
   const [loading, setLoading] = useState(false);
+
   const pageSize = 10; // Number of items to display per page
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -30,17 +31,16 @@ const Name = () => {
   const endIndex = startIndex + pageSize;
 
   const currentItems = filteredOptions && filteredOptions.slice(startIndex, endIndex);
-
   const findOptionsByName = (name) => {
     const foundOptions = Data.find((item) => true);
     if (foundOptions) {
       setSelectedData(foundOptions)
       setSelectedOptions(foundOptions.options);
-      // setFilteredOptions(foundOptions.options);
+      //setFilteredOptions(foundOptions.options);
     } else {
       setSelectedOptions([]);
       setSelectedData({});
-      // setFilteredOptions([]);
+     // setFilteredOptions([]);
     }
   };
 
@@ -67,9 +67,9 @@ const Name = () => {
       } catch (error) {
         console.error(error);
       }
-    }
-    }
-    fetchData();
+    }}
+     fetchData();
+
   }, [searchText]);
 
   const handleSearchChange = (e) => {
@@ -83,7 +83,6 @@ const Name = () => {
   const handleRadioChange = (e) => {
     setSelectedRadio(e.target.value);
   };
-
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
@@ -203,63 +202,63 @@ const Name = () => {
                   })}
                 </div>
               </div>
-              }
-              <div className='flex flex-col items-center justify-center'>
-              {currentItems && currentItems?.map((item, index) => (
-              <div key={item?.id}>
-              <div className="bg-white w-full sm:w-[80%] lg:w-[700px] rounded-lg text-black py-5 px-[1.5rem] my-[3rem] shadow-md ">
-              <div className="flex  items-center justify-center w-full space-x-6 font-bold">
-                Question # {index+1}
-              </div>
-              <div className="my-6  md:mx-[2rem] font-[500] text-[18px]">
-                    <>{item?.question}</>
-              </div>
-            </div>
-            <div className="text-black  flex justify-center items-center md:space-x-6 " style={{ width: "100%" }}>
-              <div className="w-full">
-                <div className="w-full flex flex-col ">
-                  <div className="flex flex-col font-[500] text-[18px] space-y-5 mt-14">
-                        <>
-                          <>
-                              <div>
-                                <div
-                                  className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                >
-                                  A) {item?.mcq1}
-                                </div>
-                              </div>
-                              <div>
-                                <div
-                                  className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                >
-                                  B) {item?.mcq1} 
-                                </div>
-                              </div>
-                              <div>
-                                <div
-                                  className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                >
-                                  C) {item?.mcq1}
-                                </div>
-                              </div>
-                              <div>
-                                <div
-                                  className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
-                                >
-                                  D) {item?.mcq1} 
-                                </div>
-                              </div>
-
-                          </>
-                        </>
-                  </div>
-                </div>
-              </div>
-            </div>
-            </div>
-              ))}
-              <Pagination style={{marginTop: '30px'}} defaultCurrent={1} onChange={handlePageChange} total={filteredOptions && filteredOptions?.length}/>
-              </div>
+                 }
+                 <div className='flex flex-col items-center justify-center'>
+                 {currentItems && currentItems?.map((item, index) => (
+                 <div key={item?.id}>
+                 <div className="bg-white w-full sm:w-[80%] lg:w-[700px] rounded-lg text-black py-5 px-[1.5rem] my-[3rem] shadow-md ">
+                 <div className="flex  items-center justify-center w-full space-x-6 font-bold">
+                   Question # {index+1}
+                 </div>
+                 <div className="my-6  md:mx-[2rem] font-[500] text-[18px]">
+                       <>{item?.question}</>
+                 </div>
+               </div>
+               <div className="text-black  flex justify-center items-center md:space-x-6 " style={{ width: "100%" }}>
+                 <div className="w-full">
+                   <div className="w-full flex flex-col ">
+                     <div className="flex flex-col font-[500] text-[18px] space-y-5 mt-14">
+                           <>
+                             <>
+                                 <div>
+                                   <div
+                                     className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                   >
+                                     A) {item?.mcq1}
+                                   </div>
+                                 </div>
+                                 <div>
+                                   <div
+                                     className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                   >
+                                     B) {item?.mcq1} 
+                                   </div>
+                                 </div>
+                                 <div>
+                                   <div
+                                     className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                   >
+                                     C) {item?.mcq1}
+                                   </div>
+                                 </div>
+                                 <div>
+                                   <div
+                                     className={`rounded-lg border py-3 px-3 flex items-center transition duration-300 ease-in-out transform hover:scale-104.5 hover:shadow-md cursor-pointer `}
+                                   >
+                                     D) {item?.mcq1} 
+                                   </div>
+                                 </div>
+   
+                             </>
+                           </>
+                     </div>
+                   </div>
+                 </div>
+               </div>
+               </div>
+                 ))}
+                 <Pagination style={{marginTop: '30px'}} defaultCurrent={1} onChange={handlePageChange} total={filteredOptions && filteredOptions?.length}/>
+                 </div>
             </div>
           </main>
           <WebFooter />

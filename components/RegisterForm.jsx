@@ -41,8 +41,8 @@ function RegisterForm() {
     const checkEmail=validateEmail(newUser.email)
     const checkName=containsEmail(newUser.fullname)
     const checkPhoneNumber=validatePhoneNumber(newUser.mobilenumber)
-console.log('check   --- ',checkEmail, checkName, checkPhoneNumber)
-    try{
+    console.log('check   --- ',checkEmail, checkName, checkPhoneNumber)
+        try{
     
 
     if(newUser.password !==newUser.rePassword){

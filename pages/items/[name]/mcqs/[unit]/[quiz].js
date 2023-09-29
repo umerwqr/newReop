@@ -6,10 +6,31 @@ import Link from 'next/link'
 import axios from 'axios';
 import { useRouter } from 'next/router';
 import Loader from '@/components/Loader';
+import cookie from "js-cookie"
+import NotesCard from "@/components/NotesCard"
+import Bookmark from '@/components/Bookmark';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons'; // Import other icons
+
+const BookmarkIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="24" height="24">
+    <path d="M12 2l-4.95 4.95-4.95-4.95M6.05 0v16.35l5.95 5.95 5.95-5.95V0H6.05z" />
+  </svg>
+);
+
+
 export default function Quiz() {
 
   const [loading, setLoading] = useState(true);
+  const userCookie = cookie.get("user")
 
+  const [userObject, setUserObject] = useState(null)
+  console.log("iiuuuuuu", userObject && userObject, " end")
+  useEffect(() => {
+    if (userCookie) {
+      setUserObject(JSON.parse(userCookie))
+
+    }
+  }, [userCookie]);
 
   const router = useRouter();
   const { subject, sliderValue, sliderValue2 } = router.query;
@@ -20,7 +41,7 @@ export default function Quiz() {
 
 
   const [mcqs, setMcqs] = useState(null);
-  console.log("mcsssqs",mcqs)
+  console.log("mcsssqs", mcqs)
   const [len, SetLen] = useState(1);
 
   const [question, setQuestion] = useState();
@@ -58,7 +79,7 @@ export default function Quiz() {
     const getData = async () => {
       try {
         if (subjectObject.unit_id && subjectObject.program_id && subjectObject.subject_id) {
-          const response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', topic_id:subjectObject.topic_id?subjectObject.topic_id:"", unit_id: subjectObject.unit_id, program_id: subjectObject.program_id, subject_id: subjectObject.subject_id })
+          const response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', topic_id: subjectObject.topic_id ? subjectObject.topic_id : "", unit_id: subjectObject.unit_id, program_id: subjectObject.program_id, subject_id: subjectObject.subject_id })
           setMcqs(response.data.mcqs)
         } else {
           const response = await axios.post('/api/get_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', unit_id: subjectObject.unit_id, subject_id: subjectObject.subject_id })
@@ -326,6 +347,57 @@ export default function Quiz() {
 
 
 
+  const handleBookmark = async (e) => {
+
+    try {
+      const response = await axios.post('/api/set_bookmark_mcq', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', user_id: userObject?.data.user_id, mcq_id: eachMcq ? eachMcq.id : mcqs && mcqs[0].id })
+
+      message.success("successfully Bookmarked")
+
+      console.log("SUCCCCESS")
+    }
+    catch (err) {
+      console.log("EROOOOOOR", err)
+
+      message.error("Error in bookmarking this mcqs")
+    }
+  }
+
+
+  const [showModal, setShowModal] = useState(false);
+
+  const handleOpenModal = () => {
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
+
+  const handleSubmit = (formData) => {
+    // Handle form submission here
+    console.log('Form Data:', formData);
+  };
+  const handleNotes = async (formData) => {
+
+    console.log(formData)
+    message.success("Note Added")
+    
+    try {
+
+    }
+    catch (err) {
+
+    }
+  }
+
+
+
+
+
+
+
+
   return (
     <>
       {loading ? (
@@ -578,8 +650,20 @@ export default function Quiz() {
                   <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
                   <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
                   <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
-                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
-                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
+
+                  <div><button
+                    onClick={handleOpenModal}
+                    className="rounded-full py-4 px-4 bg-white">
+                    <EditOutlined style={{ fontSize: '24px', color: 'black' }} />
+                  </button></div>
+                  <NotesCard showModal={showModal} setShowModal={setShowModal} onSubmit={handleNotes} user_id={userObject?.data.user_id} mcq_id={eachMcq ? eachMcq.id : mcqs && mcqs[0].id}/>
+
+
+                  <div><button
+                    onClick={handleBookmark}
+                    className="rounded-full py-4 px-4 bg-white">
+                    <BookmarkIcon style={{ fontSize: '24px', marginLeft: '8px' }} /> {/* Add custom bookmark icon here */}
+                  </button></div>
 
                 </div>
                 {check ? <>  <div className="rounded-md border border-[#FAD7DD] mt-3">

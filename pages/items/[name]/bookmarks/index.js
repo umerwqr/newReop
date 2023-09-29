@@ -2,12 +2,15 @@ import WebFooter from '@/components/WebFooter';
 import WebHeader from '@/components/WebHeader';
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { Input, Radio } from 'antd';
+import { Input, Radio, message } from 'antd';
 import { SearchOutlined, CloseCircleOutlined } from '@ant-design/icons';
 import { useRouter } from 'next/router'
 import Data from '@/data/Data';
 import ItemCard from '@/components/ItemCard.jsx';
 import React from 'react';
+import cookie from "js-cookie"
+import axios from 'axios';
+import Loader from '@/components/Loader';
 import Link from 'next/link'
 const Name = () => {
 
@@ -18,7 +21,7 @@ const Name = () => {
   const [selectedOptions, setSelectedOptions] = useState([]);
   const [selectedData, setSelectedData] = useState({});
   const [optionName, setOptionName] = useState('');
-
+  const [loading, setLoading] = useState(true)
   const findOptionsByName = (name) => {
     const foundOptions = Data.find((item) => item.name === name);
     if (foundOptions) {
@@ -29,6 +32,16 @@ const Name = () => {
       setSelectedData({});
     }
   };
+  
+  const userCookie = cookie.get("user")
+
+  const [userObject, setUserObject] = useState(null)
+  useEffect(() => {
+    if (userCookie) {
+      setUserObject(JSON.parse(userCookie))
+
+    }
+  }, [userCookie]);
 
   console.log(optionName)
 
@@ -41,6 +54,29 @@ const Name = () => {
     }
   });
 
+  const [bookmarkMcqs, setBookmarkMcqs] = useState(null)
+  useEffect(() => {
+
+    const get_bookmarked_mcqs = async () => {
+      try {
+        const response = await axios.post('/api/get_bookmarked_mcqs', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', user_id: userObject?.data.user_id, type: "bookmark" })
+        console.log(response)
+        setBookmarkMcqs(response.data.mcqs)
+        setLoading(false)
+
+
+      }
+      catch (err) {
+        message.error("Error fetching Bookmarked Mcqs")
+        console.log(err)
+
+      }
+
+    }
+
+    get_bookmarked_mcqs()
+  }, [bookmarkMcqs])
+  console.log("BookMarked Mcqs  :::::", bookmarkMcqs && bookmarkMcqs)
 
   const handleSearchChange = (e) => {
     setSearchText(e.target.value);
@@ -54,36 +90,26 @@ const Name = () => {
     setSelectedRadio(e.target.value);
   };
 
-  function getOptionText(optionName) {
-    switch (optionName) {
-      case 'Subject MCQs':
-        return 'mcqs';
-      case 'Guidlines':
-        return 'guide';
-      case 'Past Papers':
-        return 'papers';
-      case 'Mock Exams':
-        return 'mocks';
-      case 'Flash Cards':
-        return 'cards';
-      case 'Notes':
-        return 'notes';
-      case 'Bookmarked':
-        return 'bookmarks';
-      default:
-        return '';
-    }
+  const handleBookmarkNavigate=(mcq)=>{
+
+    cookie.set("bmMcq",JSON.stringify(mcq))
+
+
+    setTimeout(() => {
+      router.push("/items/name/bookmarks/bookmark_mcq");
+    }, 2000);
   }
 
 
-
   return (
+
     <div className="">
       <WebHeader />
       <main className="w-full h-full xxl:h-[100vh] flex items-center xl:items-start justify-center">
-        <div className=" py-[6rem] px-4   w-full">
+        {loading ? <div className='h-[400px] flex justify-center items-center'> <Loader /></div> : <> <div className=" py-[6rem] px-4   w-full">
           <div className="w-full   flex flex-col items-center ">
             <div className="md:w-[45%] w-full">
+
               <div className="relative  w-full flex items-center justify-between mb-4">
                 <Image
                   src="/images/search.svg"
@@ -128,29 +154,32 @@ const Name = () => {
             </div>
           </div>
           <div className="my-[3rem]   flex justify-center w-full   flex-wrap px-6">
-            <div className="flex justify-center sm:w-[90%] w-full flex-wrap">
-            <h1>NO MCQ Bookmarked</h1>
-              {selectedOptions.map((option, index) => {
-                const optionName = getOptionText(option.name);
-                return (<>
-                  
-                  <Link
-                    href={`/items/name/${optionName}?index=${index}&optionName=${option.name}&selectedData=${encodeURIComponent(JSON.stringify(selectedData))}`}
-                    key={option.name}
-                  >
-                    <ItemCard
-                      option={option}
-                      img={`/images/${option.name}.jpg`}
-                    />
-                  </Link>
-                </>);
-              })}
+            <div className="flex flex-col items-center justify-center sm:w-[90%] w-full flex-wrap">
 
+              {bookmarkMcqs.length !==0 ? <div className='text-red-600'>YOUR BOOKMARKED MCQs ARE FOLLOWING: </div> : <> NO MCQ IS BOOKMARKED</>}
+              <div className='flex flex-col items-start'>
+                {bookmarkMcqs && bookmarkMcqs.map((mcq, index) => (
+                <>
+
+                  <div 
+                  key={index}
+                  onClick={()=>handleBookmarkNavigate(mcq)}
+                  className='flex shadow-sm hover:scale-[101.3%] transition:translate duration-200 hover:text-red-600 flex-row p-4 m-1 rounded-lg cursor-pointer w-full items-center text-blue-800 border-2'>
+
+                    <h1>Mcq No:{index + 1})  _</h1>
+                    <h1> {mcq.mcq.question}</h1>
+
+
+                  </div>
+                  </>
+                ))}
+              </div>
 
 
             </div>
           </div>
-        </div>
+        </div>  </>}
+
       </main>
       <WebFooter />
     </div>

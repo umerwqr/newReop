@@ -57,10 +57,6 @@ module.exports = {
         destination:'https://www.medicall.pk/medi-app-api/get-medistudy-core-list'
       },
       {
-        source:'/api/search_mcqs',
-        destination:'https://www.medicall.pk/medi-app-api/search/mcqs'
-      },
-      {
         source:'/api/subjects_units',
         destination:'https://www.medicall.pk/medi-app-api/mcqs/subjects/get'
       },
@@ -71,11 +67,31 @@ module.exports = {
       {
         source:'/api/get_flash_cards',
         destination:'https://www.medicall.pk/medi-app-api/get-flash-cards'
-      },
+      },  
       {
         source:'/api/get_guidelines',
-        destination:'https://www.medicall.pk/medi-app-api//medistudy/med/guidelines/get'
-      }
+        destination:'https://www.medicall.pk/medi-app-api/medistudy/med/guidelines/get'
+      },
+       {
+        source:'/api/set_bookmark_mcq',
+        destination:'https://www.medicall.pk/medi-app-api/bookmark-mcq'
+      },
+      {
+        source:'/api/get_bookmarked_mcqs',
+        destination:'https://www.medicall.pk/medi-app-api/get-bookmarked-mcqs'
+      },
+      {
+        source:'/api/set_unbookmark_mcq',
+        destination:'https://www.medicall.pk/medi-app-api/mcq/unbookmark'
+      },
+      {
+        source:'/api/set_mcq_note',
+        destination:'https://www.medicall.pk/medi-app-api/notes-mcq'
+      },
+      {
+        source:'/api/search_mcqs',
+        destination:'https://www.medicall.pk/medi-app-api/search/mcqs'
+      },
       
       
     ];
