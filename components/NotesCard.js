@@ -1,22 +1,19 @@
 import React, { useState } from 'react';
 
-const Modal = ({ showModal, setShowModal, onSubmit,user_id, mcq_id }) => {
+const Modal = ({ showModal, setShowModal, onSubmit, user_id, mcq_id }) => {
   const [formData, setFormData] = useState({
-    user_id:user_id,
-    mcq_id:mcq_id,
-    note_heading:"",
-    note_description:""
+    user_id: user_id,
+    mcq_id: mcq_id,
+    note_heading: "",
+    note_description: ""
   });
 
-
   const handleInputChange = (e) => {
-
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
   const handleSubmit = () => {
-  
     onSubmit(formData);
     setShowModal(false);
   };
@@ -30,11 +27,22 @@ const Modal = ({ showModal, setShowModal, onSubmit,user_id, mcq_id }) => {
       <div className="modal-content rounded-lg">
         <h2 className='p-2'>Enter Note </h2>
         {/* Add your form fields */}
-        <div className='flex flex-col '>
-            
-        <input className='border-2 my-2 text-xl p-2' type="text" placeholder='Enter Note Heading' name="note_heading" value={formData.note_heading} onChange={handleInputChange} />
-        <input className='border-2 my-2 text-xl p-2' type="text" placeholder='Enter Note Description' name="note_description" value={formData.note_description} onChange={handleInputChange} />
-      
+        <div className='flex flex-col'>
+          <input
+            className='border-2 my-2 text-xl p-2'
+            type="text"
+            placeholder='Enter Note Heading'
+            name="note_heading"
+            value={formData.note_heading}
+            onChange={handleInputChange}
+          />
+          <textarea
+            className='border-2 my-2 text-xl p-2 h-32'  // Use textarea here
+            placeholder='Enter Note Description'
+            name="note_description"
+            value={formData.note_description}
+            onChange={handleInputChange}
+          />
         </div>
         {/* Add other form fields */}
         <div className="modal-buttons">

@@ -10,6 +10,7 @@ import ItemCard from '@/components/ItemCard';
 import React from 'react';
 import Link from 'next/link'
 import axios from 'axios';
+import cookie from "js-cookie"
 import Loader from '@/components/Loader';
 const Name = () => {
 
@@ -21,6 +22,7 @@ const Name = () => {
   const [selectedData, setSelectedData] = useState({});
   const [optionName, setOptionName] = useState('');
   const [filteredOptions, setFilteredOptions] = useState([]);
+  console.log("filtered program:",filteredOptions&&filteredOptions)
 
   const [loading, setLoading] = useState(false);
 
@@ -119,6 +121,16 @@ const Name = () => {
 
   }
 
+  const handleMcq=(mcq)=>{
+    
+    cookie.set("searchMcq",JSON.stringify(mcq))
+
+
+    setTimeout(() => {
+      router.push("/items/name/searchMcq");
+    }, 2000);
+
+  }
   return (
     <>
       {loading ? (
@@ -206,7 +218,9 @@ const Name = () => {
                  <div className='flex flex-col items-center justify-center'>
                  {currentItems && currentItems?.map((item, index) => (
                  <div key={item?.id}>
-                 <div className="bg-white w-full sm:w-[80%] lg:w-[700px] rounded-lg text-black py-5 px-[1.5rem] my-[3rem] shadow-md ">
+                 <div
+                 onClick={()=>{handleMcq(item)}}
+                  className="bg-white cursor-pointer w-full sm:w-[80%] lg:w-[700px] rounded-lg text-black py-5 px-[1.5rem] my-[3rem] shadow-md ">
                  <div className="flex  items-center justify-center w-full space-x-6 font-bold">
                    Question # {index+1}
                  </div>
@@ -214,7 +228,7 @@ const Name = () => {
                        <>{item?.question}</>
                  </div>
                </div>
-               <div className="text-black  flex justify-center items-center md:space-x-6 " style={{ width: "100%" }}>
+               {/* <div className="text-black  flex justify-center items-center md:space-x-6 " style={{ width: "100%" }}>
                  <div className="w-full">
                    <div className="w-full flex flex-col ">
                      <div className="flex flex-col font-[500] text-[18px] space-y-5 mt-14">
@@ -254,7 +268,7 @@ const Name = () => {
                      </div>
                    </div>
                  </div>
-               </div>
+               </div> */}
                </div>
                  ))}
                  <Pagination style={{marginTop: '30px'}} defaultCurrent={1} onChange={handlePageChange} total={filteredOptions && filteredOptions?.length}/>

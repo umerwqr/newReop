@@ -363,6 +363,23 @@ export default function Quiz() {
     }
   }
 
+  const handleNotes = async (formData) => {
+
+    
+    try {
+      const response = await axios.post('/api/set_mcq_note', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', user_id: formData.user_id, mcq_id:formData.mcq_id , note_heading: formData.note_heading, note_description:formData.note_description })
+      message.success("Note Added Successfully")
+
+    }
+    catch (err) {
+      console.log(err)
+      message.error("Error, Note not added")
+
+    }
+  }
+
+
+
 
   const [showModal, setShowModal] = useState(false);
 
@@ -378,20 +395,6 @@ export default function Quiz() {
     // Handle form submission here
     console.log('Form Data:', formData);
   };
-  const handleNotes = async (formData) => {
-
-    console.log(formData)
-    message.success("Note Added")
-    
-    try {
-
-    }
-    catch (err) {
-
-    }
-  }
-
-
 
 
 

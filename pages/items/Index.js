@@ -19,6 +19,7 @@ const Home = () => {
 
   const [loading, setLoading] = useState(true);
 
+  console.log("filtered program:",filteredPrograms&&filteredPrograms)
   const pageSize = 10; // Number of items to display per page
   const [currentPage, setCurrentPage] = useState(1);
 
@@ -46,6 +47,7 @@ const Home = () => {
       try {
         const response = await axios.post("/api/search_mcqs", { key: "Vx0cbjkzfQpyTObY8vfqgN1us", wordSearch: searchText.toLowerCase() });
         setFilteredPrograms(response.data.mcqs);
+
         setLoading(false);
       } catch (error) {
         console.error(error);
