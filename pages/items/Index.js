@@ -8,10 +8,13 @@ import Image from 'next/image';
 import Data from '@/data/Data';
 import Link from 'next/link'
 import axios from 'axios';
+import cookie from "js-cookie"
+import { useRouter } from 'next/router'
 import Loader from '../../components/Loader';
 
 
 const Home = () => {
+  const router =useRouter()
   const [searchText, setSearchText] = useState('');
   const [selectedRadio, setSelectedRadio] = useState('brands');
   const [programs, setPrograms] = useState(null);
@@ -71,7 +74,16 @@ const Home = () => {
   const handlePageChange = (page) => {
     setCurrentPage(page);
   };
+  const handleMcq=(mcq)=>{
+    
+    cookie.set("searchMcq",JSON.stringify(mcq))
 
+
+    setTimeout(() => {
+      router.push("/items/name/searchMcq");
+    }, 2000);
+
+  }
 
   return (
     <>
@@ -162,7 +174,9 @@ const Home = () => {
             }
             {currentItems && currentItems?.map((item, index) => (
             <div key={item?.id}>
-            <div className="bg-white w-full sm:w-[80%] lg:w-[700px] rounded-lg text-black py-5 px-[1.5rem] my-[3rem] shadow-md ">
+            <div 
+            onClick={()=>{handleMcq(item)}}
+            className="bg-white cursor-pointer w-full sm:w-[80%] lg:w-[700px] rounded-lg text-black py-5 px-[1.5rem] my-[3rem] shadow-md ">
             <div className="flex  items-center justify-center w-full space-x-6 font-bold">
               Question # {index+1}
             </div>
@@ -170,7 +184,7 @@ const Home = () => {
                   <>{item?.question}</>
             </div>
           </div>
-          <div className="text-black  flex justify-center items-center md:space-x-6 " style={{ width: "72%" }}>
+          {/* <div className="text-black  flex justify-center items-center md:space-x-6 " style={{ width: "72%" }}>
             <div className="w-full">
               <div className="w-full flex flex-col ">
                 <div className="flex flex-col font-[500] text-[18px] space-y-5 mt-14">
@@ -210,7 +224,7 @@ const Home = () => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> */}
             </div>
             ))}
             <Pagination defaultCurrent={1} onChange={handlePageChange} total={filteredPrograms && filteredPrograms?.length}/>
