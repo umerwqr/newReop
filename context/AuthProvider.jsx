@@ -42,7 +42,7 @@ export const AuthProvider = ({ children }) => {
     setTimeout(() => {
       clearUserFromLocalStorage();
       setIsLoggedIn(false);
-    }, 60000); // 30 minutes in milliseconds
+    }, 1800000); // 30 minutes in milliseconds
 
     router.push('/'); // Redirect to home page after successful login
     

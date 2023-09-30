@@ -22,7 +22,7 @@ export default function Quiz() {
             setMcqObject(JSON.parse(mcqCookie))
 
         }
-    }, [mcqCookie]);
+    }, [mcqObject]);
     console.log("impooooortant", mcqObject && mcqObject?.mcq.id)
 
 

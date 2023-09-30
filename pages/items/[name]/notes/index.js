@@ -89,14 +89,14 @@ const Name = () => {
     setSelectedRadio(e.target.value);
   };
 
-  const handleBookmarkNavigate=(mcq)=>{
+  const handleBookmarkNavigate=async(mcq)=>{
 
-    cookie.set("noteMcq",JSON.stringify(mcq))
+    await cookie.set("noteMcq",JSON.stringify(mcq))
 
 
     setTimeout(() => {
       router.push("/items/name/notes/McqsWithNotes");
-    }, 2000);
+    }, 3000);
   }
 
 

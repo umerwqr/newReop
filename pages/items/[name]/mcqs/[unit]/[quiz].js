@@ -728,7 +728,7 @@ export default function Quiz() {
                     className="rounded-full py-4 px-4 bg-white text-red-600 ">
                     <EditOutlined style={{ fontSize: '24px' }} />
                   </button></div>
-                  <NotesCard showModal={showModal} setShowModal={setShowModal} onSubmit={handleNotes} user_id={userObject?.data.user_id} mcq_id={eachMcq ? eachMcq.id : mcqs && mcqs[0].id} />
+                  <NotesCard showModal={showModal} setShowModal={setShowModal} onSubmit={handleNotes} user_id={userObject?.data.user_id} mcq_id={eachMcq&&eachMcq ? eachMcq.id : mcqs && mcqs[0].id} />
 
 
                   <div><button
