@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from 'react';
 import { useRouter } from 'next/router';
 import User from '../data/User';
+import cookie from "js-cookie"
 const AuthContext = createContext();
 
 export const useAuth = () => useContext(AuthContext);
@@ -10,7 +11,7 @@ export const AuthProvider = ({ children }) => {
 
   function getUserFromLocalStorage() {
     if (typeof window !== 'undefined') {
-      const userJSON = window.localStorage.getItem('user');
+      const userJSON = cookie.get("user");
       return userJSON ? JSON.parse(userJSON) : null;
     }
     return null;
@@ -41,9 +42,10 @@ export const AuthProvider = ({ children }) => {
     setTimeout(() => {
       clearUserFromLocalStorage();
       setIsLoggedIn(false);
-    }, 1800000); // 30 minutes in milliseconds
+    }, 60000); // 30 minutes in milliseconds
 
     router.push('/'); // Redirect to home page after successful login
+    
   }
 
   useEffect(() => {
