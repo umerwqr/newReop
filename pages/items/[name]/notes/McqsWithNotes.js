@@ -8,6 +8,7 @@ import { useRouter } from 'next/router';
 import Loader from '@/components/Loader';
 import cookie from "js-cookie"
 import Bookmark from '@/components/Bookmark';
+import NotesCard from "@/components/NotesCard"
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'; // Import the icons
 
 export default function Quiz() {
@@ -22,7 +23,7 @@ export default function Quiz() {
 
         }
     }, [mcqCookie]);
-    console.log("impooooortant", mcqObject && mcqObject)
+    console.log("impooooortant", mcqObject && mcqObject?.mcq.id)
 
 
     const userCookie = cookie.get("user")
@@ -33,7 +34,7 @@ export default function Quiz() {
 
         }
     }, [userCookie]);
-
+    console.log(userObject&&userObject.data.user_id)
     const router = useRouter();
     const { subject, sliderValue, sliderValue2 } = router.query;
 
@@ -309,6 +310,34 @@ export default function Quiz() {
 
 
     }
+    
+    const handleNotes = async (formData) => {
+
+        console.log("formData::",formData)
+
+        try {
+            const response = await axios.post('/api/set_mcq_note', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', user_id: userObject?.data.user_id, mcq_id: mcqObject?.mcq.id, note_heading: formData.note_heading, note_description: formData.note_description })
+            console.log("russsssponse:",response)
+            message.success("Note Added Successfully")
+
+        }
+        catch (err) {
+            console.log(err)
+            message.error("Error, Note not added")
+
+        }
+    }
+
+
+    const [showModal, setShowModal] = useState(false);
+
+    const handleOpenModal = () => {
+        setShowModal(true);
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
 
 
 
@@ -551,21 +580,28 @@ export default function Quiz() {
 
                                 </div>
                                 <div className='flex flex-col '>
-                                    
-                                <h1 className=' p-2 my-3 text-3xl'>
+
+                                    <h1 className=' p-2 my-3 text-3xl'>
                                         NOTES:
                                     </h1>
-                                    <h1>
-                                        Heading:
-                                    </h1>
-                                    <h1 className='border-2 p-2 my-2'>
+
+                                    <h1 className='border-2 p-2 my-0'>
                                         {mcqObject?.note_heading}
                                     </h1>
-                                    <h1>
-                                        Description:
-                                    </h1>
-                                    <p className='border-2 p-2 my-2'>
+
+                                    <p className='border-2 p-2 my-1 bg-yellow-300'>
                                         {mcqObject?.note_description}
+
+                                        <div className='flex justify-around'>
+                                            <button
+                                                onClick={handleOpenModal}
+                                                className='bg-white rounded-sm p-2 w-20 h-12'
+                                            >Edit</button>
+                                            
+                                            <button className='bg-white rounded-sm p-2 w-20 h-12'>Delete</button>
+                                        </div>
+                                        <NotesCard showModal={showModal} setShowModal={setShowModal} onSubmit={handleNotes} user_id={userObject?.data.user_id} mcq_id={mcqObject?.mcq.id} />
+
                                     </p>
                                 </div>
                                 <div className="bg-[#146B53] rounded-md py-4 px-4 flex flex-wrap justify-evenly mt-8">
@@ -588,7 +624,7 @@ export default function Quiz() {
                                 <button className="bg-[#268FDA0A] py-3 px-3 rounded-md my-3 w-full text-left"><p>Severity of MCQs : {mcqObject?.statistics_mcq_severity } </p></button>
  */}
 
-                               
+
                             </div>
                             {/* <div className="border lg:flex-col lg:flex hidden border-[#0000001A] w-[200px] rounded-md px-2  items-center ">
 

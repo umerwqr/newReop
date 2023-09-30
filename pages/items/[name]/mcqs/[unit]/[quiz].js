@@ -10,6 +10,7 @@ import cookie from "js-cookie"
 import NotesCard from "@/components/NotesCard"
 import Bookmark from '@/components/Bookmark';
 import { DeleteOutlined, EditOutlined } from '@ant-design/icons'; // Import other icons
+import WebHeader from '@/components/WebHeader';
 
 const BookmarkIcon = () => (
   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="24" height="24">
@@ -17,6 +18,39 @@ const BookmarkIcon = () => (
   </svg>
 );
 
+const ShareIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="24" height="24">
+    <circle cx="18" cy="5" r="3" />
+    <circle cx="6" cy="12" r="3" />
+    <circle cx="18" cy="19" r="3" />
+    <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+    <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+  </svg>
+);
+
+const PlayIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="24" height="24">
+    <polygon points="5 3 19 12 5 21 5 3" />
+  </svg>
+);
+const PauseIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="24" height="24">
+    <rect x="6" y="4" width="4" height="16" />
+    <rect x="14" y="4" width="4" height="16" />
+  </svg>
+);
+const CancelIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="24" height="24">
+    <line x1="18" y1="6" x2="6" y2="18" />
+    <line x1="6" y1="6" x2="18" y2="18" />
+  </svg>
+);
+const HelpIcon = () => (
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="-2 -1.7 28 28" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" width="24" height="24">
+    <circle cx="12" cy="12" r="12.7" />
+    <text x="12" y="20" textAnchor="middle" width="12" height="12" fontSize="18" fontWeight="bold">?</text>
+  </svg>
+);
 
 export default function Quiz() {
 
@@ -365,9 +399,9 @@ export default function Quiz() {
 
   const handleNotes = async (formData) => {
 
-    
+
     try {
-      const response = await axios.post('/api/set_mcq_note', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', user_id: formData.user_id, mcq_id:formData.mcq_id , note_heading: formData.note_heading, note_description:formData.note_description })
+      const response = await axios.post('/api/set_mcq_note', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', user_id: formData.user_id, mcq_id: formData.mcq_id, note_heading: formData.note_heading, note_description: formData.note_description })
       message.success("Note Added Successfully")
 
     }
@@ -410,43 +444,70 @@ export default function Quiz() {
           <Loader />
         </div>
       ) : (
+
         <div className=' relative'>
+          <div className="bg-white-500 p-2">
+            <div className="container mx-auto flex items-center justify-between">
+              {/* Left Side: Logo */}
+              <div className="flex items-center space-x-4">
+                <Image src="/images/logo.svg" alt="logo" width={60} height={60} />
+                {/* Social Icons */}
+                <div className="flex space-x-2">
+                  <span className="text-white hover:text-gray-200">
+                    <Image src="/images/youtube.svg" alt="logo" width={30} height={30} />
+                  </span>
+                  <span className="text-white hover:text-gray-200">
+                    <Image src="/images/facebook.svg" alt="logo" width={30} height={30} />
+                  </span>
+                  <span className="text-white hover:text-gray-200">
+                    <Image src="/images/whatsapp.svg" alt="logo" width={30} height={30} />
+                  </span>
+                  <span className="">
+                    <Image src="/images/instagram.svg" color='' alt="logo" width={30} height={30} />
+                  </span>
+                </div>
+              </div>
+
+              {/* Right Side: Menu Items */}
+              <div className="hidden lg:flex space-x-6 items-center">
+                <Link href="#" className="text-[#242864] mt-5 pr-10" style={{ fontWeight: 600 }}>Install App</Link>
+                <Link href="#" className="text-[#242864] mt-5 pr-10" style={{ fontWeight: 600 }}>About Us</Link>
+                <Link href="#" className="text-[#242864] mt-5 pr-10" style={{ fontWeight: 600 }}>Contact</Link>
+                <Link href="#" className="text-[#242864] mt-5 pr-10" style={{ fontWeight: 600 }}>PDF Heaven</Link>
+                <Link href="#" className="text-[#242864] mt-5 pr-10" style={{ fontWeight: 600 }}>Premium</Link>
+                <span className='flex pr-10'>
+                  <Image src="/images/home.png" color='' alt="logo" width={40} height={40} />
+                </span>
+              </div>
+            </div>
+          </div>
           <div className="absolute z-[-10] w-[100%] h-[400px]">
             <Image src="/images/bg.svg" layout="fill" alt='Image' // This tells Next.js to fill the parent container
               objectFit="cover" className="absolute top-0" />
           </div>
           <div className=" w-full z-10 flex flex-col items-center text-white py-[1rem] sm:py-[3rem] px-4">
-            <div className="flex flex-wrap justify-center items-center space-y-2 lg:space-y-0 lg:space-x-5 w-full">
-              <div style={{ width: "65px" }}>
-                <h1></h1>
-                <p></p>
-              </div>
-              <div className=" rounded-md border border-[#FFFFFF] py-4 px-5 w-full lg:w-auto  sm:flex sm:flex-col items-center">
-                <div className='flex sm:flex-col text-center'>
+            <div className="flex  md:justify-around justify-between items-center md:w-[60%] w-[100%]">
 
 
-                  <h1>Time Remaining</h1>
-                  <p className="ml-1">{minutes} : {timer % 60 < 10 ? `0${timer % 60}` : timer % 60}</p>
+
+              <div className='flex flex-col items-center w-[30%]'>
+                <h1 className='font-bold   text-xl'>Skipped</h1>
+                <div className=" md:w-16 md:h-16 w-10 h-10 flex justify-center items-center bg-white rounded-md border border-[#FFFFFF] py-4 px-5   items-center">
+                  <p className='text-4xl font-bold text-red-800'>{skip ? skip : 0}</p>
                 </div>
               </div>
-              <div className="rounded-md bg-white w-full lg:w-[38%] flex justify-center py-4 px-5">
-                <Image src="/images/logo.svg" alt="No Image Available" width={80} height={80} />
-              </div>
-              <div className="hidden rounded-md border border-[#FFFFFF] py-4 px-5 w-full lg:w-auto  sm:flex sm:flex-col items-center">
-                <h1>Skipped</h1>
-                <p>{skip}</p>
-              </div>
-              <div className="rounded-md border border-[#FFFFFF] py-4 px-5 w-full lg:w-auto flex flex-col items-center">
-                <div className="flex sm:hidden">
-                  <h1>Skipped</h1>
-                  <p className="ml-2">{skip}</p>
+
+              <div className=" rounded-md  md:w-[30%] w-[35%]    lg:w-auto  sm:flex sm:flex-col items-center">
+                <h1 className='font-bold text-xl'>Time Left</h1>
+                <div className=' bg-white text-red-800 font-bold rounded-md p-1 text-center'>
+                  <p className=" md:text-4xl text-3xl">{minutes} : {timer % 60 < 10 ? `0${timer % 60}` : timer % 60}</p>
                 </div>
+              </div>
 
-                <div className='flex sm:flex-col sm:text-center'>
-
-
-                  <h1>Total MCQs</h1>
-                  <p className="ml-2">{mcqs ? (sliderValue > mcqs.length ? mcqs.length : sliderValue) : null}</p>
+              <div className='font-bold flex flex-col items-center text-lg w-[30%] '>
+                <h1 className=''>Total</h1>
+                <div className="rounded-md md:w-16 md:h-16 w-10 h-10  border bg-white border-[#FFFFFF] md:py-4 md:px-5 py-0 px-0  flex flex-col items-center">
+                  <p className=" text-4xl  text-red-800">{mcqs ? (sliderValue > mcqs.length ? mcqs.length : sliderValue) : null}</p>
                 </div>
               </div>
 
@@ -466,14 +527,15 @@ export default function Quiz() {
               </div>
             </div>
             <div className="text-black  flex justify-center items-center md:space-x-6 md:px-[2rem] " style={{ width: "100%" }}>
-              {/* <div className="border border-[#0000001A] w-[200px] rounded-md px-2 hidden lg:flex items-center lg:flex-col">
+              <div className="border border-[#0000001A] w-[200px] rounded-md px-2 hidden lg:flex items-center lg:flex-col">
 
                 <div className="flex flex-col items-center text-center">
+                  <h1 className="font-[600] my-4">GOOGLE ADs</h1>
                   <h1 className="font-[600] my-4">Are you an Enterpreneur?</h1>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
                   <Link href="#" className="rounded-md my-3 bg-[#16213E] text-white py-2 px-7 font-[500] text-[18px]" >Next Que</Link>
                 </div>
-              </div> */}
+              </div>
               <div className="w-full">
                 <div className="w-full flex flex-col ">
                   <div className="flex flex-col font-[500] text-[18px] space-y-5 mt-14">
@@ -631,7 +693,7 @@ export default function Quiz() {
                     <button
                       disabled={check ? false : true}
                       onClick={handleSkip}
-                      className={`${check ? "bg-[#1F5689]  hover:bg-[#268FDA]" : 'bg-gray-400 '}  py-2 px-7 rounded-md text-white font-[500] text-[16px] mt-2 mr-2  hover:shadow-md transition duration-300 ease-in-out`}
+                      className={`${check ? "bg-[#1F5689]  hover:bg-[#268FDA]" : 'bg-gray-400 '}   py-2 px-7 rounded-md text-white font-[500] text-[16px] mt-2 mr-2  hover:shadow-md transition duration-300 ease-in-out`}
                     >
                       Skip
                     </button>
@@ -649,23 +711,42 @@ export default function Quiz() {
 
                 </div>
                 <div className="bg-[#146B53] rounded-md py-4 px-4 flex flex-wrap justify-evenly mt-8">
-                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
-                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
-                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
-                  <div><button className="rounded-full py-4 px-4 bg-white"></button></div>
-
                   <div><button
-                    onClick={handleOpenModal}
-                    className="rounded-full py-4 px-4 bg-white">
-                    <EditOutlined style={{ fontSize: '24px', color: 'black' }} />
+                    className="rounded-full py-4 px-4 bg-white text-red-600">
+                    <HelpIcon />
                   </button></div>
-                  <NotesCard showModal={showModal} setShowModal={setShowModal} onSubmit={handleNotes} user_id={userObject?.data.user_id} mcq_id={eachMcq ? eachMcq.id : mcqs && mcqs[0].id}/>
-
+                
 
                   <div><button
                     onClick={handleBookmark}
-                    className="rounded-full py-4 px-4 bg-white">
+                    className="rounded-full py-4 px-4 bg-white text-red-600">
                     <BookmarkIcon style={{ fontSize: '24px', marginLeft: '8px' }} /> {/* Add custom bookmark icon here */}
+                  </button></div>
+                 
+                  <div><button
+                    onClick={handleOpenModal}
+                    className="rounded-full py-4 px-4 bg-white text-red-600 ">
+                    <EditOutlined style={{ fontSize: '24px' }} />
+                  </button></div>
+                  <NotesCard showModal={showModal} setShowModal={setShowModal} onSubmit={handleNotes} user_id={userObject?.data.user_id} mcq_id={eachMcq ? eachMcq.id : mcqs && mcqs[0].id} />
+
+
+                  <div><button
+                    className="rounded-full py-4 px-4 bg-white text-red-600 ">
+                    <PauseIcon style={{ fontSize: "24px", color: "red" }} />
+                  </button></div>
+
+
+                  <div><button
+                    className="rounded-full py-4 px-4 bg-white text-red-600 ">
+                    <ShareIcon style={{ fontSize: "24px", color: "red" }} />
+
+                  </button></div>
+
+                  <div><button
+                    className="rounded-full py-4 px-4 bg-white text-red-600 ">
+                    <CancelIcon style={{ fontSize: "24px", color: "red" }} />
+
                   </button></div>
 
                 </div>
@@ -678,14 +759,15 @@ export default function Quiz() {
                 </> : <p className='flex justify-center h-24 items-center'> Good Job !  </p>}
 
               </div>
-              {/* <div className="border lg:flex-col lg:flex hidden border-[#0000001A] w-[200px] rounded-md px-2  items-center ">
+              <div className="border lg:flex-col lg:flex hidden border-[#0000001A] w-[200px] rounded-md px-2  items-center ">
 
                 <div className="flex flex-col items-center text-center">
+                  <h1 className="font-[600] my-4">GOOGLE ADs</h1>
                   <h1 className="font-[600] my-4">Are you an Enterpreneur?</h1>
                   <p>Lorem ipsum dolor sit amet, consectetur adipiscing.</p>
                   <Link href="#" className="rounded-md my-3 bg-[#16213E] text-white py-2 px-7 font-[500] text-[18px]" >Next Que</Link>
                 </div>
-              </div> */}
+              </div>
             </div>
           </div>
           <WebFooter />

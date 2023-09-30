@@ -26,7 +26,7 @@ function WebHeader() {
   }, [userCookie]);
 
 
-  const firstname = user && userObject?.data.full_name?.split(" ")[0]
+  const firstname = userObject && userObject?.data.full_name?.split(" ")[0]
   const auth = useAuth();
   const router = useRouter();
   const { clearUserFromLocalStorage } = auth
@@ -43,10 +43,10 @@ function WebHeader() {
   };
 
   const LogOut = () => {
+    Cookies.remove("user")
 
     clearUserFromLocalStorage();
     updateUser(null)
-    Cookies.remove("user")
 
     Cookies.remove("loggedIn")
     setTimeout(() => {

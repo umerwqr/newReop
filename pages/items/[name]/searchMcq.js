@@ -143,7 +143,7 @@ export default function Quiz() {
     const handleSkip = () => {
 
 
-        router.push("/items/name/bookmarks")
+        router.push("/")
 
     }
 

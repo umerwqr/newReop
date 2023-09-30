@@ -11,8 +11,11 @@ import React from 'react';
 import cookie from "js-cookie"
 import axios from 'axios';
 import Loader from '@/components/Loader';
+import { DeleteOutlined, EditOutlined } from '@ant-design/icons'; // Import the icons
 import Link from 'next/link'
 const Name = () => {
+  const [showConfirmation, setShowConfirmation] = useState(false);
+  const [selectedMcq, setSelectedMcq] = useState(null);
 
   const router = useRouter();
   const { options } = router.query;
@@ -32,7 +35,7 @@ const Name = () => {
       setSelectedData({});
     }
   };
-  
+
   const userCookie = cookie.get("user")
 
   const [userObject, setUserObject] = useState(null)
@@ -67,7 +70,6 @@ const Name = () => {
 
       }
       catch (err) {
-        message.error("Error fetching Bookmarked Mcqs")
         console.log(err)
 
       }
@@ -90,17 +92,37 @@ const Name = () => {
     setSelectedRadio(e.target.value);
   };
 
-  const handleBookmarkNavigate=(mcq)=>{
+  const handleBookmarkNavigate = (mcq) => {
 
-    cookie.set("bmMcq",JSON.stringify(mcq))
+    cookie.set("bmMcq", JSON.stringify(mcq))
 
 
     setTimeout(() => {
       router.push("/items/name/bookmarks/bookmark_mcq");
     }, 2000);
   }
+  const handleDeleteBookmark = (mcq) => {
+    setSelectedMcq(mcq);
+    setShowConfirmation(true);
+  }
 
+  const handleConfirmDelete = async () => {
+    try {
+      // Make API call to delete bookmark
+      const response = await axios.post('/api/set_unbookmark_mcq', { key: 'Vx0cbjkzfQpyTObY8vfqgN1us', user_id: userObject?.data.user_id, mcq_id: selectedMcq.mcq_id });
 
+      // Update bookmarked MCQs list (if necessary)
+
+      // Close confirmation modal
+      setShowConfirmation(false);
+    } catch (err) {
+      message.error("Failed to delete bookmark")
+    }
+  }
+
+  const handleCancelDelete = () => {
+    setShowConfirmation(false);
+  }
   return (
 
     <div className="">
@@ -153,24 +175,45 @@ const Name = () => {
               </div>
             </div>
           </div>
+          {showConfirmation && (
+            <div className="confirmation-modal-container">
+              <div className="confirmation-modal">
+                <div className="confirmation-content">
+                  <p>Are you sure you want to delete this bookmark?</p>
+                  <div className="confirmation-buttons">
+                    <button onClick={handleCancelDelete}>Cancel</button>
+                    <button onClick={handleConfirmDelete}>Delete</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          )}
           <div className="my-[3rem]   flex justify-center w-full   flex-wrap px-6">
             <div className="flex flex-col items-center justify-center sm:w-[90%] w-full flex-wrap">
 
-              {bookmarkMcqs.length !==0 ? <div className='text-red-600'>YOUR BOOKMARKED MCQs ARE FOLLOWING: </div> : <> NO MCQ IS BOOKMARKED</>}
+              {bookmarkMcqs.length !== 0 ? <div className='text-red-600'>YOUR BOOKMARKED MCQs ARE FOLLOWING: </div> : <> NO MCQ IS BOOKMARKED</>}
               <div className='flex flex-col items-start'>
                 {bookmarkMcqs && bookmarkMcqs.map((mcq, index) => (
-                <>
+                  <>
 
-                  <div 
-                  key={index}
-                  onClick={()=>handleBookmarkNavigate(mcq)}
-                  className='flex shadow-sm hover:scale-[101.3%] transition:translate duration-200 hover:text-red-600 flex-row p-4 m-1 rounded-lg cursor-pointer w-full items-center text-blue-800 border-2'>
+                    <div
+                      key={index}
+                      className='flex justify-between shadow-sm hover:scale-[100.5%] transition:translate duration-200 hover:text-blue-400 flex-row p-4 m-1 rounded-lg cursor-pointer w-full items-center text-blue-700 border-2'>
 
-                    <h1>Mcq No:{index + 1})  _</h1>
-                    <h1> {mcq.mcq.question}</h1>
+                      <div 
+                      className='flex ' 
+                      onClick={() => handleBookmarkNavigate(mcq)}
+>
+                        <h1>Mcq_No:{index + 1})  _</h1>
+                        <h1> {mcq.mcq.question}</h1>
+                      </div>
+                      <DeleteOutlined
+                        onClick={() => handleDeleteBookmark(mcq)}
+                        className='text-blue-500 hover:text-red-400' style={{ fontSize: '24px' }} />
 
 
-                  </div>
+                    </div>
+
                   </>
                 ))}
               </div>
